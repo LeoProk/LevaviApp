@@ -2,9 +2,6 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/org/levavi/levaviapp/Interfaces/FactoryInterface.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/org/levavi/levaviapp/Interfaces/OnFileGetCompleted.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/org/levavi/levaviapp/Interfaces/OnTaskCompleted.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/app/src/main/java/org/levavi/levaviapp/Interfaces/TasksListUpdate.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/org/levavi/levaviapp/UserInterface/CustomToolbar.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/org/levavi/levaviapp/UserInterface/UIFactory.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" charset="UTF-8" />
