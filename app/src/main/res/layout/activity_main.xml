@@ -10,6 +10,24 @@
             android:background="@color/color_primary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/enter"
+                android:layout_gravity="right"
+                android:src="@drawable/ic_sumbit"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/close"
+                android:layout_gravity="left"
+                android:src="@drawable/ic_sumbit"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/editText"
+                android:background="#FFFFFF"
+                />
     </android.support.v7.widget.Toolbar>
 
 
