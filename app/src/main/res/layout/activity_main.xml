@@ -9,25 +9,38 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/color_primary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
-
-        <ImageView
+        <RelativeLayout
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:animateLayoutChanges="true"
+            android:visibility="invisible"
+            android:background="#FFFFFF">
+            <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:id="@+id/enter"
-                android:layout_gravity="right"
                 android:src="@drawable/ic_sumbit"/>
-        <ImageView
+            <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
                 android:id="@+id/close"
                 android:layout_gravity="left"
                 android:src="@drawable/ic_sumbit"/>
-        <EditText
+            <EditText
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:id="@+id/editText"
-                android:background="#FFFFFF"
+                android:layout_toRightOf="@+id/close"
+                android:layout_toLeftOf="@+id/enter"
                 />
+        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
 
 
