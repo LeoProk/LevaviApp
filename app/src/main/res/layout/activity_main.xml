@@ -24,18 +24,20 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:id="@+id/enter"
-                android:src="@drawable/ic_sumbit"/>
-            <ImageView
+                android:layout_gravity="right"
+                android:src="@drawable/ic_submit"/>
+        <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentLeft="true"
                 android:id="@+id/close"
                 android:layout_gravity="left"
-                android:src="@drawable/ic_sumbit"/>
-            <EditText
+                android:src="@drawable/ic_cancel"/>
+        <EditText
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="match_parent"
                 android:id="@+id/editText"
+                android:textColor="#191919"
                 android:layout_toRightOf="@+id/close"
                 android:layout_toLeftOf="@+id/enter"
                 />
