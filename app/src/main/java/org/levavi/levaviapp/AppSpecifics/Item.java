@@ -11,16 +11,17 @@ public class Item  implements Comparable {
     private String mPrice;
     private String mAddress;
     private String mPhoneNum;
-
+    private String mTitle;
     private int mDistance;
 
     private HashMap<String,String> mItems;
 
-    public Item(String date,String price,String address,String phoneNum,int distance, HashMap<String,String> items){
+    public Item(String date,String price,String address,String phoneNum,String title,int distance, HashMap<String,String> items){
         mDate = date;
         mPrice = price;
         mAddress = address;
         mPhoneNum = phoneNum;
+        mTitle = title;
         mDistance = distance;
         mItems = items;
     }
@@ -44,6 +45,11 @@ public class Item  implements Comparable {
 
     public String getPhoneNum() {
         return mPhoneNum;
+    }
+
+
+    public String getTitle() {
+        return mTitle;
     }
 
     public int getDistance() {
