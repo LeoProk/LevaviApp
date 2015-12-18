@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">לבבי</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="phone_num">מספר טלפון</string>
+    <string name="address">כתובת</string>
+    <string name="title">כותרת</string>
+    <string name="item">שם פריט</string>
     <string name="no_connection">אין חיבור לאינטרנט אנא נסו שוב</string>
 </resources>

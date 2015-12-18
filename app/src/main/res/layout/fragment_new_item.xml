@@ -17,6 +17,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:hint="@string/title"
                 android:id="@+id/title"/>
         <EditText
                 android:layout_width="match_parent"
@@ -24,6 +25,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/title"
                 android:layout_marginTop="20dp"
+                android:hint="@string/address"
                 android:id="@+id/address"/>
         <EditText
                 android:layout_width="match_parent"
@@ -31,6 +33,7 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/address"
                 android:layout_marginTop="20dp"
+                android:hint="@string/phone_num"
                 android:id="@+id/phone"/>
         <EditText
                 android:layout_width="100dp"
