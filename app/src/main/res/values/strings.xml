@@ -5,5 +5,7 @@
     <string name="address">כתובת</string>
     <string name="title">כותרת</string>
     <string name="item">שם פריט</string>
+    <string name="units">מס יחידות</string>
+    <string name="price">מחיר</string>
     <string name="no_connection">אין חיבור לאינטרנט אנא נסו שוב</string>
 </resources>

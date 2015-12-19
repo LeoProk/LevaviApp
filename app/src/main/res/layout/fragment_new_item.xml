@@ -40,6 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/phone"
+                android:hint="@string/item"
                 android:layout_marginTop="20dp"
                 android:id="@+id/item_name"/>
         <EditText
@@ -49,6 +50,7 @@
                 android:layout_below="@+id/phone"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="100dp"
+                android:hint="@string/units"
                 android:id="@+id/units"/>
         <EditText
                 android:layout_width="80dp"
@@ -57,6 +59,7 @@
                 android:layout_below="@+id/phone"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="200dp"
+                android:hint="@string/price"
                 android:id="@+id/price"/>
 
         <ImageButton
@@ -70,7 +73,7 @@
         <ListView
                 android:layout_width="wrap_content"
                 android:layout_height="200dp"
-                android:id="@+id/listView2"
+                android:id="@+id/items"
                 android:layout_below="@id/units"/>
         <Button
             android:layout_width="wrap_content"
