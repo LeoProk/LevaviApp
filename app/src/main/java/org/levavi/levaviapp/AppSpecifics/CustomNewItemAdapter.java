@@ -1,5 +1,6 @@
 package org.levavi.levaviapp.AppSpecifics;
 
+import org.levavi.levaviapp.Interfaces.OnItemDelete;
 import org.levavi.levaviapp.R;
 
 import android.content.Context;
@@ -24,9 +25,12 @@ public class CustomNewItemAdapter extends BaseAdapter {
 
     private ArrayList<NewItem> mItemsList;
 
-    public CustomNewItemAdapter(Context context,ArrayList itemsList){
+    private OnItemDelete mListener;
+
+    public CustomNewItemAdapter(Context context,ArrayList itemsList,OnItemDelete listener){
         mContext = context;
         mItemsList = itemsList;
+        mListener = listener;
     }
 
     @Override
@@ -45,7 +49,7 @@ public class CustomNewItemAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         final NewItem newItem = mItemsList.get(position);
         if (mInflater == null)
             mInflater = (LayoutInflater) mContext
@@ -60,10 +64,11 @@ public class CustomNewItemAdapter extends BaseAdapter {
         final TextView price =(TextView)convertView.findViewById(R.id.price);
         price.setText(newItem.getPrice());
         final ImageButton remove =(ImageButton)convertView.findViewById(R.id.cancel);
+
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                mListener.onItemDeleted(position);
             }
         });
         return  convertView;
