@@ -19,6 +19,9 @@ import org.levavi.levaviapp.Interfaces.FactoryInterface;
 
 import android.app.Fragment;
 import android.content.Context;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.Toolbar;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,5 +77,18 @@ public class UtilitiesFactory {
     //Resets the app
     public static FactoryInterface resetApp(Context context) {
         return new AppRestart(context);
+    }
+
+
+    //Creates toolbar actionbar must be disabled in manifest
+    public static FactoryInterface getToolbar(Context context, Toolbar toolbar) {
+        return new CustomToolbar(context, toolbar);
+    }
+
+
+    //Creates navigation drawer
+    public static FactoryInterface getDrawer(Context context, DrawerLayout mDrawerLayout,
+                                             ListView mDrawerList) {
+        return new CustomDrawer(context, mDrawerLayout, mDrawerList);
     }
 }

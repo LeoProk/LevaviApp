@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.UserInterface;
+package org.levavi.levaviapp.Utilities;
 
 import android.content.Context;
 import android.support.v7.app.ActionBar;
