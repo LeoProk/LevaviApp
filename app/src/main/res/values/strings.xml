@@ -9,5 +9,8 @@
     <string name="item">שם פריט</string>
     <string name="units">מס יחידות</string>
     <string name="price">מחיר</string>
+    <string name="wrong_title">שדה הכותרת הוא חובה.</string>
+    <string name="wrong_address">שדה הכתובת הוא חובה.</string>
+    <string name="wrong_phone">שדה המס טלפון הוא חובה.</string>
     <string name="no_connection">אין חיבור לאינטרנט אנא נסו שוב</string>
 </resources>
