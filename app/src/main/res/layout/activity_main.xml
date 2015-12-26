@@ -9,40 +9,6 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/color_primary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark">
-        <RelativeLayout
-            android:id="@+id/search_bar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="5dp"
-            android:animateLayoutChanges="true"
-            android:visibility="invisible"
-            android:background="#FFFFFF">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:id="@+id/enter"
-                android:layout_gravity="right"
-                android:src="@drawable/ic_submit"/>
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:id="@+id/close"
-                android:layout_gravity="left"
-                android:src="@drawable/ic_cancel"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/editText"
-                android:textColor="#191919"
-                android:layout_toRightOf="@+id/close"
-                android:layout_toLeftOf="@+id/enter"
-                />
-        </RelativeLayout>
-
     </android.support.v7.widget.Toolbar>
 
 
