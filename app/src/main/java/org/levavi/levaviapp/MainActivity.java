@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         //create the drawer
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView drawerList = (ListView) findViewById(R.id.slider_list);
-        mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList).doTask();
+        mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList,toolbar).doTask();
         //creating star fragment
         UtilitiesFactory.addFragment(this,new ItemsFragment(),"item",true).doTask();
     }

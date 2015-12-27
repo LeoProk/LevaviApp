@@ -27,6 +27,7 @@ final class CustomToolbar implements FactoryInterface {
         final AppCompatActivity activity = (AppCompatActivity) mContext;
         activity.setSupportActionBar(mToolbar);
         ActionBar ab = activity.getSupportActionBar();
+        ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
         ab.setDisplayUseLogoEnabled(true);
         /*activity.getSupportActionBar().setDisplayShowTitleEnabled(false);

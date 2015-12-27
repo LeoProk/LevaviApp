@@ -88,7 +88,7 @@ public class UtilitiesFactory {
 
     //Creates navigation drawer
     public static FactoryInterface getDrawer(Context context, DrawerLayout mDrawerLayout,
-                                             ListView mDrawerList) {
-        return new CustomDrawer(context, mDrawerLayout, mDrawerList);
+                                             ListView mDrawerList,Toolbar toolbar) {
+        return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar);
     }
 }

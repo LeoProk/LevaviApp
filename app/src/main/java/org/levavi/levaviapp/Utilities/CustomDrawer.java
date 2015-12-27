@@ -22,9 +22,9 @@ import org.levavi.levaviapp.R;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -37,16 +37,19 @@ import java.util.ArrayList;
 
 final class CustomDrawer implements FactoryInterface {
 
-    Context mContext;
+    private Context mContext;
 
-    DrawerLayout mDrawerLayout;
+    private DrawerLayout mDrawerLayout;
 
-    ListView mDrawerList;
+    private ListView mDrawerList;
 
-    protected CustomDrawer(Context context, DrawerLayout drawerLayout, ListView drawerList) {
+    private Toolbar mToolbar;
+
+    protected CustomDrawer(Context context, DrawerLayout drawerLayout, ListView drawerList,Toolbar toolbar) {
         mContext = context;
-        this.mDrawerLayout = drawerLayout;
-        this.mDrawerList = drawerList;
+        mDrawerLayout = drawerLayout;
+        mDrawerList = drawerList;
+        mToolbar = toolbar;
     }
 
     //class of creating and populating navigation drawer
@@ -59,8 +62,8 @@ final class CustomDrawer implements FactoryInterface {
         final TypedArray menuIcons = context.getResources().obtainTypedArray(R.array.icons);*/
         ArrayList<RowItem> rowItems = new ArrayList<>();
         //create the drawer
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(activity, mDrawerLayout,
-                R.string.drawer_open, R.string.drawer_close) {
+        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity, mDrawerLayout,
+                mToolbar,R.string.drawer_open, R.string.drawer_close) {
 
             //* Called when a drawer has settled in a completely closed state.
             public void onDrawerClosed(View view) {
@@ -81,10 +84,12 @@ final class CustomDrawer implements FactoryInterface {
 
         }
         menuIcons.recycle();*/
+        mDrawerLayout.setDrawerListener(drawerToggle);
         DrawerAdapter adapter = new DrawerAdapter(mContext, rowItems);
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new CustomDrawer.SlideitemListener());
-        return mDrawerToggle;
+        drawerToggle.syncState();
+        return drawerToggle;
     }
 
     //create fragment based on clicked position

@@ -61,6 +61,10 @@ public class NewItemFragment extends Fragment implements OnItemDelete {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(mTitle.getText().toString().isEmpty()){
+
+                }else{
+                }
                 //create json and send it to the server
                 createJson();
                 //change fragment
