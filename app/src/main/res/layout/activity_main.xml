@@ -32,8 +32,13 @@
                 android:background="#ffffff"
                 android:choiceMode="singleChoice"
                 android:divider="@android:color/transparent"
+                android:dividerHeight="0dp">
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-                android:dividerHeight="0dp"/>
+        </ListView>
 
     </android.support.v4.widget.DrawerLayout>
 
