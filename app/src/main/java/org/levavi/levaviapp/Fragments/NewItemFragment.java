@@ -1,5 +1,7 @@
 package org.levavi.levaviapp.Fragments;
 
+import com.google.gson.Gson;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,8 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.TextView;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.levavi.levaviapp.AppSpecifics.CustomNewItemAdapter;
@@ -82,11 +82,7 @@ public class NewItemFragment extends Fragment implements OnItemDelete {
             object.put("title",mTitle.getText().toString());
             object.put("address",mAddress.getText().toString());
             object.put("phone",mPhone.getText().toString());
-            for (int i = 0; i < mNewItemsList.size() ; i++) {
-                object.put("item"+Integer.toString(i),mNewItemsList.get(i).getName());
-                object.put("unit"+Integer.toString(i),mNewItemsList.get(i).getUnits());
-                object.put("price"+Integer.toString(i),mNewItemsList.get(i).getPrice());
-            }
+            object.put("items",new Gson().toJson(mNewItemsList));
         } catch (JSONException e) {
             e.printStackTrace();
         }
