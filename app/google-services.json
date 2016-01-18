@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "levavi-1185",
+    "project_number": "947543842597",
+    "name": "Levavi"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947543842597:android:5c52b285f209c67b",
+        "client_id": "android:org.levavi.levaviapp",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "org.levavi.levaviapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947543842597-av7gfvsb4vs0vrltdkbtbnnt4riqq738.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.levavi.levaviapp",
+            "certificate_hash": "96FF94458F982386869FDA97BB4651B0283F73DC"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 1,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
