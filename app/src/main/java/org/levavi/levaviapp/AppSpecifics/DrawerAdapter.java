@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.levavi.levaviapp.Utilities;
+package org.levavi.levaviapp.AppSpecifics;
 
 /**
  * Custom adapter which extends BaseAdapter , this is used for inflating each row items of the listview .
@@ -33,7 +33,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-final class DrawerAdapter extends BaseAdapter {
+public class DrawerAdapter extends BaseAdapter {
 
     Context context;
 

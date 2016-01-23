@@ -5,6 +5,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ListView;
 
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
 
@@ -18,9 +19,9 @@ public class AppFactory {
     }
     //
     public static FactoryInterface signIn(Context context , GoogleApiClient googleApiClient){
-        return new GoogleSignIn(context,googleApiClient,0,"signIn",null);
+        return new GoogleSignIn(context,googleApiClient,0,"signIn",null,null);
     }
-    public static FactoryInterface signInResult(int requestCod,Intent data){
-        return new GoogleSignIn(null,null,requestCod,"result",data);
+    public static FactoryInterface signInResult(int requestCod,Intent data,ListView drawerList){
+        return new GoogleSignIn(null,null,requestCod,"result",data,drawerList);
     }
 }

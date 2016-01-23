@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.levavi.levaviapp.Utilities;
+package org.levavi.levaviapp.AppSpecifics;
 
 // a Bean Class RowItem which is used for setting and getting row data's of each items in ListView ( icons and titles).
 
-final class RowItem {
+public class RowItem {
 
     private String title;
 

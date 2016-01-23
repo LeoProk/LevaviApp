@@ -16,10 +16,10 @@
 
 package org.levavi.levaviapp.Utilities;
 
+import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
 import org.levavi.levaviapp.R;
 
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,8 +28,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import java.util.ArrayList;
 
 /**
  * This class contain logic of drawer.
@@ -60,7 +58,6 @@ final class CustomDrawer implements FactoryInterface {
         //get the arrays from strings
         /*final String[] menutitles = context.getResources().getStringArray(R.array.titles);
         final TypedArray menuIcons = context.getResources().obtainTypedArray(R.array.icons);*/
-        ArrayList<RowItem> rowItems = new ArrayList<>();
         //create the drawer
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity, mDrawerLayout,
                 mToolbar,R.string.drawer_open, R.string.drawer_close) {
@@ -85,9 +82,6 @@ final class CustomDrawer implements FactoryInterface {
         }
         menuIcons.recycle();*/
         mDrawerLayout.setDrawerListener(drawerToggle);
-        DrawerAdapter adapter = new DrawerAdapter(mContext, rowItems);
-        mDrawerList.setAdapter(adapter);
-        mDrawerList.setOnItemClickListener(new CustomDrawer.SlideitemListener());
         drawerToggle.syncState();
         return drawerToggle;
     }

@@ -1,11 +1,14 @@
 package org.levavi.levaviapp;
 
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
+import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
+import org.levavi.levaviapp.AppSpecifics.RowItem;
 import org.levavi.levaviapp.Fragments.ItemsFragment;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,16 +17,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+
+import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
@@ -34,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // sets direction to rtl
+        getWindow().getDecorView().setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
         //sets toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         UtilitiesFactory.getToolbar(this, toolbar).doTask();
@@ -97,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        AppFactory.signInResult(requestCode,data).doTask();
+        AppFactory.signInResult(requestCode,data,mD).doTask();
     }
 
     @Override
