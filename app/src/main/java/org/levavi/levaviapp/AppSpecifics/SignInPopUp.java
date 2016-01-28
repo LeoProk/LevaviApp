@@ -1,5 +1,9 @@
 package org.levavi.levaviapp.AppSpecifics;
 
+import org.levavi.levaviapp.AppController;
+import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.R;
+
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -10,14 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
-import org.levavi.levaviapp.R;
-
 /**
  * Created by Leo on 12/22/2015.
  */
-final class PopUpGenerator implements FactoryInterface {
+final class SignInPopUp implements FactoryInterface {
 
     private LayoutInflater mInflater;
 
@@ -25,12 +25,9 @@ final class PopUpGenerator implements FactoryInterface {
 
     private Context mContext;
 
-    private String mInputCondition;
-
-    public PopUpGenerator(View anchorView, Context context, String inputCondition) {
+    public SignInPopUp(View anchorView, Context context) {
         mAnchorView = anchorView;
         mContext = context;
-        mInputCondition = inputCondition;
     }
     @Override
     public Object doTask() {
@@ -43,24 +40,6 @@ final class PopUpGenerator implements FactoryInterface {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         final TextView textView = (TextView) popupView.findViewById(R.id.message);
         textView.setTypeface(null, Typeface.BOLD);
-        //change load message bassed on input
-        switch (mInputCondition) {
-            case "title":
-                textView.setText(mContext.getResources().getString(R.string.wrong_title));
-                break;
-            case "address":
-                textView.setText(mContext.getResources().getString(R.string.wrong_address));
-                break;
-            case "phone":
-                textView.setText(mContext.getResources().getString(R.string.wrong_phone));
-                break;
-            case "info":
-                textView.setText(mContext.getResources().getString(R.string.wrong_info));
-                break;
-            default:
-                break;
-        }
-        // Initialize more widgets from `popup_layout.xml`
         // If the PopupWindow should be focusable
         popupWindow.setFocusable(true);
 

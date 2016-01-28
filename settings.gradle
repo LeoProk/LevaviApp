@@ -1,1 +1,1 @@
-include ':app', ':mobileassistantbackend'
+include ':app'

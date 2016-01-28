@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         // Build a GoogleApiClient with access to the Google Sign-In API and the
         // options specified by gso.
         final GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .enableAutoManage(this , this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
         // google log in on button click
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        AppFactory.signInResult(requestCode,data,mD).doTask();
+        AppFactory.signInResult(requestCode,data).doTask();
     }
 
     @Override

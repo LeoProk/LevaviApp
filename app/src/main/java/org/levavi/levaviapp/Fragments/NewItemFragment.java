@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.AppSpecifics.CustomNewItemAdapter;
 import org.levavi.levaviapp.AppSpecifics.NewItem;
 import org.levavi.levaviapp.Interfaces.OnItemDelete;
@@ -24,27 +25,24 @@ import java.util.ArrayList;
 /**
  * Created by Leo on 12/12/2015.
  */
-public class NewItemFragment extends Fragment implements OnItemDelete {
+public class NewItemFragment extends Fragment {
 
-    private EditText mTitle,mAddress,mPhone,mItem,mUnit,mPrice;
-
-    private CustomNewItemAdapter mItemsAdapter;
-
-    private ArrayList<NewItem> mNewItemsList;
+    private EditText mTitle,mAddress,mPhone,mInfo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_new_item, container, false);
-        //creates array list and adapter and list view
-        final ListView itemsList = (ListView) rootView.findViewById(R.id.items);
-        mNewItemsList = new ArrayList<>();
-        mItemsAdapter = new CustomNewItemAdapter(getActivity(),mNewItemsList,this);
-        itemsList.setAdapter(mItemsAdapter);
         //initializes views
         mTitle = (EditText) rootView.findViewById(R.id.title);
         mAddress  = (EditText) rootView.findViewById(R.id.address);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
+        mInfo = (EditText) rootView.findViewById(R.id.info);
+        // this code used to make list of item not usable for now
+       /* mNewItemsList = new ArrayList<>();
+        final ListView itemsList = (ListView) rootView.findViewById(R.id.items);
+        itemsList.setAdapter(mItemsAdapter);
+        mItemsAdapter = new CustomNewItemAdapter(getActivity(),mNewItemsList,this);
         mItem = (EditText) rootView.findViewById(R.id.item_name);
         mUnit = (EditText) rootView.findViewById(R.id.units);
         mPrice = (EditText) rootView.findViewById(R.id.price);
@@ -56,41 +54,40 @@ public class NewItemFragment extends Fragment implements OnItemDelete {
                         ,mPrice.getText().toString()));
                 mItemsAdapter.notifyDataSetChanged();
             }
-        });
+        });*/
+        //on sumbit button click
         final Button submit = (Button) rootView.findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //check if all field are full if yes create new parse item and goes back to last window
                 if(mTitle.getText().toString().isEmpty()){
-
+                    AppFactory.titlePopUp(mPhone,getActivity()).doTask();
                 }else{
+                    if(mAddress.getText().toString().isEmpty()){
+                        AppFactory.addressPopUp(mPhone, getActivity()).doTask();
+                    }else {
+
+                        if(mPhone.getText().toString().isEmpty()){
+                            AppFactory.phonePopUp(mPhone, getActivity()).doTask();
+                        }else {
+
+                            if(mInfo.getText().toString().isEmpty()){
+                                AppFactory.infoPopUp(mPhone, getActivity()).doTask();
+                            }else {
+
+                                //if also field are filled do the following
+                                //change fragment
+                                UtilitiesFactory.switchFragments(getActivity(),"items").doTask();
+                                //crate parse object
+
+                            }
+                        }
+                    }
                 }
-                //create json and send it to the server
-                createJson();
-                //change fragment
-                UtilitiesFactory.switchFragments(getActivity(),"items").doTask();
             }
         });
         return rootView;
     }
 
-
-    //creates json object with all the entered values
-    private void createJson(){
-        JSONObject object = new JSONObject();
-        try {
-            object.put("title",mTitle.getText().toString());
-            object.put("address",mAddress.getText().toString());
-            object.put("phone",mPhone.getText().toString());
-            object.put("items",new Gson().toJson(mNewItemsList));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void onItemDeleted(int position) {
-        mNewItemsList.remove(position);
-        mItemsAdapter.notifyDataSetChanged();
-    }
 }

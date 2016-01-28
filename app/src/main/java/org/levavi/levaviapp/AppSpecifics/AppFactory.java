@@ -17,11 +17,23 @@ public class AppFactory {
     public static FactoryInterface titlePopUp(View view ,Context context) {
         return new PopUpGenerator(view,context,"title");
     }
+    // show pop up message when address text view is missing
+    public static FactoryInterface addressPopUp(View view ,Context context) {
+        return new PopUpGenerator(view,context,"address");
+    }
+    // show pop up message when phone text view is missing
+    public static FactoryInterface phonePopUp(View view ,Context context) {
+        return new PopUpGenerator(view,context,"phone");
+    }
+    // show pop up message when info text view is missing
+    public static FactoryInterface infoPopUp(View view ,Context context) {
+        return new PopUpGenerator(view,context,"info");
+    }
     //
     public static FactoryInterface signIn(Context context , GoogleApiClient googleApiClient){
-        return new GoogleSignIn(context,googleApiClient,0,"signIn",null,null);
+        return new GoogleSignIn(context,googleApiClient,0,"signIn",null);
     }
-    public static FactoryInterface signInResult(int requestCod,Intent data,ListView drawerList){
-        return new GoogleSignIn(null,null,requestCod,"result",data,drawerList);
+    public static FactoryInterface signInResult(int requestCod,Intent data){
+        return new GoogleSignIn(null,null,requestCod,"result",data);
     }
 }
