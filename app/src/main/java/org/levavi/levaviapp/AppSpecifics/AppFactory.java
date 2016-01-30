@@ -36,4 +36,8 @@ public class AppFactory {
     public static FactoryInterface signInResult(int requestCod,Intent data){
         return new GoogleSignIn(null,null,requestCod,"result",data);
     }
+    // create new object at parse database
+    public static FactoryInterface createParseObj(String user, String title, String address, String phone, String message){
+        return new CreateParseObject(user,title,address,phone,message);
+    }
 }

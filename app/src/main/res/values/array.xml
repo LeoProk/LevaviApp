@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--drawer icons-->
     <array name="icons">
-    <item>@drawable/ic_navigation_drawer</item>
+    <item>@drawable/ic_action_content_add_circle_outline</item>
+    <item>@drawable/ic_action_action_exit_to_app</item>
+    </array>
+    <!--drawer list-->
+    <array name="titles">
+      <item>הוסף מוצר</item>
+      <item>יציאה מהמשתמש</item>
     </array>
 </resources>
