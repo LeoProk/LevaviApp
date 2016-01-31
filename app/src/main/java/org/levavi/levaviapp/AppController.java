@@ -2,7 +2,7 @@ package org.levavi.levaviapp;
 
 import android.app.Application;
 
-import com.parse.Parse;
+import com.firebase.client.Firebase;
 
 /**
  * Created by Leo on 10/13/2015.
@@ -15,7 +15,6 @@ public class AppController extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Parse.enableLocalDatastore(this);
-        Parse.initialize(this);
+        Firebase.setAndroidContext(this);;
     }
 }

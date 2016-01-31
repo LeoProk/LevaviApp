@@ -1,26 +1,22 @@
 package org.levavi.levaviapp.AppSpecifics;
 
-import java.util.HashMap;
-
 /**
  * Pojo for items list adapter
  */
-public class Item  implements Comparable {
+public class UploadItem{
 
     private String mDate;
     private String mPrice;
     private String mAddress;
     private String mPhoneNum;
     private String mTitle;
-    private int mDistance;
 
-    public Item(String date,String price,String address,String phoneNum,String title,int distance){
+    public UploadItem(String date, String price, String address, String phoneNum, String title){
         mDate = date;
         mPrice = price;
         mAddress = address;
         mPhoneNum = phoneNum;
         mTitle = title;
-        mDistance = distance;
     }
 
 
@@ -48,15 +44,6 @@ public class Item  implements Comparable {
     public String getTitle() {
         return mTitle;
     }
-
-    public int getDistance() {
-        return mDistance;
-    }
-
-    @Override
-    public int compareTo(Object compare) {
-        int comparedPark = ((Item) compare).getDistance();
-        return this.mDistance - comparedPark;
     }
 
 }
