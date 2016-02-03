@@ -33,6 +33,10 @@
                 android:layout_gravity="start"
                 android:background="#ffffff">
 
+<!--        <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+                android:layout_width="240dp"
+                android:layout_height="50dp" />-->
         <ListView
                 android:id="@+id/slider_list"
                 android:layout_width="240dp"

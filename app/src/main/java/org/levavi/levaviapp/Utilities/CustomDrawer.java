@@ -16,6 +16,7 @@
 
 package org.levavi.levaviapp.Utilities;
 
+import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
 import org.levavi.levaviapp.AppSpecifics.RowItem;
 import org.levavi.levaviapp.Fragments.NewItemFragment;
@@ -102,8 +103,14 @@ final class CustomDrawer implements FactoryInterface {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                fragment = new NewItemFragment();
-                tag = "new";
+                String userInfo = (String) UtilitiesFactory.getFile(mContext, "user").doTask();
+                if (!userInfo.isEmpty()) {
+                    fragment = new NewItemFragment();
+                    tag = "new";
+                }else {
+                    fragment = new NewItemFragment();
+                    tag = "new";
+                }
                 break;
             case 1:
                 //fragment = new LoginFragment();
@@ -113,7 +120,7 @@ final class CustomDrawer implements FactoryInterface {
         }
         if (fragment != null && (boolean)UtilitiesFactory.checkNetwork(mContext,true).doTask()) {
             UtilitiesFactory.replaceFragment(mContext,fragment,tag,true).doTask();
-            mDrawerLayout.closeDrawer(mDrawerList);
+            //mDrawerLayout.closeDrawer(mDrawerLayout);
         }
     }
 

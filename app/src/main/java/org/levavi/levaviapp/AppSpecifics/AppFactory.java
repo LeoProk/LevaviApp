@@ -8,6 +8,7 @@ import android.view.View;
 
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -37,8 +38,8 @@ public class AppFactory {
     public static FactoryInterface signInResult(int requestCod,Intent data){
         return new GoogleSignIn(null,null,requestCod,"result",data);
     }
-    // create new object at parse database
-    public static FactoryInterface createParseObj(HashMap<String,String> item){
-        return new SaveNewItem(item);
+    // create new fire base entry
+    public static FactoryInterface saveFireBase(HashMap<String,String> item,ArrayList<NewItem> newItems){
+        return new SaveNewItem(item,newItems);
     }
 }
