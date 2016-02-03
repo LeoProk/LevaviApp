@@ -8,4 +8,9 @@
         android:icon="@drawable/ic_navigation_drawer"
         android:orderInCategory="100"
         app:showAsAction="always" />
+    <item android:id="@+id/action_search"
+        android:title="search"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
 </menu>

@@ -69,6 +69,11 @@ public class UtilitiesFactory {
         return new ReplaceFragment(context, fragment, tag, addToBackStack);
     }
 
+    //Removes fragment by tag
+    public static FactoryInterface removeFragment(Context context) {
+        return new RemoveFragment(context);
+    }
+
     //Deletes file by name
     public static FactoryInterface deleteFile(Context context, String filename) {
         return new FileManager(context, filename, "", "delete");

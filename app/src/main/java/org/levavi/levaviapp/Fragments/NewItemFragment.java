@@ -27,7 +27,7 @@ import java.util.ArrayList;
  */
 public class NewItemFragment extends Fragment {
 
-    private EditText mTitle,mAddress,mPhone,mInfo;
+    private EditText mTitle,mAddress,mPhone,mItem,mUnit,mPrice;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,12 +37,10 @@ public class NewItemFragment extends Fragment {
         mTitle = (EditText) rootView.findViewById(R.id.title);
         mAddress  = (EditText) rootView.findViewById(R.id.address);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
-        mInfo = (EditText) rootView.findViewById(R.id.info);
-        // this code used to make list of item not usable for now
-       /* mNewItemsList = new ArrayList<>();
+        final ArrayList<NewItem> newItemsList = new ArrayList<>();
         final ListView itemsList = (ListView) rootView.findViewById(R.id.items);
-        itemsList.setAdapter(mItemsAdapter);
-        mItemsAdapter = new CustomNewItemAdapter(getActivity(),mNewItemsList,this);
+        final CustomNewItemAdapter itemsAdapter = new CustomNewItemAdapter(getActivity(),newItemsList);
+        itemsList.setAdapter(itemsAdapter);
         mItem = (EditText) rootView.findViewById(R.id.item_name);
         mUnit = (EditText) rootView.findViewById(R.id.units);
         mPrice = (EditText) rootView.findViewById(R.id.price);
@@ -50,11 +48,11 @@ public class NewItemFragment extends Fragment {
         addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mNewItemsList.add(new NewItem(mItem.getText().toString(),mUnit.getText().toString()
+                newItemsList.add(new NewItem(mItem.getText().toString(),mUnit.getText().toString()
                         ,mPrice.getText().toString()));
-                mItemsAdapter.notifyDataSetChanged();
+                itemsAdapter.notifyDataSetChanged();
             }
-        });*/
+        });
         //on sumbit button click
         final Button submit = (Button) rootView.findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -71,17 +69,16 @@ public class NewItemFragment extends Fragment {
                         if(mPhone.getText().toString().isEmpty()){
                             AppFactory.phonePopUp(mPhone, getActivity()).doTask();
                         }else {
+                            if(itemsAdapter.isEmpty()){
 
-                            if(mInfo.getText().toString().isEmpty()){
-                                AppFactory.infoPopUp(mPhone, getActivity()).doTask();
-                            }else {
-
+                            }else{
                                 //if also field are filled do the following
                                 //change fragment
                                 UtilitiesFactory.switchFragments(getActivity(),"items").doTask();
-                                //crate parse object
-
+                                //save to firebase
                             }
+
+
                         }
                     }
                 }

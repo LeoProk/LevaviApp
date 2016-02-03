@@ -25,12 +25,9 @@ public class CustomNewItemAdapter extends BaseAdapter {
 
     private ArrayList<NewItem> mItemsList;
 
-    private OnItemDelete mListener;
-
-    public CustomNewItemAdapter(Context context,ArrayList itemsList,OnItemDelete listener){
+    public CustomNewItemAdapter(Context context,ArrayList itemsList){
         mContext = context;
         mItemsList = itemsList;
-        mListener = listener;
     }
 
     @Override
@@ -68,7 +65,8 @@ public class CustomNewItemAdapter extends BaseAdapter {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onItemDeleted(position);
+                mItemsList.remove(position);
+                notifyDataSetChanged();
             }
         });
         return  convertView;

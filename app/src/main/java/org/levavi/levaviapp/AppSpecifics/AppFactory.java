@@ -5,9 +5,10 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.widget.ListView;
 
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
+
+import java.util.HashMap;
 
 /**
  * Created by Leo on 1/10/2016.
@@ -37,7 +38,7 @@ public class AppFactory {
         return new GoogleSignIn(null,null,requestCod,"result",data);
     }
     // create new object at parse database
-    public static FactoryInterface createParseObj(String user, String title, String address, String phone, String message){
-        return new CreateParseObject(user,title,address,phone,message);
+    public static FactoryInterface createParseObj(HashMap<String,String> item){
+        return new SaveNewItem(item);
     }
 }

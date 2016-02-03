@@ -8,7 +8,6 @@ import java.util.HashMap;
 public class Item  implements Comparable {
 
     private String mDate;
-    private String mPrice;
     private String mAddress;
     private String mPhoneNum;
     private String mTitle;
@@ -16,7 +15,6 @@ public class Item  implements Comparable {
 
     public Item(String date,String price,String address,String phoneNum,String title,int distance){
         mDate = date;
-        mPrice = price;
         mAddress = address;
         mPhoneNum = phoneNum;
         mTitle = title;
@@ -27,11 +25,6 @@ public class Item  implements Comparable {
 
     public String getDate() {
         return mDate;
-    }
-
-
-    public String getPrice() {
-        return mPrice;
     }
 
 
