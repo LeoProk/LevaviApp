@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Leo on 1/10/2016.
+ * this class hold or the factory methods of the app
  */
 public class AppFactory {
     // show pop up message when title text view is missing
@@ -39,7 +39,11 @@ public class AppFactory {
         return new GoogleSignIn(null,null,requestCod,"result",data);
     }
     // create new fire base entry
-    public static FactoryInterface saveFireBase(HashMap<String,String> item,ArrayList<NewItem> newItems){
-        return new SaveNewItem(item,newItems);
+    public static FactoryInterface saveFireBase(HashMap<String,String> itemInfo,HashMap<String,NewItem> newItems){
+        return new SaveNewItem(itemInfo,newItems);
+    }
+    //get data from firebase server
+    public static FactoryInterface getFireBase(){
+        return new FirebaseGet();
     }
 }

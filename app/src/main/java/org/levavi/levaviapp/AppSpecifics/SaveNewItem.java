@@ -12,12 +12,12 @@ import java.util.HashMap;
  */
 final class SaveNewItem implements FactoryInterface {
 
-    private HashMap<String,String> mItem;
+    private HashMap<String,String> mItemInfo;
 
-    private ArrayList<NewItem> mNewItems;
+    private HashMap<String,NewItem> mNewItems;
 
-    public SaveNewItem(HashMap<String,String> item,ArrayList<NewItem> newItems) {
-        mItem = item;
+    public SaveNewItem(HashMap<String,String> item,HashMap<String,NewItem> newItems) {
+        mItemInfo = item;
         mNewItems = newItems;
     }
 
@@ -26,10 +26,8 @@ final class SaveNewItem implements FactoryInterface {
         Firebase myFirebaseRef = new Firebase("https://luminous-fire-5859.firebaseio.com/");
         Firebase postRef = myFirebaseRef.child("items");
         Firebase newPostRef = postRef.push();
-        newPostRef.setValue(mItem);
-        for (int i = 0; i <mNewItems.size(); i++) {
-            newPostRef.child("item"+Integer.toString(i)).setValue(mNewItems.get(i));
-        }
+        newPostRef.setValue(mItemInfo);
+        newPostRef.setValue(mNewItems);
         return null;
     }
 }

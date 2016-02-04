@@ -6,7 +6,6 @@
     <item android:id="@+id/drawer"
         android:title="drawer"
         android:icon="@drawable/ic_navigation_drawer"
-        android:orderInCategory="100"
         app:showAsAction="always" />
     <item android:id="@+id/action_search"
         android:title="search"

@@ -30,21 +30,17 @@ public class CustomNewItemAdapter extends BaseAdapter {
         mItemsList = itemsList;
     }
 
-    @Override
     public int getCount() {
-        return 0;
+        return mItemsList.size();
     }
 
-    @Override
     public Object getItem(int position) {
-        return null;
+        return position;
     }
 
-    @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
-
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final NewItem newItem = mItemsList.get(position);

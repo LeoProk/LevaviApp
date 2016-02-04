@@ -21,9 +21,9 @@ final class RemoveFragment implements FactoryInterface {
 
     @Override
     public Object doTask() {
-        final AppController appController = (AppController) mContext;
-        Fragment fragment = ((AppCompatActivity)mContext).getSupportFragmentManager().findFragmentByTag(appController.mFragmentTag);
-        ((AppCompatActivity)mContext).getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        final AppController appController = (AppController) mContext.getApplicationContext();
+        //Fragment fragment = ((AppCompatActivity)mContext).getSupportFragmentManager().findFragmentByTag(appController.mFragmentTag);
+        ((AppCompatActivity)mContext).getFragmentManager().popBackStack();
         appController.mFragmentTag = null;
         return null;
     }

@@ -34,6 +34,7 @@ public class NewItemFragment extends Fragment {
         mAddress  = (EditText) rootView.findViewById(R.id.address);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         final HashMap<String, String> infoMap = new HashMap<>();
+        final HashMap<String,NewItem> itemsForSave = new HashMap<>();
         final ArrayList<NewItem> newItemsList = new ArrayList<>();
         final ListView itemsList = (ListView) rootView.findViewById(R.id.items);
         final CustomNewItemAdapter itemsAdapter = new CustomNewItemAdapter(getActivity(),newItemsList);
@@ -74,9 +75,12 @@ public class NewItemFragment extends Fragment {
                                 infoMap.put("phone", mPhone.getText().toString());
                                 //if also field are filled do the following
                                 //change fragment
-                                UtilitiesFactory.switchFragments(getActivity(), "items").doTask();
-                                AppFactory.saveFireBase(infoMap, newItemsList).doTask();
-                                //save to firebase
+                                UtilitiesFactory.removeFragment(getActivity()).doTask();
+                                //save to firebase after creating hashmap of the new items array list
+                                for (int i = 0; i < newItemsList.size() ; i++) {
+                                    itemsForSave.put("item"+Integer.toString(i),newItemsList.get(i));
+                                }
+                                AppFactory.saveFireBase(infoMap, itemsForSave).doTask();
                             }
 
 

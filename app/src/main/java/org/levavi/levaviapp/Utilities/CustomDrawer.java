@@ -118,9 +118,10 @@ final class CustomDrawer implements FactoryInterface {
             default:
                 break;
         }
+        //witch to new fragment and closes the drawer
         if (fragment != null && (boolean)UtilitiesFactory.checkNetwork(mContext,true).doTask()) {
             UtilitiesFactory.replaceFragment(mContext,fragment,tag,true).doTask();
-            //mDrawerLayout.closeDrawer(mDrawerLayout);
+            mDrawerLayout.closeDrawers();
         }
     }
 

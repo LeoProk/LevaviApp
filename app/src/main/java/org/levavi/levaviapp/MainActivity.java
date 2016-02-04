@@ -51,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView drawerList = (ListView) findViewById(R.id.slider_list);
         mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList,toolbar).doTask();
-        //creating star fragment
-        UtilitiesFactory.addFragment(this,new ItemsFragment(),"item",true).doTask();
         // Configure sign-in to request the user's ID, email address, and basic
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         final GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -64,14 +62,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 .enableAutoManage(this , this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
-/*        // google log in on button click
-        SignInButton signInButton = (SignInButton)findViewById(R.id.sign_in_button);
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AppFactory.signIn(MainActivity.this,googleApiClient).doTask();
-            }
-        });*/
+        AppFactory.getFireBase().doTask();
     }
 
     @Override

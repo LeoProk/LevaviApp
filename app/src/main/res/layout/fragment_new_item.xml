@@ -13,7 +13,7 @@
 
 
         <EditText
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -36,7 +36,7 @@
             android:hint="@string/phone_num"
             android:id="@+id/phone"/>
         <EditText
-                android:layout_width="100dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/phone"
@@ -49,16 +49,16 @@
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/phone"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="100dp"
+                android:layout_marginRight="90dp"
                 android:hint="@string/units"
                 android:id="@+id/units"/>
         <EditText
-                android:layout_width="80dp"
+                android:layout_width="90dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/phone"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="200dp"
+                android:layout_marginRight="190dp"
                 android:hint="@string/price"
                 android:id="@+id/price"/>
 
@@ -68,11 +68,11 @@
                 android:layout_below="@+id/phone"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/check"
-                android:layout_toLeftOf="@id/price"
+                android:layout_marginRight="275dp"
                 android:id="@+id/add"/>
         <ListView
                 android:layout_width="wrap_content"
-                android:layout_height="200dp"
+                android:layout_height="180dp"
                 android:id="@+id/items"
                 android:layout_below="@id/units"/>
         <Button
@@ -80,7 +80,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/items"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/submit"/>
+                android:id="@+id/submit"
+            android:text="submit" />
 
 
     </RelativeLayout>
