@@ -5,10 +5,14 @@
               android:layout_height="match_parent"
                 android:background="#E0E0E0"
               android:padding="10dp">
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/scrollView">
+    <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/rounded_corner"
+                    android:background="#ffffff"
                     android:padding="20dp">
 
 
@@ -37,7 +41,7 @@
             android:id="@+id/phone"/>
         <EditText
                 android:layout_width="90dp"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
                 android:layout_alignParentRight="true"
                 android:layout_below="@+id/phone"
                 android:hint="@string/item"
@@ -45,25 +49,21 @@
                 android:id="@+id/item_name"/>
         <EditText
                 android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/phone"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="90dp"
+                android:layout_height="43dp"
                 android:hint="@string/units"
-                android:id="@+id/units"/>
+                android:id="@+id/units"
+                android:layout_alignTop="@+id/item_name"
+                android:layout_toStartOf="@+id/item_name"/>
         <EditText
                 android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_below="@id/phone"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="190dp"
+                android:layout_height="43dp"
                 android:hint="@string/price"
-                android:id="@+id/price"/>
+                android:id="@+id/price"
+                android:layout_alignTop="@+id/item_name"
+                android:layout_toStartOf="@+id/units"/>
 
         <ImageButton
-                android:layout_width="wrap_content"
+                android:layout_width="45dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/phone"
                 android:layout_marginTop="8dp"
@@ -85,4 +85,5 @@
 
 
     </RelativeLayout>
+    </ScrollView>
 </LinearLayout>

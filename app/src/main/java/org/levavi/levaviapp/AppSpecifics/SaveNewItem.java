@@ -13,7 +13,6 @@ import java.util.HashMap;
 final class SaveNewItem implements FactoryInterface {
 
     private HashMap<String,String> mItemInfo;
-
     private HashMap<String,NewItem> mNewItems;
 
     public SaveNewItem(HashMap<String,String> item,HashMap<String,NewItem> newItems) {
@@ -24,10 +23,10 @@ final class SaveNewItem implements FactoryInterface {
     @Override
     public Object doTask() {
         Firebase myFirebaseRef = new Firebase("https://luminous-fire-5859.firebaseio.com/");
-        Firebase postRef = myFirebaseRef.child("items");
+        Firebase postRef = myFirebaseRef.child("input");
         Firebase newPostRef = postRef.push();
         newPostRef.setValue(mItemInfo);
-        newPostRef.setValue(mNewItems);
+        newPostRef.child("items").setValue(mNewItems);
         return null;
     }
 }
