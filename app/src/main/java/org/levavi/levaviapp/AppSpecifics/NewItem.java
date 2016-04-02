@@ -6,12 +6,12 @@ package org.levavi.levaviapp.AppSpecifics;
 public class NewItem {
 
 
-    private String mName,mUnits,mPrice;
+    private String mName,mUnits, mText;
 
     public NewItem(String name,String units,String price){
         mName = name;
         mUnits = units;
-        mPrice = price;
+        mText = price;
     }
 
     public String getName() {
@@ -23,6 +23,6 @@ public class NewItem {
     }
 
     public String getPrice() {
-        return mPrice;
+        return mText;
     }
 }
