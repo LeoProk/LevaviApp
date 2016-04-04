@@ -23,16 +23,12 @@ import java.util.HashMap;
  */
 public class NewItemFragment extends Fragment {
 
-    private EditText mTitle,mAddress,mPhone,mItem,mUnit,mPrice;
+    private EditText mItem,mUnit,mPrice;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_new_item, container, false);
-        //initializes views
-        mTitle = (EditText) rootView.findViewById(R.id.title);
-        mAddress  = (EditText) rootView.findViewById(R.id.address);
-        mPhone  = (EditText) rootView.findViewById(R.id.phone);
         final HashMap<String, String> infoMap = new HashMap<>();
         final HashMap<String,NewItem> itemsForSave = new HashMap<>();
         final ArrayList<NewItem> newItemsList = new ArrayList<>();
@@ -56,17 +52,7 @@ public class NewItemFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //check if all field are full if yes create new parse item and goes back to last window
-                if (mTitle.getText().toString().isEmpty()) {
-                    AppFactory.titlePopUp(mPhone, getActivity()).doTask();
-                } else {
-                    if (mAddress.getText().toString().isEmpty()) {
-                        AppFactory.addressPopUp(mPhone, getActivity()).doTask();
-                    } else {
 
-                        if (mPhone.getText().toString().isEmpty()) {
-                            AppFactory.phonePopUp(mPhone, getActivity()).doTask();
-                        } else {
                             if (itemsAdapter.isEmpty()) {
 
                             } else {
@@ -84,9 +70,9 @@ public class NewItemFragment extends Fragment {
                             }
 
 
-                        }
-                    }
-                }
+
+
+
             }
         });
         return rootView;
