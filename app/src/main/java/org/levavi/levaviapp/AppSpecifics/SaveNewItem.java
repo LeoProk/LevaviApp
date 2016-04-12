@@ -13,11 +13,9 @@ import java.util.HashMap;
 final class SaveNewItem implements FactoryInterface {
 
     private HashMap<String,String> mItemInfo;
-    private HashMap<String,NewItem> mNewItems;
 
-    public SaveNewItem(HashMap<String,String> item,HashMap<String,NewItem> newItems) {
+    public SaveNewItem(HashMap<String,String> item) {
         mItemInfo = item;
-        mNewItems = newItems;
     }
 
     @Override
@@ -26,7 +24,6 @@ final class SaveNewItem implements FactoryInterface {
         Firebase postRef = myFirebaseRef.child("input");
         Firebase newPostRef = postRef.push();
         newPostRef.setValue(mItemInfo);
-        newPostRef.child("items").setValue(mNewItems);
         return null;
     }
 }

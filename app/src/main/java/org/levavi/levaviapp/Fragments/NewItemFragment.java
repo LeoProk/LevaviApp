@@ -10,8 +10,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
-import org.levavi.levaviapp.AppSpecifics.CustomNewItemAdapter;
-import org.levavi.levaviapp.AppSpecifics.NewItem;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
@@ -23,7 +21,7 @@ import java.util.HashMap;
  */
 public class NewItemFragment extends Fragment {
 
-    private EditText mTitle,mAddress,mPhone,mItem,mUnit,mPrice;
+    private EditText mTitle,mAddress,mPhone,mText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,24 +31,8 @@ public class NewItemFragment extends Fragment {
         mTitle = (EditText) rootView.findViewById(R.id.title);
         mAddress  = (EditText) rootView.findViewById(R.id.address);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
+        mText = (EditText) rootView.findViewById(R.id.text);
         final HashMap<String, String> infoMap = new HashMap<>();
-        final HashMap<String,NewItem> itemsForSave = new HashMap<>();
-        final ArrayList<NewItem> newItemsList = new ArrayList<>();
-        final ListView itemsList = (ListView) rootView.findViewById(R.id.items);
-        final CustomNewItemAdapter itemsAdapter = new CustomNewItemAdapter(getActivity(),newItemsList);
-        itemsList.setAdapter(itemsAdapter);
-        mItem = (EditText) rootView.findViewById(R.id.item_name);
-        mUnit = (EditText) rootView.findViewById(R.id.units);
-        mPrice = (EditText) rootView.findViewById(R.id.price);
-        final ImageButton addItem = (ImageButton)rootView.findViewById(R.id.add);
-        addItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newItemsList.add(new NewItem(mItem.getText().toString(),mUnit.getText().toString()
-                        ,mPrice.getText().toString()));
-                itemsAdapter.notifyDataSetChanged();
-            }
-        });
         //on submit button click
         final Button submit = (Button) rootView.findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -67,23 +49,15 @@ public class NewItemFragment extends Fragment {
                         if (mPhone.getText().toString().isEmpty()) {
                             AppFactory.phonePopUp(mPhone, getActivity()).doTask();
                         } else {
-                            if (itemsAdapter.isEmpty()) {
-
-                            } else {
-                                infoMap.put("title", mTitle.getText().toString());
-                                infoMap.put("address", mAddress.getText().toString());
-                                infoMap.put("phone", mPhone.getText().toString());
-                                //if also field are filled do the following
-                                //change fragment
-                                UtilitiesFactory.removeFragment(getActivity()).doTask();
-                                //save to firebase after creating hashmap of the new items array list
-                                for (int i = 0; i < newItemsList.size() ; i++) {
-                                    itemsForSave.put("item"+Integer.toString(i),newItemsList.get(i));
-                                }
-                                AppFactory.saveFireBase(infoMap, itemsForSave).doTask();
-                            }
-
-
+                            infoMap.put("title", mTitle.getText().toString());
+                            infoMap.put("address", mAddress.getText().toString());
+                            infoMap.put("phone", mPhone.getText().toString());
+                            infoMap.put("text", mText.getText().toString());
+                            //if also field are filled do the following
+                            //change fragment
+                            UtilitiesFactory.removeFragment(getActivity()).doTask();
+                            //save to firebase after creating hashmap of the new items array list
+                            AppFactory.saveFireBase(infoMap).doTask();
                         }
                     }
                 }
