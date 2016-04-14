@@ -39,13 +39,17 @@
             android:layout_marginTop="20dp"
             android:hint="@string/phone_num"
             android:id="@+id/phone"/>
+        <TimePicker
+            android:id="@+id/time_picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|right"
             android:inputType="textMultiLine"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/phone"
+            android:layout_below="@+id/time_picker"
             android:layout_marginTop="20dp"
             android:lines="8"
             android:hint="@string/phone_num"

@@ -3,7 +3,6 @@ package org.levavi.levaviapp;
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
 import org.levavi.levaviapp.AppSpecifics.RowItem;
-import org.levavi.levaviapp.Fragments.ItemsFragment;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
 import android.app.SearchManager;
@@ -85,6 +84,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
         SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
     }
 
