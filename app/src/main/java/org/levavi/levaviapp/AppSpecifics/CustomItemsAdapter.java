@@ -15,20 +15,14 @@
  */
 
 package org.levavi.levaviapp.AppSpecifics;
-import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.R;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.EditText;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -36,7 +30,7 @@ import java.util.HashMap;
 
 public class CustomItemsAdapter extends BaseExpandableListAdapter {
 
-    private HashMap<String, ArrayList<Item>> mListDataChild;
+    private HashMap<String, ArrayList<NewItem>> mListDataChild;
 
     private Activity mActivity;
 
@@ -44,7 +38,7 @@ public class CustomItemsAdapter extends BaseExpandableListAdapter {
 
     private LayoutInflater mInflater;
 
-    public CustomItemsAdapter(Activity activity, HashMap<String, ArrayList<Item>> listHeaders,
+    public CustomItemsAdapter(Activity activity, HashMap<String, ArrayList<NewItem>> listHeaders,
                               ArrayList<String> listDataHeader) {
         mActivity = activity;
         mListDataChild = listHeaders;
@@ -112,7 +106,7 @@ public class CustomItemsAdapter extends BaseExpandableListAdapter {
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         // getting task data for the row
-        final Item task = (Item) getChild(groupPosition, childPosition);
+        final NewItem task = (NewItem) getChild(groupPosition, childPosition);
 
         // sets layout
         if (mInflater == null) {

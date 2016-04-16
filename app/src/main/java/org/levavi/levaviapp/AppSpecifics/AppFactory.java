@@ -39,8 +39,8 @@ public class AppFactory {
         return new GoogleSignIn(null,null,requestCod,"result",data);
     }
     // create new fire base entry
-    public static FactoryInterface saveFireBase(HashMap<String,String> itemInfo){
-        return new SaveNewItem(itemInfo);
+    public static FactoryInterface saveFireBase(NewItem newItem){
+        return new SaveNewItem(newItem);
     }
     //get data from firebase server
     public static FactoryInterface getFireBase(){
