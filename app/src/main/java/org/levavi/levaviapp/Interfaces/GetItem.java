@@ -1,6 +1,6 @@
 package org.levavi.levaviapp.Interfaces;
 
-import org.levavi.levaviapp.AppSpecifics.Item;
+import org.levavi.levaviapp.AppSpecifics.NewItem;
 
 import java.util.List;
 import retrofit.http.GET;
@@ -11,5 +11,5 @@ import retrofit.http.Path;
  */
 public interface GetItem {
     @GET("/items/{item}")
-    List<Item> itemsList(@Path("item") String itemName);
+    List<NewItem> itemsList(@Path("item") String itemName);
 }

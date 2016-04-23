@@ -1,6 +1,6 @@
 package org.levavi.levaviapp.Interfaces;
 
-import org.levavi.levaviapp.AppSpecifics.Item;
+import org.levavi.levaviapp.AppSpecifics.NewItem;
 
 import retrofit.Call;
 import retrofit.http.Body;
@@ -12,5 +12,5 @@ import retrofit.http.POST;
 public interface PostItem {
 
     @POST("/items")
-    Call<Item> createTask(@Body Item task);
+    Call<NewItem> createTask(@Body NewItem task);
 }

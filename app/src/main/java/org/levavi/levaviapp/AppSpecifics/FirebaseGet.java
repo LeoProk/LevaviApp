@@ -25,7 +25,7 @@ final class FirebaseGet implements FactoryInterface {
     @Override
     public Object doTask() {
         Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
-        Query queryRef = ref.orderByChild("price");
+        Query queryRef = ref.orderByChild("date");
         queryRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChild) {
