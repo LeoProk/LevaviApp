@@ -46,21 +46,38 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         //sets toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         UtilitiesFactory.getToolbar(this, toolbar).doTask();
+        boolean userLogIn;
+        //check if the user sign in to the app before
+        if(((String)UtilitiesFactory.getFile(this,"use").doTask()).isEmpty()) {
+            userLogIn = false;
+            // Configure sign-in to request the user's ID, email address, and basic
+            // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+            final GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestEmail()
+                    .build();
+            // Build a GoogleApiClient with access to the Google Sign-In API and the
+            // options specified by gso.
+            final GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
+                    .enableAutoManage(this, this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .build();
+
+            SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+            signInButton.setSize(SignInButton.SIZE_STANDARD);
+            signInButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AppFactory.signIn(MainActivity.this, googleApiClient).doTask();
+                }
+            });
+        }else {
+            userLogIn = true;
+        }
         //create the drawer
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView drawerList = (ListView) findViewById(R.id.slider_list);
-        mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList,toolbar).doTask();
-        // Configure sign-in to request the user's ID, email address, and basic
-        // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-        final GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
-        // Build a GoogleApiClient with access to the Google Sign-In API and the
-        // options specified by gso.
-        final GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this , this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
+        mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList,toolbar
+                ,userLogIn).doTask();
         AppFactory.getFireBase().doTask();
     }
 

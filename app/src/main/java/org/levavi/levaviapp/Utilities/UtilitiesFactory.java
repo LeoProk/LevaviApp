@@ -93,7 +93,7 @@ public class UtilitiesFactory {
 
     //Creates navigation drawer
     public static FactoryInterface getDrawer(Context context, DrawerLayout mDrawerLayout,
-                                             ListView mDrawerList,Toolbar toolbar) {
-        return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar);
+                                             ListView mDrawerList,Toolbar toolbar,boolean logIn) {
+        return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar,logIn);
     }
 }

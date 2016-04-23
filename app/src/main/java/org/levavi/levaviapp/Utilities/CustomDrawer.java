@@ -50,11 +50,15 @@ final class CustomDrawer implements FactoryInterface {
 
     private Toolbar mToolbar;
 
-    protected CustomDrawer(Context context, DrawerLayout drawerLayout, ListView drawerList,Toolbar toolbar) {
+    private boolean mLogIn;
+
+    protected CustomDrawer(Context context, DrawerLayout drawerLayout, ListView drawerList,
+                           Toolbar toolbar,boolean logIn) {
         mContext = context;
         mDrawerLayout = drawerLayout;
         mDrawerList = drawerList;
         mToolbar = toolbar;
+        mLogIn = logIn;
     }
 
     //class of creating and populating navigation drawer
@@ -82,11 +86,19 @@ final class CustomDrawer implements FactoryInterface {
                 activity.invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
-        for (int i = 0; i < menuTitles.length; i++) {
+        //check if user login if not disable add new item option and shows the log in button
+        int startingListNum = 0;
+        if(mLogIn == false){
+            startingListNum = 1;
+
+        }
+        //create the drawer list names and icons
+        for (int i = startingListNum; i < menuTitles.length; i++) {
             RowItem items = new RowItem(menuTitles[i], menuIcons.getResourceId(i, -1));
             rowItems.add(items);
 
         }
+        //sets drawer adapter
         DrawerAdapter adapter = new DrawerAdapter(mContext, rowItems);
         mDrawerList.setAdapter(adapter);
         mDrawerList.setOnItemClickListener(new CustomDrawer.SlideitemListener());
@@ -103,8 +115,8 @@ final class CustomDrawer implements FactoryInterface {
         Fragment fragment = null;
         switch (position) {
             case 0:
-                String userInfo = (String) UtilitiesFactory.getFile(mContext, "user").doTask();
-                if (!userInfo.isEmpty()) {
+                //checks if user log in or not
+                if(mLogIn == true){
                     fragment = new NewItemFragment();
                     tag = "new";
                 }else {
