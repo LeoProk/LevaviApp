@@ -23,6 +23,8 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
+import com.google.android.gms.common.SignInButton;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -93,7 +95,7 @@ public class UtilitiesFactory {
 
     //Creates navigation drawer
     public static FactoryInterface getDrawer(Context context, DrawerLayout mDrawerLayout,
-                                             ListView mDrawerList,Toolbar toolbar,boolean logIn) {
-        return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar,logIn);
+                                             ListView mDrawerList,Toolbar toolbar,SignInButton signInButton) {
+        return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar,signInButton);
     }
 }

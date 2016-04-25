@@ -34,6 +34,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.common.SignInButton;
+
 import java.util.ArrayList;
 
 /**
@@ -50,15 +52,15 @@ final class CustomDrawer implements FactoryInterface {
 
     private Toolbar mToolbar;
 
-    private boolean mLogIn;
+    private SignInButton mSignInButton;
 
     protected CustomDrawer(Context context, DrawerLayout drawerLayout, ListView drawerList,
-                           Toolbar toolbar,boolean logIn) {
+                           Toolbar toolbar,SignInButton signInButton) {
         mContext = context;
         mDrawerLayout = drawerLayout;
         mDrawerList = drawerList;
         mToolbar = toolbar;
-        mLogIn = logIn;
+        mSignInButton = signInButton;
     }
 
     //class of creating and populating navigation drawer
@@ -71,26 +73,30 @@ final class CustomDrawer implements FactoryInterface {
         final String[] menuTitles = mContext.getResources().getStringArray(R.array.titles);
         final TypedArray menuIcons = mContext.getResources().obtainTypedArray(R.array.icons);
         //create the drawer
-        ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(activity, mDrawerLayout,
-                mToolbar,R.string.drawer_open, R.string.drawer_close) {
+        ActionBarDrawerToggle drawerToggle = null;
+        if(mToolbar!= null) {
+            drawerToggle = new ActionBarDrawerToggle(activity, mDrawerLayout,
+                    mToolbar, R.string.drawer_open, R.string.drawer_close) {
 
-            //* Called when a drawer has settled in a completely closed state.
-            public void onDrawerClosed(View view) {
-                super.onDrawerClosed(view);
-                activity.invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
+                //* Called when a drawer has settled in a completely closed state.
+                public void onDrawerClosed(View view) {
+                    super.onDrawerClosed(view);
+                    activity.invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
 
-            //* Called when a drawer has settled in a completely open state.
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                activity.invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
-            }
-        };
+                //* Called when a drawer has settled in a completely open state.
+                public void onDrawerOpened(View drawerView) {
+                    super.onDrawerOpened(drawerView);
+                    activity.invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                }
+            };
+            drawerToggle.syncState();
+        }
         //check if user login if not disable add new item option and shows the log in button
         int startingListNum = 0;
-        if(mLogIn == false){
-            startingListNum = 1;
-
+        if(mSignInButton != null){
+            startingListNum = 2;
+            mSignInButton.setVisibility(View.VISIBLE);
         }
         //create the drawer list names and icons
         for (int i = startingListNum; i < menuTitles.length; i++) {
@@ -104,7 +110,6 @@ final class CustomDrawer implements FactoryInterface {
         mDrawerList.setOnItemClickListener(new CustomDrawer.SlideitemListener());
         menuIcons.recycle();
         mDrawerLayout.setDrawerListener(drawerToggle);
-        drawerToggle.syncState();
         return drawerToggle;
     }
 
@@ -113,16 +118,13 @@ final class CustomDrawer implements FactoryInterface {
         //empty fragment and tag
         String tag = null;
         Fragment fragment = null;
+        if(mSignInButton != null){
+            position = position + 2;
+        }
         switch (position) {
             case 0:
-                //checks if user log in or not
-                if(mLogIn == true){
                     fragment = new NewItemFragment();
                     tag = "new";
-                }else {
-                    fragment = new NewItemFragment();
-                    tag = "new";
-                }
                 break;
             case 1:
                 //fragment = new LoginFragment();

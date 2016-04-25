@@ -17,6 +17,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -46,10 +47,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         //sets toolbar
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         UtilitiesFactory.getToolbar(this, toolbar).doTask();
-        boolean userLogIn;
         //check if the user sign in to the app before
-        if(((String)UtilitiesFactory.getFile(this,"use").doTask()).isEmpty()) {
-            userLogIn = false;
+        SignInButton signInButton = null;
+        if(((String)UtilitiesFactory.getFile(this,"user").doTask()).isEmpty()) {
             // Configure sign-in to request the user's ID, email address, and basic
             // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
             final GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                     .build();
 
-            SignInButton signInButton = (SignInButton) findViewById(R.id.sign_in_button);
+            signInButton = (SignInButton) findViewById(R.id.sign_in_button);
             signInButton.setSize(SignInButton.SIZE_STANDARD);
             signInButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,14 +70,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     AppFactory.signIn(MainActivity.this, googleApiClient).doTask();
                 }
             });
-        }else {
-            userLogIn = true;
         }
         //create the drawer
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView drawerList = (ListView) findViewById(R.id.slider_list);
         mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList,toolbar
-                ,userLogIn).doTask();
+                ,signInButton).doTask();
         AppFactory.getFireBase().doTask();
     }
 

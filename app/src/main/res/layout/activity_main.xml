@@ -37,13 +37,14 @@
                 android:id="@+id/sign_in_button"
                 android:layout_width="240dp"
                 android:layout_height="50dp"
-                android:visability="gone"
+                android:visibility="gone"
             />
         <ListView
                 android:id="@+id/slider_list"
                 android:layout_width="240dp"
                 android:layout_height="match_parent"
                 android:choiceMode="singleChoice"
+                android:layout_below="@+id/sign_in_button"
                 android:divider="@android:color/transparent"
                 android:dividerHeight="0dp"/>
         </RelativeLayout>
