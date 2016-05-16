@@ -11,16 +11,18 @@ public class FirebaseItem {
     private String address;
     private String phone;
     private String title;
+    private String text;
     private int distance;
 
     public FirebaseItem(){
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
     }
-    public FirebaseItem(String date, String address, String phone, String title, int distance){
+    public FirebaseItem(String date, String text ,String address, String phone, String title, int distance){
         this.date = date;
         this.address = address;
         this.phone = phone;
         this.title = title;
+        this.text = text;
         this.distance = distance;
     }
     public String getDate() {
@@ -41,6 +43,10 @@ public class FirebaseItem {
 
     public int getDistance() {
         return distance;
+    }
+
+    public String getText() {
+        return text;
     }
 
 
