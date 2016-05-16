@@ -16,7 +16,7 @@
 
 package org.levavi.levaviapp.Utilities;
 
-import org.levavi.levaviapp.AppSpecifics.AppFactory;
+
 import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
 import org.levavi.levaviapp.AppSpecifics.RowItem;
 import org.levavi.levaviapp.Fragments.NewItemFragment;

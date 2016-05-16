@@ -3,7 +3,7 @@ package org.levavi.levaviapp.AppSpecifics;
 /**
  * Created by Leo on 4/9/2016.
  */
-public class RetrievedItem {
+public class FirebaseItem {
 
     //make sure that our field names match the names of the properties
     // in the Firebase database
@@ -13,10 +13,16 @@ public class RetrievedItem {
     private String title;
     private int distance;
 
-    public RetrievedItem(){
+    public FirebaseItem(){
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
     }
-
+    public FirebaseItem(String date, String address, String phone, String title, int distance){
+        this.date = date;
+        this.address = address;
+        this.phone = phone;
+        this.title = title;
+        this.distance = distance;
+    }
     public String getDate() {
         return date;
     }
