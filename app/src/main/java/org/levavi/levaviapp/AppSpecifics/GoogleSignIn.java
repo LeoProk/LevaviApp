@@ -11,6 +11,7 @@ import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 /**
  *this class responsible for google sign in and saving user id to internal storage
@@ -61,12 +62,15 @@ final class GoogleSignIn implements FactoryInterface {
     }
     // check if sign-in succeeded
     private void handleSignInResult(GoogleSignInResult result) {
+        Log.e("TAt", "handleSignInResult:" + result.isSuccess());
+
         if (result.isSuccess()) {
             //after successfully signing in save the user id
             GoogleSignInAccount acct = result.getSignInAccount();
             UtilitiesFactory.saveFile(mContext, "user", acct.getId());
+            Log.e("TRY",acct.getId());
         } else {
-
+            Log.e("TRY","error");
         }
     }
 
@@ -74,6 +78,7 @@ final class GoogleSignIn implements FactoryInterface {
     private void checkResult(){
         if (mRequestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(mData);
+            Log.e("error",result.getStatus().toString());
             handleSignInResult(result);
         }
 

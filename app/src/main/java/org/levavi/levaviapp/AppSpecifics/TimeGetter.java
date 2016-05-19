@@ -34,9 +34,10 @@ public class TimeGetter implements FactoryInterface {
         call.enqueue(new Callback<TimeData>() {
             @Override
             public void onResponse(Call<TimeData> call, Response<TimeData> response) {
-                Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                mCurrentDate = String.valueOf(response.body().getTimestamp());
+              /*  Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                 cal.setTimeInMillis(response.body().getTimestamp());
-                mCurrentDate = DateFormat.format("dd-M-yyyy hh:mm", cal).toString();
+                mCurrentDate = DateFormat.format("dd-M-yyyy hh:mm", cal).toString();*/
             }
 
             @Override

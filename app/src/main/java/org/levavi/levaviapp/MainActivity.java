@@ -5,6 +5,7 @@ import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
 import org.levavi.levaviapp.AppSpecifics.RowItem;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
+import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +27,9 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,6 +40,10 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private ActionBarDrawerToggle mDrawerToggle;
+
+    private GoogleApiClient mGoogleApiClient;
+
+    private static final int RC_SIGN_IN = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +60,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             // Configure sign-in to request the user's ID, email address, and basic
             // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
             final GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken("947543842597-6ssol53at50cs7juqhqbb4ed3huaqk4q.apps.googleusercontent.com")
                     .requestEmail()
                     .build();
             // Build a GoogleApiClient with access to the Google Sign-In API and the
             // options specified by gso.
-            final GoogleApiClient googleApiClient = new GoogleApiClient.Builder(this)
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .enableAutoManage(this, this)
                     .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                     .build();
@@ -67,15 +75,22 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             signInButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AppFactory.signIn(MainActivity.this, googleApiClient).doTask();
+                    Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                    startActivityForResult(signInIntent, RC_SIGN_IN);
                 }
             });
         }
         //create the drawer
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView drawerList = (ListView) findViewById(R.id.slider_list);
-        mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList,toolbar
-                ,signInButton).doTask();
+        Log.e("TRY",(String)UtilitiesFactory.getFile(this,"user").doTask());
+        if(((String)UtilitiesFactory.getFile(this,"user").doTask()).length()==0) {
+            mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList, toolbar
+                    , signInButton).doTask();
+        }else {
+            mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList, toolbar
+                    ,null).doTask();
+        }
         AppFactory.getFireBase().doTask();
     }
 
@@ -126,7 +141,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        AppFactory.signInResult(requestCode,data).doTask();
+        if(requestCode == RC_SIGN_IN) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+            Log.e("error",result.getStatus().toString());
+            handleSignInResult(result);
+        }
     }
 
     @Override
@@ -139,5 +158,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
+    }
+    // check if sign-in succeeded
+    private void handleSignInResult(GoogleSignInResult result) {
+        Log.e("TAt", "handleSignInResult:" + result.isSuccess());
+
+        if (result.isSuccess()) {
+            //after successfully signing in save the user id
+            GoogleSignInAccount acct = result.getSignInAccount();
+            UtilitiesFactory.saveFile(this, "user", acct.getId());
+            Log.e("TRY",acct.getId());
+        } else {
+            Log.e("TRY","error");
+        }
     }
 }

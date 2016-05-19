@@ -15,7 +15,6 @@ import com.firebase.client.Firebase;
 
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.AppSpecifics.FirebaseItem;
-import org.levavi.levaviapp.AppSpecifics.NewItem;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
@@ -64,8 +63,9 @@ public class NewItemFragment extends Fragment {
                             UtilitiesFactory.removeFragment(getActivity()).doTask();
                             String[] fullTime =((String)AppFactory.getTimeGetter().doTask()).split(" ");
                             //save to firebase after creating hashmap of the new items array list
-                            FirebaseItem itemForSave = new FirebaseItem(fullTime[0],mAddress.getText().toString(),mPhone.getText().toString(),
-                                    mTitle.getText().toString(), mText.getText().toString()).doTask();
+                            FirebaseItem itemForSave = new FirebaseItem(fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
+                                    mPhone.getText().toString(),mTitle.getText().toString());
+                            AppFactory.saveFireBase(itemForSave).doTask();
                         }
                     }
                 }
