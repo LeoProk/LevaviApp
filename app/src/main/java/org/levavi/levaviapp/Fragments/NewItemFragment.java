@@ -14,6 +14,7 @@ import android.widget.TimePicker;
 import com.firebase.client.Firebase;
 
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
+import org.levavi.levaviapp.AppSpecifics.FirebaseItem;
 import org.levavi.levaviapp.AppSpecifics.NewItem;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
@@ -27,6 +28,7 @@ import java.util.HashMap;
 public class NewItemFragment extends Fragment {
 
     private EditText mTitle,mAddress,mPhone,mText;
+
 
     private TimePicker mTimePicker;
 
@@ -58,14 +60,12 @@ public class NewItemFragment extends Fragment {
                         if (mPhone.getText().toString().isEmpty()) {
                             AppFactory.phonePopUp(mPhone, getActivity()).doTask();
                         } else {
-                            //get select time in time picker and conver it to seconds
-                            long timeInSecs =  mTimePicker.getCurrentHour()*3600 + mTimePicker.getCurrentMinute()*60;
                             //change fragment
                             UtilitiesFactory.removeFragment(getActivity()).doTask();
+                            String[] fullTime =((String)AppFactory.getTimeGetter().doTask()).split(" ");
                             //save to firebase after creating hashmap of the new items array list
-                            NewItem itemForSave = new NewItem( mAddress.getText().toString(),mPhone.getText().toString(),
-                                    mTitle.getText().toString(), mText.getText().toString(),System.currentTimeMillis()/1000 + timeInSecs);
-                            AppFactory.saveFireBase(itemForSave).doTask();
+                            FirebaseItem itemForSave = new FirebaseItem(fullTime[0],mAddress.getText().toString(),mPhone.getText().toString(),
+                                    mTitle.getText().toString(), mText.getText().toString()).doTask();
                         }
                     }
                 }

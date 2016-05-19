@@ -9,5 +9,13 @@
     <array name="titles">
       <item>הוסף מוצר</item>
       <item>יציאה מהמשתמש</item>
+      <item>מסעדות</item>
+      <item>אטרקציות ופנאי</item>
+      <item>טיפוח וספא</item>
+      <item>בריאות וכושר</item>
+      <item>אלקטרוניקה ומחשבים</item>
+      <item>לבית ולגן</item>
+      <item>תינוקות ילדים וצעצועים</item>
+      <item>ביגוד והנעלה</item>
     </array>
 </resources>

@@ -4,18 +4,15 @@ import com.firebase.client.Firebase;
 
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
  * this class saves object from hash map on firebase server
  */
 final class SaveNewItem implements FactoryInterface {
 
-    private NewItem mNewItem;
+    private FirebaseItem mFirebaseItem;
 
-    public SaveNewItem(NewItem newItem) {
-        mNewItem = newItem;
+    public SaveNewItem(FirebaseItem firebaseItem) {
+        mFirebaseItem = firebaseItem;
     }
 
     @Override
@@ -23,7 +20,7 @@ final class SaveNewItem implements FactoryInterface {
         Firebase myFirebaseRef = new Firebase("https://luminous-fire-5859.firebaseio.com/");
         Firebase postRef = myFirebaseRef.child("input");
         Firebase newPostRef = postRef.push();
-        newPostRef.setValue(mNewItem);
+        newPostRef.setValue(mFirebaseItem);
         return null;
     }
 }

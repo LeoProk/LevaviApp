@@ -39,11 +39,14 @@ public class AppFactory {
         return new GoogleSignIn(null,null,requestCod,"result",data);
     }
     // create new fire base entry
-    public static FactoryInterface saveFireBase(NewItem newItem){
+    public static FactoryInterface saveFireBase(FirebaseItem newItem){
         return new SaveNewItem(newItem);
     }
-    //get data from firebase server
+    //gets data from firebase server
     public static FactoryInterface getFireBase(){
         return new FirebaseGet();
     }
+
+    //gets current time and date
+    public static FactoryInterface getTimeGetter(){return new TimeGetter();}
 }
