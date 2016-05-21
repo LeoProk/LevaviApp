@@ -31,19 +31,21 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Scope;
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
 
     private ActionBarDrawerToggle mDrawerToggle;
 
     private GoogleApiClient mGoogleApiClient;
 
-    private static final int RC_SIGN_IN = 0;
+    private static final int RC_SIGN_IN = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,19 +61,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if(((String)UtilitiesFactory.getFile(this,"user").doTask()).isEmpty()) {
             // Configure sign-in to request the user's ID, email address, and basic
             // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-            final GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken("947543842597-6ssol53at50cs7juqhqbb4ed3huaqk4q.apps.googleusercontent.com")
+            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
+                    .requestProfile()
                     .build();
             // Build a GoogleApiClient with access to the Google Sign-In API and the
             // options specified by gso.
             mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .enableAutoManage(this, this)
+                    .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                     .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                     .build();
 
             signInButton = (SignInButton) findViewById(R.id.sign_in_button);
             signInButton.setSize(SignInButton.SIZE_STANDARD);
+            signInButton.setScopes(gso.getScopeArray());
             signInButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -166,10 +169,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         if (result.isSuccess()) {
             //after successfully signing in save the user id
             GoogleSignInAccount acct = result.getSignInAccount();
-            UtilitiesFactory.saveFile(this, "user", acct.getId());
+            UtilitiesFactory.saveFile(this, "user", acct.getId()).doTask();
             Log.e("TRY",acct.getId());
         } else {
             Log.e("TRY","error");
         }
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+
     }
 }

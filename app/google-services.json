@@ -13,23 +13,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "947543842597-av7gfvsb4vs0vrltdkbtbnnt4riqq738.apps.googleusercontent.com",
+          "client_id": "947543842597-a52b5ne59g99ir7j3vqbroi9q5t33i1j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "org.levavi.levaviapp",
-            "certificate_hash": "96FF94458F982386869FDA97BB4651B0283F73DC"
+            "certificate_hash": "0CE6C3B3A6EC4352AC7717C820316EB4FA356D93"
           }
-        },
-        {
-          "client_id": "947543842597-jjfnikq6n86s3unof187hmmo2nevprbk.apps.googleusercontent.com",
-          "client_type": 3
         }
       ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA6bnkgVhy091Ie4EQDEgcraqNX7HwSgkA"
-        }
-      ],
+      "api_key": [],
       "services": {
         "analytics_service": {
           "status": 1

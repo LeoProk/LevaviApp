@@ -9,6 +9,7 @@
         android:layout_width="50dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_gravity="start"
         android:layout_centerVertical="true"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
@@ -19,7 +20,7 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
         android:layout_toRightOf="@id/icon"
-        android:gravity="center_vertical"
+        android:layout_gravity="start"
         android:textColor="#000000"
         android:textSize="20sp" />
 </RelativeLayout>
