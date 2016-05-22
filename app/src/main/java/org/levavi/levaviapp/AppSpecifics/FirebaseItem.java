@@ -1,7 +1,7 @@
 package org.levavi.levaviapp.AppSpecifics;
 
 /**
- * Created by Leo on 4/9/2016.
+ * fire base helper object for saving and retriving data from the server
  */
 public class FirebaseItem {
 
@@ -12,16 +12,22 @@ public class FirebaseItem {
     private String phone;
     private String title;
     private String text;
+    private String subject;
 
     public FirebaseItem(){
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
     }
-    public FirebaseItem(String date, String text ,String address, String phone, String title){
+    public FirebaseItem(String subject,String date, String text ,String address, String phone, String title){
+        this.subject = subject;
         this.timeStamp = date;
         this.address = address;
         this.phone = phone;
         this.title = title;
         this.text = text;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 
     public String getTimeStamp() {

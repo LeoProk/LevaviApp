@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.firebase.client.Firebase;
@@ -22,14 +24,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Created by Leo on 12/12/2015.
+ * First fragment on app run that show the latest items added
  */
 public class NewItemFragment extends Fragment {
 
     private EditText mTitle,mAddress,mPhone,mText;
 
-
-    private TimePicker mTimePicker;
+    private Spinner mSpinner;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,9 +41,13 @@ public class NewItemFragment extends Fragment {
         mAddress  = (EditText) rootView.findViewById(R.id.address);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
-        mTimePicker = (TimePicker) rootView.findViewById(R.id.time_picker);
-        mTimePicker.setIs24HourView(true);
-        final HashMap<String, String> infoMap = new HashMap<>();
+        mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
+        //array of spinner items
+        final String[] menuTitles = getActivity().getResources().getStringArray(R.array.spinner_titles);
+        //creates and sets spinner adapter
+        final ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                android.R.layout.simple_spinner_dropdown_item, menuTitles);
+        mSpinner.setAdapter(adapter);
         //on submit button click
         final Button submit = (Button) rootView.findViewById(R.id.submit);
         submit.setOnClickListener(new View.OnClickListener() {
@@ -58,14 +63,19 @@ public class NewItemFragment extends Fragment {
 
                         if (mPhone.getText().toString().isEmpty()) {
                             AppFactory.phonePopUp(mPhone, getActivity()).doTask();
+
                         } else {
-                            //change fragment
-                            UtilitiesFactory.removeFragment(getActivity()).doTask();
-                            String[] fullTime =((String)AppFactory.getTimeGetter().doTask()).split(" ");
-                            //save to firebase after creating hashmap of the new items array list
-                            FirebaseItem itemForSave = new FirebaseItem(fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
-                                    mPhone.getText().toString(),mTitle.getText().toString());
-                            AppFactory.saveFireBase(itemForSave).doTask();
+                            if(mSpinner.getSelectedItem().toString().equals("")){
+                                AppFactory.subjectPopUp(mPhone, getActivity()).doTask();
+                            }else {
+                                //change fragment
+                                UtilitiesFactory.removeFragment(getActivity()).doTask();
+                                String[] fullTime =((String)AppFactory.getTimeGetter().doTask()).split(" ");
+                                //save to firebase after creating hashmap of the new items array list
+                                FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
+                                        mPhone.getText().toString(),mTitle.getText().toString());
+                                AppFactory.saveFireBase(itemForSave).doTask();
+                            }
                         }
                     }
                 }

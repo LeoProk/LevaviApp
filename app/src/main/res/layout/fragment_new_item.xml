@@ -16,11 +16,17 @@
                     android:padding="20dp">
 
 
+        <Spinner
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/spinner" />
+
         <EditText
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
+                android:layout_below="@id/spinner"
                 android:hint="@string/title"
                 android:id="@+id/title"/>
         <EditText
@@ -39,26 +45,23 @@
             android:layout_marginTop="20dp"
             android:hint="@string/phone_num"
             android:id="@+id/phone"/>
-        <TimePicker
-            android:id="@+id/time_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="top|right"
             android:inputType="textMultiLine"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/time_picker"
             android:layout_marginTop="20dp"
+            android:layout_below="@+id/phone"
             android:lines="8"
-            android:hint="@string/phone_num"
+            android:hint="@string/text"
             android:id="@+id/text"/>
         <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-                android:id="@+id/submit"
+            android:id="@+id/submit"
             android:text="submit"
             android:layout_below="@+id/text" />
 

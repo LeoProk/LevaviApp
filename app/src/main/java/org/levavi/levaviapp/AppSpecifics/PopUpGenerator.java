@@ -15,7 +15,7 @@ import org.levavi.levaviapp.Interfaces.FactoryInterface;
 import org.levavi.levaviapp.R;
 
 /**
- * Created by Leo on 12/22/2015.
+ * hold the diffrent pop up for missing field in new item create fragment
  */
 final class PopUpGenerator implements FactoryInterface {
 
@@ -56,6 +56,9 @@ final class PopUpGenerator implements FactoryInterface {
                 break;
             case "info":
                 textView.setText(mContext.getResources().getString(R.string.wrong_info));
+                break;
+            case "subject":
+                textView.setText(mContext.getResources().getString(R.string.wrong_subject));
                 break;
             default:
                 break;
