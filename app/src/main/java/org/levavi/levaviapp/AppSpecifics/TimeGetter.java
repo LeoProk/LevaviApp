@@ -1,12 +1,8 @@
 package org.levavi.levaviapp.AppSpecifics;
 
-import android.text.format.DateFormat;
-
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.Interfaces.OnDateCompleted;
 import org.levavi.levaviapp.Interfaces.RequestInterface;
-
-import java.util.Calendar;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -18,13 +14,17 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * get the current time in string format from json
  */
 
-public class TimeGetter implements FactoryInterface {
+final class TimeGetter implements FactoryInterface {
 
-    private String mCurrentDate;
+    private OnDateCompleted mListener;
+
+    public TimeGetter(OnDateCompleted listener){
+        mListener = listener;
+    }
+
 
     @Override
     public Object doTask() {
-        mCurrentDate = null;
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://api.timezonedb.com")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,7 +34,7 @@ public class TimeGetter implements FactoryInterface {
         call.enqueue(new Callback<TimeData>() {
             @Override
             public void onResponse(Call<TimeData> call, Response<TimeData> response) {
-                mCurrentDate = String.valueOf(response.body().getTimestamp());
+                mListener.onTaskCompleted(String.valueOf(response.body().getTimestamp()));
               /*  Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                 cal.setTimeInMillis(response.body().getTimestamp());
                 mCurrentDate = DateFormat.format("dd-M-yyyy hh:mm", cal).toString();*/
@@ -45,6 +45,6 @@ public class TimeGetter implements FactoryInterface {
 
             }
         });
-        return mCurrentDate;
+        return null;
     }
 }

@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.view.View;
 
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.Interfaces.OnDateCompleted;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,13 +36,6 @@ public class AppFactory {
     public static FactoryInterface subjectPopUp(View view ,Context context) {
         return new PopUpGenerator(view,context,"subject");
     }
-    //
-    public static FactoryInterface signIn(Context context , GoogleApiClient googleApiClient){
-        return new GoogleSignIn(context,googleApiClient,0,"signIn",null);
-    }
-    public static FactoryInterface signInResult(int requestCod,Intent data){
-        return new GoogleSignIn(null,null,requestCod,"result",data);
-    }
     // create new fire base entry
     public static FactoryInterface saveFireBase(FirebaseItem newItem){
         return new SaveNewItem(newItem);
@@ -52,5 +46,5 @@ public class AppFactory {
     }
 
     //gets current time and date
-    public static FactoryInterface getTimeGetter(){return new TimeGetter();}
+    public static FactoryInterface getTimeGetter(OnDateCompleted onDateCompleted){return new TimeGetter(onDateCompleted);}
 }

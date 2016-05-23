@@ -3,6 +3,7 @@ package org.levavi.levaviapp;
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
 import org.levavi.levaviapp.AppSpecifics.RowItem;
+import org.levavi.levaviapp.Fragments.StartFragment;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
 import android.app.Activity;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     ,null).doTask();
         }
         AppFactory.getFireBase().doTask();
+        UtilitiesFactory.addFragment(this,new StartFragment(),"start",true).doTask();
     }
 
     @Override

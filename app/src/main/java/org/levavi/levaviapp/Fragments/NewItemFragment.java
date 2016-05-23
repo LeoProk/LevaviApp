@@ -17,6 +17,7 @@ import com.firebase.client.Firebase;
 
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.AppSpecifics.FirebaseItem;
+import org.levavi.levaviapp.Interfaces.OnDateCompleted;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
@@ -26,7 +27,7 @@ import java.util.HashMap;
 /**
  * First fragment on app run that show the latest items added
  */
-public class NewItemFragment extends Fragment {
+public class NewItemFragment extends Fragment implements OnDateCompleted {
 
     private EditText mTitle,mAddress,mPhone,mText;
 
@@ -68,13 +69,7 @@ public class NewItemFragment extends Fragment {
                             if(mSpinner.getSelectedItem().toString().equals("")){
                                 AppFactory.subjectPopUp(mPhone, getActivity()).doTask();
                             }else {
-                                //change fragment
-                                UtilitiesFactory.removeFragment(getActivity()).doTask();
-                                String[] fullTime =((String)AppFactory.getTimeGetter().doTask()).split(" ");
-                                //save to firebase after creating hashmap of the new items array list
-                                FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
-                                        mPhone.getText().toString(),mTitle.getText().toString());
-                                AppFactory.saveFireBase(itemForSave).doTask();
+                                AppFactory.getTimeGetter(NewItemFragment.this).doTask();
                             }
                         }
                     }
@@ -84,4 +79,14 @@ public class NewItemFragment extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onTaskCompleted(String date) {
+        //change fragment
+        UtilitiesFactory.removeFragment(getActivity()).doTask();
+        String[] fullTime =date.split(" ");
+        //save to firebase after creating hashmap of the new items array list
+        FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
+                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask());
+        AppFactory.saveFireBase(itemForSave).doTask();
+    }
 }

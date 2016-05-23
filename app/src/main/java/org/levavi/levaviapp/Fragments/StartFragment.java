@@ -12,6 +12,7 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import com.firebase.client.ValueEventListener;
 
+import org.levavi.levaviapp.AppSpecifics.CustomListAdapter;
 import org.levavi.levaviapp.AppSpecifics.FirebaseItem;
 import org.levavi.levaviapp.R;
 
@@ -28,6 +29,8 @@ public class StartFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.start_fragment, container, false);
         final ListView itemsList = (ListView) rootView.findViewById(R.id.itemsList);
         final ArrayList<FirebaseItem> firebaseItems = new ArrayList<>();
+        final CustomListAdapter listAdapter = new CustomListAdapter(getActivity(),firebaseItems);
+        itemsList.setAdapter(listAdapter);
         // Get a reference to our posts
         final Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
         // Attach an listener to read the data at our posts reference
@@ -37,6 +40,7 @@ public class StartFragment extends Fragment {
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     firebaseItems.add(postSnapshot.getValue(FirebaseItem.class));
                 }
+                listAdapter.notifyDataSetChanged();
             }
 
             @Override
