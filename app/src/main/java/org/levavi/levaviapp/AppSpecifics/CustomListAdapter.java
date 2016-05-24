@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import android.widget.TextView;
 import org.levavi.levaviapp.R;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by Leo on 5/16/2016.
@@ -67,7 +70,10 @@ public class CustomListAdapter extends BaseAdapter {
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
         title.setText(firebaseItem.getTitle());
         text.setText(firebaseItem.getText());
-        time.setText("00");
+        //converts the timestamp to date
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp()));
+        time.setText(DateFormat.format("dd-M-yyyy hh:mm", cal).toString());
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

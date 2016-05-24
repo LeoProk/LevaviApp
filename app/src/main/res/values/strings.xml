@@ -16,4 +16,6 @@
     <string name="wrong_info">שדה פרטים הוא חובה.</string>
     <string name="no_connection">אין חיבור לאינטרנט אנא נסו שוב</string>
     <string name="wrong_subject">אנא בחר קטגוריה בבקשה</string>
+    <string name="go">סע</string>
+    <string name="call">צור קשר</string>
 </resources>
