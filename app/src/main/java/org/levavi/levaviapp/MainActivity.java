@@ -1,17 +1,12 @@
 package org.levavi.levaviapp;
 
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
-import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
-import org.levavi.levaviapp.AppSpecifics.RowItem;
-import org.levavi.levaviapp.Fragments.StartFragment;
+import org.levavi.levaviapp.Fragments.ItemsListFragment;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
-import android.app.Activity;
 import android.app.SearchManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -20,24 +15,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.Scope;
-
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
@@ -96,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     ,null).doTask();
         }
         AppFactory.getFireBase().doTask();
-        UtilitiesFactory.addFragment(this,new StartFragment(),"start",true).doTask();
+        UtilitiesFactory.addFragment(this,new ItemsListFragment(),"start",true).doTask();
     }
 
     @Override

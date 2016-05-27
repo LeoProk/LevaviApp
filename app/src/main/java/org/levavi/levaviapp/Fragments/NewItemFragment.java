@@ -2,6 +2,7 @@ package org.levavi.levaviapp.Fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,10 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import com.firebase.client.Firebase;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.AppSpecifics.FirebaseItem;
@@ -43,6 +48,22 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
+        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
+                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+
+        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+                // TODO: Get info about the selected place.
+                Log.i("yay", "Place: " + place.getName());
+            }
+
+            @Override
+            public void onError(Status status) {
+                // TODO: Handle the error.
+                Log.i("err", "An error occurred: " + status);
+            }
+        });
         //array of spinner items
         final String[] menuTitles = getActivity().getResources().getStringArray(R.array.spinner_titles);
         //creates and sets spinner adapter
