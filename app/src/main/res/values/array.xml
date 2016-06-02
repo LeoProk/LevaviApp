@@ -3,12 +3,18 @@
     <!--drawer icons-->
     <array name="icons">
     <item>@drawable/ic_action_content_add_circle_outline</item>
-    <item>@drawable/ic_action_action_exit_to_app</item>
+    <item>@drawable/ic_food</item>
+    <item>@drawable/ic_ferris</item>
+    <item>@drawable/ic_spa</item>
+    <item>@drawable/ic_gym</item>
+    <item>@drawable/ic_tech</item>
+    <item>@drawable/ic_house</item>
+    <item>@drawable/ic_action_happy_children</item>
+    <item>@drawable/ic_hanger</item>
     </array>
     <!--drawer list-->
     <array name="titles">
       <item>הוסף מוצר</item>
-      <item>יציאה מהמשתמש</item>
       <item>מסעדות</item>
       <item>אטרקציות ופנאי</item>
       <item>טיפוח וספא</item>

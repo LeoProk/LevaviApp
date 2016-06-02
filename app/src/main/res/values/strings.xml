@@ -18,4 +18,5 @@
     <string name="wrong_subject">אנא בחר קטגוריה בבקשה</string>
     <string name="go">סע</string>
     <string name="call">צור קשר</string>
+    <string name="login">אנא התחבר על מנת להמשיך</string>
 </resources>
