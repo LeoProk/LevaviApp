@@ -2,6 +2,7 @@ package org.levavi.levaviapp;
 
 import org.levavi.levaviapp.AppSpecifics.AppFactory;
 import org.levavi.levaviapp.Fragments.ItemsListFragment;
+import org.levavi.levaviapp.Interfaces.FactoryInterface;
 import org.levavi.levaviapp.Utilities.UtilitiesFactory;
 
 import android.app.SearchManager;
@@ -33,7 +34,7 @@ import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,FactoryInterface {
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -51,11 +52,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         UtilitiesFactory.getToolbar(this, toolbar).doTask();
         //check if the user sign in to the app before
-        SignInButton signInButton = null;
+        GoogleSignInOptions gso = null;
         if(((String)UtilitiesFactory.getFile(this,"user").doTask()).isEmpty()) {
             // Configure sign-in to request the user's ID, email address, and basic
             // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-            GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
                     .requestProfile()
                     .build();
@@ -65,17 +66,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                     .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                     .build();
-
-            signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-            signInButton.setSize(SignInButton.SIZE_STANDARD);
-            signInButton.setScopes(gso.getScopeArray());
-            signInButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                    startActivityForResult(signInIntent, RC_SIGN_IN);
-                }
-            });
         }
         //create the drawer
         final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -83,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Log.e("TRY",(String)UtilitiesFactory.getFile(this,"user").doTask());
         if(((String)UtilitiesFactory.getFile(this,"user").doTask()).length()==0) {
             mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList, toolbar
-                    , signInButton).doTask();
+                    , gso).doTask();
         }else {
             mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList, toolbar
                     ,null).doTask();
@@ -197,5 +187,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onConnectionSuspended(int i) {
 
+    }
+
+    @Override
+    public Object doTask() {
+        Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+        return null;
     }
 }

@@ -23,6 +23,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 
 import java.util.ArrayList;
@@ -95,7 +96,7 @@ public class UtilitiesFactory {
 
     //Creates navigation drawer
     public static FactoryInterface getDrawer(Context context, DrawerLayout mDrawerLayout,
-                                             ListView mDrawerList,Toolbar toolbar,SignInButton signInButton) {
+                                             ListView mDrawerList, Toolbar toolbar, GoogleSignInOptions signInButton) {
         return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar,signInButton);
     }
 }
