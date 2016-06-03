@@ -13,6 +13,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
+import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.AppSpecifics.CustomListAdapter;
 import org.levavi.levaviapp.AppSpecifics.FirebaseItem;
 import org.levavi.levaviapp.R;
@@ -36,7 +37,8 @@ public class ItemsListFragment extends Fragment {
         final Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
         Query queryOrder = ref.orderByChild("timeStamp");
         //get user clicked subject from application
-        String subjectValue = "yay";
+        final AppController appController = (AppController) getActivity().getApplicationContext();
+        String subjectValue = appController.mSubject;
         if(subjectValue.equals("start")){
             // Attach an listener to read the data at our posts reference
             queryOrder.addListenerForSingleValueEvent(new ValueEventListener() {

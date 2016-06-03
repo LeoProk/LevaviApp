@@ -34,7 +34,8 @@ final class TimeGetter implements FactoryInterface {
         call.enqueue(new Callback<TimeData>() {
             @Override
             public void onResponse(Call<TimeData> call, Response<TimeData> response) {
-                mListener.onTaskCompleted(String.valueOf(response.body().getTimestamp()));
+                //set the timestamp to negative value for ordering
+                mListener.onTaskCompleted(String.valueOf(-1 * (response.body().getTimestamp())));
               /*  Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                 cal.setTimeInMillis(response.body().getTimestamp());
                 mCurrentDate = DateFormat.format("dd-M-yyyy hh:mm", cal).toString();*/

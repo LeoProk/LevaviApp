@@ -48,22 +48,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
-        PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
-        autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
-            @Override
-            public void onPlaceSelected(Place place) {
-                // TODO: Get info about the selected place.
-                Log.i("yay", "Place: " + place.getName());
-            }
-
-            @Override
-            public void onError(Status status) {
-                // TODO: Handle the error.
-                Log.i("err", "An error occurred: " + status);
-            }
-        });
         //array of spinner items
         final String[] menuTitles = getActivity().getResources().getStringArray(R.array.spinner_titles);
         //creates and sets spinner adapter

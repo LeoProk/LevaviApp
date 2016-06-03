@@ -39,7 +39,7 @@
         android:layout_below="@id/text"
         android:layout_alignParentRight="true"
         android:layout_marginRight="90dp"
-        android:text="string/call"
+        android:text="@string/call"
         android:id="@+id/call" />
     <Button
         android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
         android:layout_below="@id/text"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@id/call"
-        android:text="string/go"
+        android:text="@string/go"
         android:id="@+id/go" />
 
 </RelativeLayout>

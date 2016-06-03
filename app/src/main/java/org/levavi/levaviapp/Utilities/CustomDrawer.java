@@ -17,8 +17,10 @@
 package org.levavi.levaviapp.Utilities;
 
 
+import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
 import org.levavi.levaviapp.AppSpecifics.RowItem;
+import org.levavi.levaviapp.Fragments.ItemsListFragment;
 import org.levavi.levaviapp.Fragments.NewItemFragment;
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
 import org.levavi.levaviapp.R;
@@ -115,19 +117,54 @@ final class CustomDrawer implements FactoryInterface {
 
     //create fragment based on clicked position
     private void updateDisplay(int position) {
+        final AppController appController = (AppController) mContext.getApplicationContext();
         //empty fragment and tag
         String tag = null;
         Fragment fragment = null;
         if(mSignInButton != null){
             position = position + 2;
         }
+        //create new fragment bassed on click location in drawer list
+        // set the search value for item list fragments
         switch (position) {
             case 0:
                     fragment = new NewItemFragment();
                     tag = "new";
                 break;
             case 1:
-                //fragment = new LoginFragment();
+                    //log out of google
+                break;
+            case 2:
+                appController.mSubject = "מסעדות";
+                fragment = new ItemsListFragment();
+                break;
+            case 3:
+                appController.mSubject = "אטרקציות ופנאי";
+                fragment = new ItemsListFragment();
+                break;
+            case 4:
+                appController.mSubject = "טיפוח וספא";
+                fragment = new ItemsListFragment();
+                break;
+            case 5:
+                appController.mSubject = "בריאות וכושר";
+                fragment = new ItemsListFragment();
+                break;
+            case 6:
+                appController.mSubject = "אלקטרוניקה ומחשבים";
+                fragment = new ItemsListFragment();
+                break;
+            case 7:
+                appController.mSubject = "לבית ולגן";
+                fragment = new ItemsListFragment();
+                break;
+            case 8:
+                appController.mSubject = "תינוקות ילדים וצעצועים";
+                fragment = new ItemsListFragment();
+                break;
+            case 9:
+                appController.mSubject = "ביגוד והנעלה";
+                fragment = new ItemsListFragment();
                 break;
             default:
                 break;
