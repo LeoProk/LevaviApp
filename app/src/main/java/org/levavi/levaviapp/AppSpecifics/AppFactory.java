@@ -1,5 +1,6 @@
 package org.levavi.levaviapp.AppSpecifics;
 
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import android.content.Context;
@@ -47,4 +48,11 @@ public class AppFactory {
 
     //gets current time and date
     public static FactoryInterface getTimeGetter(OnDateCompleted onDateCompleted){return new TimeGetter(onDateCompleted);}
+
+    //gets data from firebase server
+    public static FactoryInterface getLogInPopup(View anchorView, Context context,FactoryInterface factoryInterface,
+                                                 GoogleSignInOptions gso){
+        return new LogInPopup(anchorView,context,factoryInterface,gso);
+    }
+
 }

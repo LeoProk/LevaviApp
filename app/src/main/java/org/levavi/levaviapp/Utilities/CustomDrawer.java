@@ -23,6 +23,7 @@ import org.levavi.levaviapp.AppSpecifics.RowItem;
 import org.levavi.levaviapp.Fragments.ItemsListFragment;
 import org.levavi.levaviapp.Fragments.NewItemFragment;
 import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.MainActivity;
 import org.levavi.levaviapp.R;
 
 import android.app.Fragment;
@@ -54,15 +55,11 @@ final class CustomDrawer implements FactoryInterface {
 
     private Toolbar mToolbar;
 
-    private SignInButton mSignInButton;
-
-    protected CustomDrawer(Context context, DrawerLayout drawerLayout, ListView drawerList,
-                           Toolbar toolbar,SignInButton signInButton) {
+    protected CustomDrawer(Context context, DrawerLayout drawerLayout, ListView drawerList,Toolbar toolbar) {
         mContext = context;
         mDrawerLayout = drawerLayout;
         mDrawerList = drawerList;
         mToolbar = toolbar;
-        mSignInButton = signInButton;
     }
 
     //class of creating and populating navigation drawer
@@ -96,10 +93,6 @@ final class CustomDrawer implements FactoryInterface {
         }
         //check if user login if not disable add new item option and shows the log in button
         int startingListNum = 0;
-        if(mSignInButton != null){
-            startingListNum = 2;
-            mSignInButton.setVisibility(View.VISIBLE);
-        }
         //create the drawer list names and icons
         for (int i = startingListNum; i < menuTitles.length; i++) {
             RowItem items = new RowItem(menuTitles[i], menuIcons.getResourceId(i, -1));
@@ -121,48 +114,48 @@ final class CustomDrawer implements FactoryInterface {
         //empty fragment and tag
         String tag = null;
         Fragment fragment = null;
-        if(mSignInButton != null){
-            position = position + 2;
-        }
         //create new fragment bassed on click location in drawer list
         // set the search value for item list fragments
         switch (position) {
             case 0:
-                    fragment = new NewItemFragment();
-                    tag = "new";
+                //check if the use loged into google if no create log in popup
+                if (((String) UtilitiesFactory.getFile(mContext, "user").doTask()).isEmpty()) {
+                    MainActivity mainActivity = (MainActivity)mContext;
+                    mainActivity.googleLogInPopup();
+                } else{
+                fragment = new NewItemFragment();
+                tag = "new";
+                }
                 break;
             case 1:
-                    //log out of google
-                break;
-            case 2:
                 appController.mSubject = "מסעדות";
                 fragment = new ItemsListFragment();
                 break;
-            case 3:
+            case 2:
                 appController.mSubject = "אטרקציות ופנאי";
                 fragment = new ItemsListFragment();
                 break;
-            case 4:
+            case 3:
                 appController.mSubject = "טיפוח וספא";
                 fragment = new ItemsListFragment();
                 break;
-            case 5:
+            case 4:
                 appController.mSubject = "בריאות וכושר";
                 fragment = new ItemsListFragment();
                 break;
-            case 6:
+            case 5:
                 appController.mSubject = "אלקטרוניקה ומחשבים";
                 fragment = new ItemsListFragment();
                 break;
-            case 7:
+            case 6:
                 appController.mSubject = "לבית ולגן";
                 fragment = new ItemsListFragment();
                 break;
-            case 8:
+            case 7:
                 appController.mSubject = "תינוקות ילדים וצעצועים";
                 fragment = new ItemsListFragment();
                 break;
-            case 9:
+            case 8:
                 appController.mSubject = "ביגוד והנעלה";
                 fragment = new ItemsListFragment();
                 break;

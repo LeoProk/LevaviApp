@@ -96,7 +96,7 @@ public class UtilitiesFactory {
 
     //Creates navigation drawer
     public static FactoryInterface getDrawer(Context context, DrawerLayout mDrawerLayout,
-                                             ListView mDrawerList, Toolbar toolbar, GoogleSignInOptions signInButton) {
-        return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar,signInButton);
+                                             ListView mDrawerList, Toolbar toolbar) {
+        return new CustomDrawer(context, mDrawerLayout, mDrawerList,toolbar);
     }
 }

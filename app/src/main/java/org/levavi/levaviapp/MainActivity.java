@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private GoogleApiClient mGoogleApiClient;
 
+    private GoogleSignInOptions mGso;
+
+    private DrawerLayout mDrawerLayout;
+
     private static final int RC_SIGN_IN = 1000;
 
     @Override
@@ -52,11 +56,11 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         final Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         UtilitiesFactory.getToolbar(this, toolbar).doTask();
         //check if the user sign in to the app before
-        GoogleSignInOptions gso = null;
+        mGso = null;
         if(((String)UtilitiesFactory.getFile(this,"user").doTask()).isEmpty()) {
             // Configure sign-in to request the user's ID, email address, and basic
             // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
-            gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            mGso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestEmail()
                     .requestProfile()
                     .build();
@@ -64,20 +68,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             // options specified by gso.
             mGoogleApiClient = new GoogleApiClient.Builder(this)
                     .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
                     .build();
         }
         //create the drawer
-        final DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView drawerList = (ListView) findViewById(R.id.slider_list);
-        Log.e("TRY",(String)UtilitiesFactory.getFile(this,"user").doTask());
-        if(((String)UtilitiesFactory.getFile(this,"user").doTask()).length()==0) {
-            mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList, toolbar
-                    , gso).doTask();
-        }else {
-            mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, drawerLayout, drawerList, toolbar
-                    ,null).doTask();
-        }
+        mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, mDrawerLayout, drawerList, toolbar).doTask();
         AppFactory.getFireBase().doTask();
         //place autocomplete fragment
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
@@ -194,5 +191,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
         return null;
+    }
+    public void googleLogInPopup(){
+        AppFactory.getLogInPopup(mDrawerLayout,this,MainActivity.this,mGso).doTask();
     }
 }
