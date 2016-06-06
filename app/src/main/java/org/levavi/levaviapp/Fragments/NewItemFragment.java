@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TimePicker;
 
@@ -38,6 +39,8 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
     private Spinner mSpinner;
 
+    private String mDuration;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,7 +51,23 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
-
+        mDuration = "null";
+        RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radio_group);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.no_duration:
+                        mDuration = null;
+                        break;
+                    case R.id.yes_duration:
+                        mDuration = "3324242";
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
         //array of spinner items
         final String[] menuTitles = getActivity().getResources().getStringArray(R.array.spinner_titles);
         //creates and sets spinner adapter
@@ -92,7 +111,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         String[] fullTime =date.split(" ");
         //save to firebase after creating hashmap of the new items array list
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
-                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask());
+                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mDuration);
         AppFactory.saveFireBase(itemForSave).doTask();
     }
 }

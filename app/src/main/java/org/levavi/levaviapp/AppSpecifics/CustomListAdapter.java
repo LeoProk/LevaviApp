@@ -61,6 +61,8 @@ public class CustomListAdapter extends BaseAdapter {
         final TextView title = (TextView) convertView.findViewById(R.id.title);
         final TextView text = (TextView) convertView.findViewById(R.id.text);
         final TextView time = (TextView) convertView.findViewById(R.id.time);
+        final TextView subject = (TextView) convertView.findViewById(R.id.subject);
+        final TextView length = (TextView) convertView.findViewById(R.id.length);
         //calls the contact number
         final Button call = (Button) convertView.findViewById(R.id.call);
         //open the location in waze
@@ -70,10 +72,11 @@ public class CustomListAdapter extends BaseAdapter {
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
         title.setText(firebaseItem.getTitle());
         text.setText(firebaseItem.getText());
+        subject.setText(firebaseItem.getSubject());
         //converts the timestamp to date
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp()));
-        time.setText(DateFormat.format("dd-M-yyyy hh:mm", cal).toString());
+        cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp())*1000);
+        time.setText(DateFormat.format("dd-MM-yyyy hh:mm", cal).toString());
         call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
