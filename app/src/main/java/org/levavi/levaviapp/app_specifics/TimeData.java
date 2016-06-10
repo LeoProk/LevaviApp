@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.AppSpecifics;
+package org.levavi.levaviapp.app_specifics;
 
 import java.util.HashMap;
 import java.util.Map;

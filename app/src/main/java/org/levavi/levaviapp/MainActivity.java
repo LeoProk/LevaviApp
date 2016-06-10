@@ -1,9 +1,9 @@
 package org.levavi.levaviapp;
 
-import org.levavi.levaviapp.AppSpecifics.AppFactory;
-import org.levavi.levaviapp.Fragments.ItemsListFragment;
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
-import org.levavi.levaviapp.Utilities.UtilitiesFactory;
+import org.levavi.levaviapp.app_specifics.AppFactory;
+import org.levavi.levaviapp.fragments.ItemsListFragment;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
 import android.app.SearchManager;
 import android.content.Intent;
@@ -20,13 +20,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private GoogleSignInOptions mGso;
 
     private DrawerLayout mDrawerLayout;
+
+    private PopupWindow mLogInPopup;
 
     private static final int RC_SIGN_IN = 1000;
 
@@ -170,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             //after successfully signing in save the user id
             GoogleSignInAccount acct = result.getSignInAccount();
             UtilitiesFactory.saveFile(this, "user", acct.getId()).doTask();
+            mLogInPopup.dismiss();
             Log.e("TRY",acct.getId());
         } else {
             Log.e("TRY","error");
@@ -193,6 +196,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         return null;
     }
     public void googleLogInPopup(){
-        AppFactory.getLogInPopup(mDrawerLayout,this,MainActivity.this,mGso).doTask();
+        mLogInPopup = (PopupWindow)AppFactory.getLogInPopup(mDrawerLayout,this,MainActivity.this,mGso).doTask();
     }
 }

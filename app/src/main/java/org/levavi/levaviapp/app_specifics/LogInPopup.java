@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.AppSpecifics;
+package org.levavi.levaviapp.app_specifics;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -14,7 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.R;
 
 /**

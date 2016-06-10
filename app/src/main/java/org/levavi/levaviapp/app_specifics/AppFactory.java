@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.AppSpecifics;
+package org.levavi.levaviapp.app_specifics;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
-import org.levavi.levaviapp.Interfaces.OnDateCompleted;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfaces.OnDateCompleted;
 
 import java.util.ArrayList;
 import java.util.HashMap;
