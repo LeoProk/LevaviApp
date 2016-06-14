@@ -5,8 +5,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import android.content.Context;
 import android.view.View;
 
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
-import org.levavi.levaviapp.interfacesTemp.OnDateCompleted;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfaces.OnDateCompleted;
 
 /**
  * this class hold or the factory methods of the app

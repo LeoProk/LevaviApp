@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.interfacesTemp;
+package org.levavi.levaviapp.interfaces;
 
 import org.levavi.levaviapp.main.TimeData;
 

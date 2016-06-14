@@ -1,9 +1,9 @@
 package org.levavi.levaviapp;
 
 import org.levavi.levaviapp.main.AppFactory;
-import org.levavi.levaviapp.fragmentsTemp.ItemsListFragment;
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
-import org.levavi.levaviapp.utilitiesTemp.UtilitiesFactory;
+import org.levavi.levaviapp.fragments.ItemsListFragment;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
 import android.app.SearchManager;
 import android.content.Intent;

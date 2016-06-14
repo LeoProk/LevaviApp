@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.interfacesTemp;
+package org.levavi.levaviapp.interfaces;
 
 /**
  * interface for new item fragment deletion

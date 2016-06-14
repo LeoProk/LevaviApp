@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.levavi.levaviapp.utilitiesTemp;
+package org.levavi.levaviapp.utilities;
 
 
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
 
 import android.content.Context;
 

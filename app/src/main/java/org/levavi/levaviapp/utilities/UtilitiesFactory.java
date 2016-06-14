@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.levavi.levaviapp.utilitiesTemp;
+package org.levavi.levaviapp.utilities;
 
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
 
 import android.app.Fragment;
 import android.content.Context;

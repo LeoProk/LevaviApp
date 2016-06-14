@@ -7,7 +7,7 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 
 
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
 
 import java.util.Map;
 

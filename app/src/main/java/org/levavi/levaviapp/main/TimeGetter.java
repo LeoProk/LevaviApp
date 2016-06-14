@@ -1,8 +1,8 @@
 package org.levavi.levaviapp.main;
 
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
-import org.levavi.levaviapp.interfacesTemp.OnDateCompleted;
-import org.levavi.levaviapp.interfacesTemp.RequestInterface;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfaces.OnDateCompleted;
+import org.levavi.levaviapp.interfaces.RequestInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;

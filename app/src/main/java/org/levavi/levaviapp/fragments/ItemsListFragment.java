@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.fragmentsTemp;
+package org.levavi.levaviapp.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;

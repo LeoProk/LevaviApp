@@ -11,7 +11,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.R;
 
 /**

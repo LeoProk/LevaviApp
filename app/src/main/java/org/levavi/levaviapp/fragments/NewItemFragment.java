@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.fragmentsTemp;
+package org.levavi.levaviapp.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -13,9 +13,9 @@ import android.widget.Spinner;
 
 import org.levavi.levaviapp.main.AppFactory;
 import org.levavi.levaviapp.main.FirebaseItem;
-import org.levavi.levaviapp.interfacesTemp.OnDateCompleted;
+import org.levavi.levaviapp.interfaces.OnDateCompleted;
 import org.levavi.levaviapp.R;
-import org.levavi.levaviapp.utilitiesTemp.UtilitiesFactory;
+import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
 /**
  * First fragment on app run that show the latest items added

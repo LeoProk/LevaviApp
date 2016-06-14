@@ -1,11 +1,11 @@
-package org.levavi.levaviapp.utilitiesTemp;
+package org.levavi.levaviapp.utilities;
 
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
 
 /**
  * Removes fagment by tag

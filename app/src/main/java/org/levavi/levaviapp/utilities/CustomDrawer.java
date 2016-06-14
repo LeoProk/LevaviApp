@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package org.levavi.levaviapp.utilitiesTemp;
+package org.levavi.levaviapp.utilities;
 
 
 import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.main.DrawerAdapter;
 import org.levavi.levaviapp.main.RowItem;
-import org.levavi.levaviapp.fragmentsTemp.ItemsListFragment;
-import org.levavi.levaviapp.fragmentsTemp.NewItemFragment;
-import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
+import org.levavi.levaviapp.fragments.ItemsListFragment;
+import org.levavi.levaviapp.fragments.NewItemFragment;
+import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.MainActivity;
 import org.levavi.levaviapp.R;
 
