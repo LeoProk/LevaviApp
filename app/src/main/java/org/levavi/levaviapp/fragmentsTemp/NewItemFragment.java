@@ -1,34 +1,21 @@
-package org.levavi.levaviapp.Fragments;
+package org.levavi.levaviapp.fragmentsTemp;
 
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 
-import com.firebase.client.Firebase;
-import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
-import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
-import com.google.android.gms.location.places.ui.PlaceSelectionListener;
-
-import org.levavi.levaviapp.AppSpecifics.AppFactory;
-import org.levavi.levaviapp.AppSpecifics.FirebaseItem;
-import org.levavi.levaviapp.Interfaces.OnDateCompleted;
+import org.levavi.levaviapp.main.AppFactory;
+import org.levavi.levaviapp.main.FirebaseItem;
+import org.levavi.levaviapp.interfacesTemp.OnDateCompleted;
 import org.levavi.levaviapp.R;
-import org.levavi.levaviapp.Utilities.UtilitiesFactory;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.levavi.levaviapp.utilitiesTemp.UtilitiesFactory;
 
 /**
  * First fragment on app run that show the latest items added
@@ -58,7 +45,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.no_duration:
-                        mDuration = null;
+                        mDuration = "null";
                         break;
                     case R.id.yes_duration:
                         mDuration = "3324242";

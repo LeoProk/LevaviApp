@@ -1,11 +1,11 @@
-package org.levavi.levaviapp.Utilities;
+package org.levavi.levaviapp.utilitiesTemp;
 
 import android.content.Context;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 
 /**
  * This class contain logic of toolbar

@@ -1,6 +1,6 @@
-package org.levavi.levaviapp.Utilities;
+package org.levavi.levaviapp.utilitiesTemp;
 
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 import org.levavi.levaviapp.MainActivity;
 
 import android.app.AlarmManager;

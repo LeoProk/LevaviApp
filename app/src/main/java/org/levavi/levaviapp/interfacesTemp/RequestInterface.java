@@ -1,6 +1,6 @@
-package org.levavi.levaviapp.Interfaces;
+package org.levavi.levaviapp.interfacesTemp;
 
-import org.levavi.levaviapp.AppSpecifics.TimeData;
+import org.levavi.levaviapp.main.TimeData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

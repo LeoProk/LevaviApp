@@ -1,17 +1,12 @@
-package org.levavi.levaviapp.app_specifics;
+package org.levavi.levaviapp.main;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
-import org.levavi.levaviapp.interfaces.FactoryInterface;
-import org.levavi.levaviapp.interfaces.OnDateCompleted;
-
-import java.util.ArrayList;
-import java.util.HashMap;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.OnDateCompleted;
 
 /**
  * this class hold or the factory methods of the app

@@ -1,6 +1,4 @@
-package org.levavi.levaviapp.app_specifics;
-
-import android.util.Log;
+package org.levavi.levaviapp.main;
 
 import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
@@ -9,9 +7,8 @@ import com.firebase.client.FirebaseError;
 import com.firebase.client.Query;
 
 
-import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

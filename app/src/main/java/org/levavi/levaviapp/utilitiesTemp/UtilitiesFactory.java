@@ -13,21 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.levavi.levaviapp.Utilities;
+package org.levavi.levaviapp.utilitiesTemp;
 
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 
 import android.app.Fragment;
 import android.content.Context;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
 import android.widget.ListView;
-
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Factory for network statues , retrieving files , saving and appending new files.

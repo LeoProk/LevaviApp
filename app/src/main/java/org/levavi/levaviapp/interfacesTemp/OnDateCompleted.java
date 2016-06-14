@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.Interfaces;
+package org.levavi.levaviapp.interfacesTemp;
 
 /**
  * called when async task finish it job

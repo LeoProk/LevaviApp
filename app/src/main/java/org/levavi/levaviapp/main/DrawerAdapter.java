@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.levavi.levaviapp.app_specifics;
+package org.levavi.levaviapp.main;
 
 /**
  * Custom adapter which extends BaseAdapter , this is used for inflating each row items of the listview .

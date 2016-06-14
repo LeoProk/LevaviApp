@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package org.levavi.levaviapp.Utilities;
+package org.levavi.levaviapp.utilitiesTemp;
 
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.AppSpecifics.DrawerAdapter;
-import org.levavi.levaviapp.AppSpecifics.RowItem;
-import org.levavi.levaviapp.Fragments.ItemsListFragment;
-import org.levavi.levaviapp.Fragments.NewItemFragment;
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.main.DrawerAdapter;
+import org.levavi.levaviapp.main.RowItem;
+import org.levavi.levaviapp.fragmentsTemp.ItemsListFragment;
+import org.levavi.levaviapp.fragmentsTemp.NewItemFragment;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 import org.levavi.levaviapp.MainActivity;
 import org.levavi.levaviapp.R;
 
@@ -36,8 +36,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
-import com.google.android.gms.common.SignInButton;
 
 import java.util.ArrayList;
 

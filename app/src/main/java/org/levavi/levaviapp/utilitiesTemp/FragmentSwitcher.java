@@ -1,7 +1,7 @@
-package org.levavi.levaviapp.Utilities;
+package org.levavi.levaviapp.utilitiesTemp;
  
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.Interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 
 import android.app.FragmentTransaction;
 import android.content.Context;

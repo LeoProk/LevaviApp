@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.app_specifics;
+package org.levavi.levaviapp.main;
 
 import android.app.Activity;
 import android.content.Context;

@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.app_specifics;
+package org.levavi.levaviapp.main;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -11,7 +11,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 import org.levavi.levaviapp.R;
 
 /**

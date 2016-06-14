@@ -1,8 +1,8 @@
-package org.levavi.levaviapp.app_specifics;
+package org.levavi.levaviapp.main;
 
 import com.firebase.client.Firebase;
 
-import org.levavi.levaviapp.interfaces.FactoryInterface;
+import org.levavi.levaviapp.interfacesTemp.FactoryInterface;
 
 /**
  * this class saves object from hash map on firebase server

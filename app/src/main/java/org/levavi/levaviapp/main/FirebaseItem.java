@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.app_specifics;
+package org.levavi.levaviapp.main;
 
 /**
  * fire base helper object for saving and retriving data from the server
