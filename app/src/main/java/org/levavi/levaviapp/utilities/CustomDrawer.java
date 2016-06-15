@@ -110,7 +110,7 @@ final class CustomDrawer implements FactoryInterface {
     private void updateDisplay(int position) {
         final AppController appController = (AppController) mContext.getApplicationContext();
         //empty fragment and tag
-        String tag = null;
+        String tag = "search";
         Fragment fragment = null;
         //create new fragment bassed on click location in drawer list
         // set the search value for item list fragments

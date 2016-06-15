@@ -99,12 +99,18 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menu.findItem(R.id.action_search));
-        SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
+        final AppController appController = (AppController) this.getApplicationContext();
+        final MenuItem menuSearch = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuSearch);
+        final SearchManager searchManager = (SearchManager) getSystemService(SEARCH_SERVICE);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                UtilitiesFactory.replaceFragment(MainActivity.this,new ItemsListFragment()
+                        ,"userSearch",true).doTask();
+                appController.mSubject = query;
+                menuSearch.collapseActionView();
                 return false;
             }
 

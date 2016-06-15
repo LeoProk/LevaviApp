@@ -37,8 +37,8 @@ public class ItemsListFragment extends Fragment {
         final Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
         //get user clicked subject from application
         final AppController appController = (AppController) getActivity().getApplicationContext();
-        String subjectValue = appController.mSubject;
-        if(subjectValue.equals("start")){
+        final String fragTag = appController.mSubject;
+        if(fragTag.equals("start")){
             // Attach an listener to read the data at our posts reference
 
             Query queryOrder = ref.orderByChild("timeStamp");
@@ -56,7 +56,7 @@ public class ItemsListFragment extends Fragment {
                 }
             });
         }else {
-            if(subjectValue.equals("search")){
+            if(fragTag.equals("search")){
                 Query queryValue = ref.orderByChild("text").startAt();
                 queryValue.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -72,7 +72,7 @@ public class ItemsListFragment extends Fragment {
                     }
                 });
             }else {
-                Query queryValue = ref.orderByChild("subject").equalTo(subjectValue);
+                Query queryValue = ref.orderByChild("subject").equalTo(appController.mSubject);
                 queryValue.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
