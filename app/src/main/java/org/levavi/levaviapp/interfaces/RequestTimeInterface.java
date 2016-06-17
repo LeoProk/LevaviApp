@@ -7,7 +7,7 @@ import retrofit2.http.GET;
 
 //interface for retrofit
 
-public interface RequestInterface {
+public interface RequestTimeInterface {
     @GET("/?zone=Asia/Jerusalem&format=json&key=THMPIQOI1JTT")
     Call<TimeData> getJSON();
 }

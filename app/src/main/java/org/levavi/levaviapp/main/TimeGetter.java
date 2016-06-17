@@ -2,7 +2,7 @@ package org.levavi.levaviapp.main;
 
 import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.interfaces.OnDateCompleted;
-import org.levavi.levaviapp.interfaces.RequestInterface;
+import org.levavi.levaviapp.interfaces.RequestTimeInterface;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +29,7 @@ final class TimeGetter implements FactoryInterface {
                 .baseUrl("http://api.timezonedb.com")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-        RequestInterface request = retrofit.create(RequestInterface.class);
+        RequestTimeInterface request = retrofit.create(RequestTimeInterface.class);
         Call<TimeData> call = request.getJSON();
         call.enqueue(new Callback<TimeData>() {
             @Override

@@ -28,6 +28,10 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
     private String mDuration;
 
+    private String mLatitude;
+
+    private String mLongitude;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -100,5 +104,9 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
                 mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mDuration);
         AppFactory.saveFireBase(itemForSave).doTask();
+    }
+    private void getPredication(String query){
+        String predication = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&location="+mLatitude
+                +","+mLongitude+"&radius=5000&key=AIzaSyD2SJMgrrCuhXx9LbLXfnyqdWbvN28FkKc";
     }
 }
