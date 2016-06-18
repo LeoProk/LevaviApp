@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.main;
+package org.levavi.levaviapp.pojos;
 
 import java.util.HashMap;
 import java.util.Map;

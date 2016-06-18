@@ -21,4 +21,5 @@
     <string name="login">אנא התחבר על מנת להמשיך</string>
     <string name="duration">תוקף ההצעה</string>
     <string name="none">ללא</string>
+    <string name="till">תקף עד</string>
 </resources>

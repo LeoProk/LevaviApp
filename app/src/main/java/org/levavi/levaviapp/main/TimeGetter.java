@@ -3,6 +3,7 @@ package org.levavi.levaviapp.main;
 import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.interfaces.OnDateCompleted;
 import org.levavi.levaviapp.interfaces.RequestTimeInterface;
+import org.levavi.levaviapp.pojos.TimeData;
 
 import retrofit2.Call;
 import retrofit2.Callback;

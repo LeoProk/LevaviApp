@@ -68,12 +68,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="yay"
+                android:text="@string/till"
                 android:onClick="onRadioButtonClicked"/>
             <RadioButton android:id="@+id/yes_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="nays"
+                android:text="@string/none"
                 android:textSize="20dp"
                 android:onClick="onRadioButtonClicked"/>
         </RadioGroup>
