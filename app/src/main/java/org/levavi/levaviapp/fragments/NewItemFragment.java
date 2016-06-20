@@ -2,10 +2,13 @@ package org.levavi.levaviapp.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
@@ -22,7 +25,9 @@ import org.levavi.levaviapp.utilities.UtilitiesFactory;
  */
 public class NewItemFragment extends Fragment implements OnDateCompleted {
 
-    private EditText mTitle,mAddress,mPhone,mText;
+    private EditText mTitle,mPhone,mText;
+
+    private AutoCompleteTextView mAddress;
 
     private Spinner mSpinner;
 
@@ -38,11 +43,27 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         final View rootView = inflater.inflate(R.layout.fragment_new_item, container, false);
         //initializes views
         mTitle = (EditText) rootView.findViewById(R.id.title);
-        mAddress  = (EditText) rootView.findViewById(R.id.address);
+        mAddress  = (AutoCompleteTextView) rootView.findViewById(R.id.address);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
         mDuration = "null";
+        mAddress.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                AppFactory.getGooglePlacePrediction(charSequence.toString(),"31.0461","34.8516").doTask();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         RadioGroup radioGroup = (RadioGroup) rootView.findViewById(R.id.radio_group);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
