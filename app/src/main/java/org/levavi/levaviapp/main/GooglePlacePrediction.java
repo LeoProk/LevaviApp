@@ -1,5 +1,7 @@
 package org.levavi.levaviapp.main;
 
+import android.util.Log;
+
 import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.interfaces.RequestPlaceInterface;
 import org.levavi.levaviapp.pojos.GooglePredictionData;
@@ -35,7 +37,7 @@ final class GooglePlacePrediction implements FactoryInterface{
         call.enqueue(new Callback<GooglePredictionData>() {
             @Override
             public void onResponse(Call<GooglePredictionData> call, Response<GooglePredictionData> response) {
-
+                Log.e("adress",response.body().getName());
             }
 
             @Override
