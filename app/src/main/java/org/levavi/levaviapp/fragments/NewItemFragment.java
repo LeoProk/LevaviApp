@@ -1,7 +1,9 @@
 package org.levavi.levaviapp.fragments;
 
 import android.app.Fragment;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import org.levavi.levaviapp.main.FirebaseItem;
 import org.levavi.levaviapp.interfaces.OnDateCompleted;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.utilities.UtilitiesFactory;
+
+import java.io.File;
 
 /**
  * First fragment on app run that show the latest items added
@@ -104,9 +108,5 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
                 mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mDuration);
         AppFactory.saveFireBase(itemForSave).doTask();
-    }
-    private void getPredication(String query){
-        String predication = "https://maps.googleapis.com/maps/api/place/textsearch/json?query="+query+"&location="+mLatitude
-                +","+mLongitude+"&radius=5000&key=AIzaSyD2SJMgrrCuhXx9LbLXfnyqdWbvN28FkKc";
     }
 }
