@@ -59,41 +59,19 @@ public class CustomListAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.item_list_row, null);
 
         final TextView title = (TextView) convertView.findViewById(R.id.title);
-        final TextView text = (TextView) convertView.findViewById(R.id.text);
         final TextView time = (TextView) convertView.findViewById(R.id.time);
         final TextView subject = (TextView) convertView.findViewById(R.id.subject);
         final TextView length = (TextView) convertView.findViewById(R.id.length);
-        //calls the contact number
-        final Button call = (Button) convertView.findViewById(R.id.call);
-        //open the location in waze
-        final Button go = (Button) convertView.findViewById(R.id.go);
+        final TextView price = (TextView) convertView.findViewById(R.id.price);
 
         // getting movie data for the row
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
         title.setText(firebaseItem.getTitle());
-        text.setText(firebaseItem.getText());
         subject.setText(firebaseItem.getSubject());
         //converts the timestamp to date
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp())*1000);
         time.setText(DateFormat.format("dd-MM-yyyy hh:mm", cal).toString());
-        call.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_CALL);
-                intent.setData(Uri.parse("tel:" + firebaseItem.getPhone().replaceAll("[^0-9]+", "")));
-                mActivity.startActivity(intent);
-            }
-        });
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("geo:0,0?q=" + firebaseItem.getAddress()));
-                mActivity.startActivity(intent);
-            }
-        });
-
         return convertView;
     }
 }
