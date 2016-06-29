@@ -15,12 +15,13 @@ public class FirebaseItem {
     private String subject;
     private String duration;
     private String user;
+    private String price;
 
     public FirebaseItem(){
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
     }
     public FirebaseItem(String subject,String date, String text ,String address, String phone
-            , String title,String user,String duration){
+            , String title,String user,String duration,String price){
         this.subject = subject;
         this.timeStamp = date;
         this.address = address;
@@ -29,6 +30,7 @@ public class FirebaseItem {
         this.text = text;
         this.user = user;
         this.duration = duration;
+        this.price = price;
     }
 
     public String getSubject() {
@@ -62,4 +64,9 @@ public class FirebaseItem {
     public String getDuration() {
         return duration;
     }
+
+    public String getPrice() {
+        return price;
+    }
+
 }

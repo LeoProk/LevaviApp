@@ -68,6 +68,8 @@ public class CustomListAdapter extends BaseAdapter {
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
         title.setText(firebaseItem.getTitle());
         subject.setText(firebaseItem.getSubject());
+        length.setText("5");
+        price.setText(firebaseItem.getPrice());
         //converts the timestamp to date
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp())*1000);

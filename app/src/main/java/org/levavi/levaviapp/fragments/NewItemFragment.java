@@ -25,7 +25,7 @@ import org.levavi.levaviapp.utilities.UtilitiesFactory;
  */
 public class NewItemFragment extends Fragment implements OnDateCompleted {
 
-    private EditText mTitle,mPhone,mText;
+    private EditText mTitle,mPhone,mText,mPrice;
 
     private AutoCompleteTextView mAddress;
 
@@ -46,6 +46,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         mAddress  = (AutoCompleteTextView) rootView.findViewById(R.id.address);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
+        mPrice = (EditText) rootView.findViewById(R.id.price);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
         mDuration = "null";
         mAddress.addTextChangedListener(new TextWatcher() {
@@ -123,7 +124,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         String[] fullTime =date.split(" ");
         //save to firebase after creating hashmap of the new items array list
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
-                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mDuration);
+                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mDuration,mPrice.getText().toString());
         AppFactory.saveFireBase(itemForSave).doTask();
     }
     private void getPredication(String query){

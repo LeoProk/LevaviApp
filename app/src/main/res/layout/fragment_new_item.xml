@@ -46,11 +46,20 @@
             android:inputType="number"
             android:hint="@string/phone_num"
             android:id="@+id/phone"/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/phone"
+            android:layout_marginTop="18dp"
+            android:inputType="number"
+            android:hint="@string/price"
+            android:id="@+id/price"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_below="@+id/phone"
+            android:layout_below="@+id/price"
             android:textSize="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/duration"
@@ -61,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/duration"
             android:layout_marginTop="16dp"
-            android:layout_below="@+id/phone"
+            android:layout_below="@+id/price"
             android:orientation="horizontal"
             android:id="@+id/radio_group">
             <RadioButton android:id="@+id/no_duration"
