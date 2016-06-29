@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.levavi.levaviapp.main;
+package org.levavi.levaviapp.adapters;
 
 /**
  * Custom adapter which extends BaseAdapter , this is used for inflating each row items of the listview .
@@ -21,6 +21,7 @@ package org.levavi.levaviapp.main;
 
 
 import org.levavi.levaviapp.R;
+import org.levavi.levaviapp.pojos.RowItem;
 
 import android.app.Activity;
 import android.content.Context;

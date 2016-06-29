@@ -14,8 +14,8 @@ import com.firebase.client.Query;
 import com.firebase.client.ValueEventListener;
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.main.CustomListAdapter;
-import org.levavi.levaviapp.main.FirebaseItem;
+import org.levavi.levaviapp.adapters.CustomListAdapter;
+import org.levavi.levaviapp.pojos.FirebaseItem;
 import org.levavi.levaviapp.R;
 
 import java.util.ArrayList;

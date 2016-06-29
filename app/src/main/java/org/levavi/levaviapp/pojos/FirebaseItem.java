@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.main;
+package org.levavi.levaviapp.pojos;
 
 /**
  * fire base helper object for saving and retriving data from the server

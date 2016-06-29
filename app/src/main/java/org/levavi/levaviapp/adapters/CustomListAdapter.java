@@ -1,4 +1,4 @@
-package org.levavi.levaviapp.main;
+package org.levavi.levaviapp.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.levavi.levaviapp.R;
+import org.levavi.levaviapp.pojos.FirebaseItem;
 
 import java.util.ArrayList;
 import java.util.Calendar;

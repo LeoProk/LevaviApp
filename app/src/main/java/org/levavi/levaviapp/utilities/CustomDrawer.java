@@ -18,8 +18,8 @@ package org.levavi.levaviapp.utilities;
 
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.main.DrawerAdapter;
-import org.levavi.levaviapp.main.RowItem;
+import org.levavi.levaviapp.adapters.DrawerAdapter;
+import org.levavi.levaviapp.pojos.RowItem;
 import org.levavi.levaviapp.fragments.ItemsListFragment;
 import org.levavi.levaviapp.fragments.NewItemFragment;
 import org.levavi.levaviapp.interfaces.FactoryInterface;

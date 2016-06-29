@@ -7,6 +7,7 @@ import android.view.View;
 
 import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.interfaces.OnDateCompleted;
+import org.levavi.levaviapp.pojos.FirebaseItem;
 
 /**
  * this class hold or the factory methods of the app
