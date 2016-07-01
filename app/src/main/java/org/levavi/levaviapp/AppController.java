@@ -20,6 +20,8 @@ public class AppController extends Application
     public String mSubject;
     //info of currnet clicked item inside item list
     public ClickedItemInfo mItemInfo;
+    //the timestamp of slected date in new item fragment
+    public String mTimestamp;
 
     @Override
     public void onCreate() {

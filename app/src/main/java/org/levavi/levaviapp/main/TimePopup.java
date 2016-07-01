@@ -2,6 +2,7 @@ package org.levavi.levaviapp.main;
 
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TimePicker;
 
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
-
 import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.interfaces.FactoryInterface;
@@ -21,7 +19,7 @@ import org.levavi.levaviapp.interfaces.FactoryInterface;
 /**
  * this class create popup with date and time
  */
-final class DatePopup implements FactoryInterface {
+final class TimePopup implements FactoryInterface {
 
     private LayoutInflater mInflater;
 
@@ -29,7 +27,7 @@ final class DatePopup implements FactoryInterface {
 
     private Context mContext;
 
-    public DatePopup(View anchorView, Context context) {
+    public TimePopup(View anchorView, Context context) {
         mAnchorView = anchorView;
         mContext = context;
     }
@@ -38,20 +36,27 @@ final class DatePopup implements FactoryInterface {
     public Object doTask() {
         // Sets the right layout to the view
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View popupView = mInflater.inflate(R.layout.date_popup, null);
+        final View popupView = mInflater.inflate(R.layout.time_popup, null);
         final PopupWindow popupWindow = new PopupWindow(popupView,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         //gets the application class
         final AppController appController = (AppController) mContext;
-        final DatePicker datePicker = (DatePicker) popupView.findViewById(R.id.datePicker);
+        final TimePicker timePicker = (TimePicker) popupView.findViewById(R.id.timePicker);
         final Button accept = (Button) popupView.findViewById(R.id.accept);
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 popupWindow.dismiss();
-                AppFactory.getTimePopup(mAnchorView,mContext).doTask();
-                appController.mTimestamp = datePicker.getDayOfMonth()+"."+datePicker.getMonth()+1
-                        + "." + datePicker.getYear();
+                //gets the selected date
+                String selectedDate = appController.mTimestamp;
+                //checks the current version of api then gets the full date
+                if (Build.VERSION.SDK_INT >= 23 ) {
+                    appController.mTimestamp = timePicker.getHour()+":"+timePicker.getMinute() + " " +selectedDate;
+                }
+                else {
+                    appController.mTimestamp = timePicker.getCurrentHour()+":"+timePicker.getCurrentMinute() + " " +selectedDate;
+                }
+
             }
         });
         final Button cancel = (Button) popupView.findViewById(R.id.call);

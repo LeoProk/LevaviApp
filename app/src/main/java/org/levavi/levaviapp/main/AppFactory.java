@@ -33,6 +33,14 @@ public class AppFactory {
     public static FactoryInterface subjectPopUp(View view ,Context context) {
         return new PopUpGenerator(view,context,"subject");
     }
+    //show popup wher you need to pick time from time picker
+    public static FactoryInterface getTimePopup(View view ,Context context) {
+        return new TimePopup(view, context);
+    }
+    //shows popup where you need to pick date from datepicker
+    public static FactoryInterface getDatePopup(View view ,Context context) {
+        return new DatePopup(view, context);
+    }
     // create new fire base entry
     public static FactoryInterface saveFireBase(FirebaseItem newItem){
         return new SaveNewItem(newItem);

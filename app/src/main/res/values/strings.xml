@@ -17,6 +17,8 @@
     <string name="no_connection">אין חיבור לאינטרנט אנא נסו שוב</string>
     <string name="wrong_subject">אנא בחר קטגוריה בבקשה</string>
     <string name="go">סע</string>
+    <string name="accept">אישור</string>
+    <string name="cancel">ביטול</string>
     <string name="call">צור קשר</string>
     <string name="login">אנא התחבר על מנת להמשיך</string>
     <string name="duration">תוקף ההצעה</string>

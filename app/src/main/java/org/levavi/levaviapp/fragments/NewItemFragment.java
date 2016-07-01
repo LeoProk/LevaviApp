@@ -74,7 +74,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
                         mDuration = "null";
                         break;
                     case R.id.yes_duration:
-                        mDuration = "3324242";
+                        AppFactory.getDatePopup(mPhone,getActivity()).doTask();
                         break;
                     default:
                         break;
