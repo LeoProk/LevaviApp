@@ -2,218 +2,77 @@
 package org.levavi.levaviapp.pojos;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GooglePredictionData {
 
-    private String formattedAddress;
-    private Geometry geometry;
-    private String icon;
-    private String id;
-    private String name;
-    private OpeningHours openingHours;
-    private List<Photo> photos = new ArrayList<Photo>();
-    private String placeId;
-    private float rating;
-    private String reference;
-    private List<String> types = new ArrayList<String>();
+    private List<Object> htmlAttributions = new ArrayList<Object>();
+    private List<Result> results = new ArrayList<Result>();
+    private String status;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
      * @return
-     *     The formattedAddress
+     *     The htmlAttributions
      */
-    public String getFormattedAddress() {
-        return formattedAddress;
+    public List<Object> getHtmlAttributions() {
+        return htmlAttributions;
     }
 
     /**
      * 
-     * @param formattedAddress
-     *     The formatted_address
+     * @param htmlAttributions
+     *     The html_attributions
      */
-    public void setFormattedAddress(String formattedAddress) {
-        this.formattedAddress = formattedAddress;
+    public void setHtmlAttributions(List<Object> htmlAttributions) {
+        this.htmlAttributions = htmlAttributions;
     }
 
     /**
      * 
      * @return
-     *     The geometry
+     *     The results
      */
-    public Geometry getGeometry() {
-        return geometry;
+    public List<Result> getResults() {
+        return results;
     }
 
     /**
      * 
-     * @param geometry
-     *     The geometry
+     * @param results
+     *     The results
      */
-    public void setGeometry(Geometry geometry) {
-        this.geometry = geometry;
-    }
-
-    /**
-     * 
-     * @return
-     *     The icon
-     */
-    public String getIcon() {
-        return icon;
-    }
-
-    /**
-     * 
-     * @param icon
-     *     The icon
-     */
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setResults(List<Result> results) {
+        this.results = results;
     }
 
     /**
      * 
      * @return
-     *     The id
+     *     The status
      */
-    public String getId() {
-        return id;
+    public String getStatus() {
+        return status;
     }
 
     /**
      * 
-     * @param id
-     *     The id
+     * @param status
+     *     The status
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    /**
-     * 
-     * @return
-     *     The name
-     */
-    public String getName() {
-        return name;
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
     }
 
-    /**
-     * 
-     * @param name
-     *     The name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * 
-     * @return
-     *     The openingHours
-     */
-    public OpeningHours getOpeningHours() {
-        return openingHours;
-    }
-
-    /**
-     * 
-     * @param openingHours
-     *     The opening_hours
-     */
-    public void setOpeningHours(OpeningHours openingHours) {
-        this.openingHours = openingHours;
-    }
-
-    /**
-     * 
-     * @return
-     *     The photos
-     */
-    public List<Photo> getPhotos() {
-        return photos;
-    }
-
-    /**
-     * 
-     * @param photos
-     *     The photos
-     */
-    public void setPhotos(List<Photo> photos) {
-        this.photos = photos;
-    }
-
-    /**
-     * 
-     * @return
-     *     The placeId
-     */
-    public String getPlaceId() {
-        return placeId;
-    }
-
-    /**
-     * 
-     * @param placeId
-     *     The place_id
-     */
-    public void setPlaceId(String placeId) {
-        this.placeId = placeId;
-    }
-
-    /**
-     * 
-     * @return
-     *     The rating
-     */
-    public float getRating() {
-        return rating;
-    }
-
-    /**
-     * 
-     * @param rating
-     *     The rating
-     */
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
-
-    /**
-     * 
-     * @return
-     *     The reference
-     */
-    public String getReference() {
-        return reference;
-    }
-
-    /**
-     * 
-     * @param reference
-     *     The reference
-     */
-    public void setReference(String reference) {
-        this.reference = reference;
-    }
-
-    /**
-     * 
-     * @return
-     *     The types
-     */
-    public List<String> getTypes() {
-        return types;
-    }
-
-    /**
-     * 
-     * @param types
-     *     The types
-     */
-    public void setTypes(List<String> types) {
-        this.types = types;
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }

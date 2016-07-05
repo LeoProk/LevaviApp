@@ -1,17 +1,21 @@
 
 package org.levavi.levaviapp.pojos;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Location {
 
-    private float lat;
-    private float lng;
+    private Double lat;
+    private Double lng;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * 
      * @return
      *     The lat
      */
-    public float getLat() {
+    public Double getLat() {
         return lat;
     }
 
@@ -20,7 +24,7 @@ public class Location {
      * @param lat
      *     The lat
      */
-    public void setLat(float lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
@@ -29,7 +33,7 @@ public class Location {
      * @return
      *     The lng
      */
-    public float getLng() {
+    public Double getLng() {
         return lng;
     }
 
@@ -38,8 +42,16 @@ public class Location {
      * @param lng
      *     The lng
      */
-    public void setLng(float lng) {
+    public void setLng(Double lng) {
         this.lng = lng;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 
 }

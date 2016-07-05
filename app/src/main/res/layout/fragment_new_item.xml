@@ -77,14 +77,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="@string/till"
-                android:onClick="onRadioButtonClicked"/>
+                android:text="@string/till"/>
             <RadioButton android:id="@+id/yes_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/none"
-                android:textSize="20dp"
-                android:onClick="onRadioButtonClicked"/>
+                android:textSize="20dp"/>
         </RadioGroup>
         <EditText
             android:layout_width="match_parent"

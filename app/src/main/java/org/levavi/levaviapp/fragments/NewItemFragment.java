@@ -57,7 +57,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                AppFactory.getGooglePlacePrediction(charSequence.toString(),"31.0461","34.8516").doTask();
+                AppFactory.getGooglePlacePrediction(charSequence.toString(),"32.112650","34.792527").doTask();
             }
 
             @Override

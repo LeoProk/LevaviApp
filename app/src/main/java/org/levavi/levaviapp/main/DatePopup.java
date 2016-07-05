@@ -42,7 +42,7 @@ final class DatePopup implements FactoryInterface {
         final PopupWindow popupWindow = new PopupWindow(popupView,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         //gets the application class
-        final AppController appController = (AppController) mContext;
+        final AppController appController = (AppController) mContext.getApplicationContext();
         final DatePicker datePicker = (DatePicker) popupView.findViewById(R.id.datePicker);
         final Button accept = (Button) popupView.findViewById(R.id.accept);
         accept.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +54,7 @@ final class DatePopup implements FactoryInterface {
                         + "." + datePicker.getYear();
             }
         });
-        final Button cancel = (Button) popupView.findViewById(R.id.call);
+        final Button cancel = (Button) popupView.findViewById(R.id.cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
