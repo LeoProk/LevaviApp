@@ -14,11 +14,17 @@ import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 
+import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.main.AppFactory;
 import org.levavi.levaviapp.pojos.FirebaseItem;
 import org.levavi.levaviapp.interfaces.OnDateCompleted;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.utilities.UtilitiesFactory;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * First fragment on app run that show the latest items added
@@ -121,7 +127,18 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
     public void onTaskCompleted(String date) {
         //change fragment
         UtilitiesFactory.removeFragment(getActivity()).doTask();
+        String selectedTime = "null";
+        final AppController appController = (AppController) getActivity().getApplicationContext();
         String[] fullTime =date.split(" ");
+        if(!appController.mTimestamp.equals(null)) {
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                Date dateParser = formatter.parse(appController.mTimestamp);
+                selectedTime = String.valueOf(dateParser.getTime() * -1);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         //save to firebase after creating hashmap of the new items array list
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
                 mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mDuration,mPrice.getText().toString());

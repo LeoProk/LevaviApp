@@ -63,6 +63,7 @@ final class TimePopup implements FactoryInterface {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                appController.mTimestamp = null;
                 popupWindow.dismiss();
             }
         });

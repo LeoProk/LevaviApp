@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.levavi.levaviapp.R;
@@ -64,6 +65,7 @@ public class CustomListAdapter extends BaseAdapter {
         final TextView subject = (TextView) convertView.findViewById(R.id.subject);
         final TextView length = (TextView) convertView.findViewById(R.id.length);
         final TextView price = (TextView) convertView.findViewById(R.id.price);
+        final ImageView image = (ImageView)convertView.findViewById(R.id.imageView);
 
         // getting movie data for the row
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
