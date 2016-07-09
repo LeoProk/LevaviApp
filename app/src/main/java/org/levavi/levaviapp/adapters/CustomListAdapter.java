@@ -66,9 +66,20 @@ public class CustomListAdapter extends BaseAdapter {
         final TextView length = (TextView) convertView.findViewById(R.id.length);
         final TextView price = (TextView) convertView.findViewById(R.id.price);
         final ImageView image = (ImageView)convertView.findViewById(R.id.imageView);
-
-        // getting movie data for the row
+        // getting item data for the row
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
+        //check if user uploaded image if no uses defualt images
+        if(firebaseItem.getImage().equals("null")){
+        switch (firebaseItem.getSubject()){
+            case "":
+                break;
+
+            default:
+                break;
+        }
+        }else {
+            
+        }
         title.setText(firebaseItem.getTitle());
         subject.setText(firebaseItem.getSubject());
         length.setText("5");
