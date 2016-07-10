@@ -50,6 +50,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         //initializes views
         mTitle = (EditText) rootView.findViewById(R.id.title);
         mAddress  = (AutoCompleteTextView) rootView.findViewById(R.id.address);
+        mAddress.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item));
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mPrice = (EditText) rootView.findViewById(R.id.price);
@@ -126,11 +127,11 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
     @Override
     public void onTaskCompleted(String date) {
         //change fragment
-        UtilitiesFactory.removeFragment(getActivity()).doTask();
+        //UtilitiesFactory.removeFragment(getActivity()).doTask();
         String selectedTime = "null";
         final AppController appController = (AppController) getActivity().getApplicationContext();
         String[] fullTime =date.split(" ");
-        if(!appController.mTimestamp.equals(null)) {
+        if(appController.mTimestamp!=null) {
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             try {
                 Date dateParser = formatter.parse(appController.mTimestamp);
@@ -141,7 +142,8 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         }
         //save to firebase after creating hashmap of the new items array list
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
-                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mDuration,mPrice.getText().toString());
+                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask()
+                ,mDuration,mPrice.getText().toString(),"null");
         AppFactory.saveFireBase(itemForSave).doTask();
     }
 }

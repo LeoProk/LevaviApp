@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,14 +67,38 @@ public class CustomListAdapter extends BaseAdapter {
         final TextView length = (TextView) convertView.findViewById(R.id.length);
         final TextView price = (TextView) convertView.findViewById(R.id.price);
         final ImageView image = (ImageView)convertView.findViewById(R.id.imageView);
+        image.setImageResource(R.drawable.dinner_table);
         // getting item data for the row
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
         //check if user uploaded image if no uses defualt images
         if(firebaseItem.getImage().equals("null")){
+            Log.e("yay","yayyy2");
         switch (firebaseItem.getSubject()){
-            case "":
+            case "מסעדות":
+                image.setImageResource(R.drawable.dinner_table);
+                Log.e("yay","88888");
                 break;
-
+            case "אטרקציות ופנאי":
+                image.setImageResource(R.drawable.beach);
+                break;
+            case "טיפוח וספא":
+                image.setImageResource(R.drawable.spa);
+                break;
+            case "בריאות וכושר":
+                image.setImageResource(R.drawable.gym);
+                break;
+            case "אלקטרוניקה ומחשבים":
+                image.setImageResource(R.drawable.electornics);
+                break;
+            case "לבית ולגן":
+                image.setImageResource(R.drawable.garden);
+                break;
+            case "תינוקות ילדים וצעצועים":
+                image.setImageResource(R.drawable.toy);
+                break;
+            case "ביגוד והנעלה":
+                image.setImageResource(R.drawable.clothes);
+                break;
             default:
                 break;
         }
@@ -81,13 +106,12 @@ public class CustomListAdapter extends BaseAdapter {
             
         }
         title.setText(firebaseItem.getTitle());
-        subject.setText(firebaseItem.getSubject());
         length.setText("5");
-        price.setText(firebaseItem.getPrice());
+        price.setText(firebaseItem.getPrice()+" "+"₪");
         //converts the timestamp to date
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-        cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp())*1000);
-        time.setText(DateFormat.format("dd-MM-yyyy hh:mm", cal).toString());
+        cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp())*-1000);
+        time.setText("פורסם ב-"+DateFormat.format("dd/MM hh:mm", cal).toString());
         return convertView;
     }
 }
