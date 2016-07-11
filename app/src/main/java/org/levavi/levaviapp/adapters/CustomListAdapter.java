@@ -22,7 +22,8 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
- * Created by Leo on 5/16/2016.
+ * base adapter for list view of items
+ * the item info is taken from firebase servers in pojo
  */
 
 public class CustomListAdapter extends BaseAdapter {
@@ -103,7 +104,7 @@ public class CustomListAdapter extends BaseAdapter {
                 break;
         }
         }else {
-            
+
         }
         title.setText(firebaseItem.getTitle());
         length.setText("5");

@@ -5,6 +5,7 @@ import android.app.Application;
 import com.firebase.client.Firebase;
 
 import org.levavi.levaviapp.pojos.ClickedItemInfo;
+import org.levavi.levaviapp.pojos.FirebaseItem;
 
 /**
  * application class:
@@ -22,11 +23,13 @@ public class AppController extends Application
     public ClickedItemInfo mItemInfo;
     //the timestamp of slected date in new item fragment
     public String mTimestamp;
+    //current clicked item
+    public FirebaseItem mCurrentFirebaseItem;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        Firebase.setAndroidContext(this);;
+        Firebase.setAndroidContext(this);
         mSubject = "start";
     }
 }

@@ -24,7 +24,13 @@ import org.levavi.levaviapp.utilities.UtilitiesFactory;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.schedulers.Schedulers;
 
 /**
  * First fragment on app run that show the latest items added
@@ -43,6 +49,10 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
     private String mLongitude;
 
+    private ArrayList<String> mPredictions;
+
+    private ArrayList<String> mItems;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,7 +60,9 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         //initializes views
         mTitle = (EditText) rootView.findViewById(R.id.title);
         mAddress  = (AutoCompleteTextView) rootView.findViewById(R.id.address);
-        mAddress.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item));
+        mItems = new ArrayList<>();
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_dropdown_item_1line, mItems);
+        mAddress.setAdapter(arrayAdapter);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mPrice = (EditText) rootView.findViewById(R.id.price);
@@ -64,7 +76,28 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                AppFactory.getGooglePlacePrediction(charSequence.toString(),"32.112650","34.792527").doTask();
+                Observable.just(new String[]{charSequence.toString(),"32.112650","34.792527"})
+                .observeOn(Schedulers.newThread())
+                .subscribe(new Observer<String[]>() {
+                    @Override
+                    public void onCompleted() {
+                        //after getting the predictions updates the autcompletetext
+                        mItems = new ArrayList<>(mPredictions);
+                        arrayAdapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(String[] strings) {
+                       //gets the predictions
+                       mPredictions =(ArrayList<String>)AppFactory.getGooglePlacePrediction(strings[0], strings[1], strings[2]).doTask();
+                    }
+                });
+                //AppFactory.getGooglePlacePrediction(charSequence.toString(),"32.112650","34.792527").doTask();
             }
 
             @Override

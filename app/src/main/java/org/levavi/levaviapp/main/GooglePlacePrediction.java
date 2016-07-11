@@ -6,6 +6,8 @@ import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.interfaces.RequestPlaceInterface;
 import org.levavi.levaviapp.pojos.GooglePredictionData;
 
+import java.util.ArrayList;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -31,10 +33,13 @@ final class GooglePlacePrediction implements FactoryInterface{
     @Override
     public Object doTask() {
         final String apiKey = "AIzaSyD2SJMgrrCuhXx9LbLXfnyqdWbvN28FkKc";
-        //debug lof of retrofit
+        //debug log of retrofit
         /* HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();*/
+        // array list of predicted addresses
+        final ArrayList<String> addresses = new ArrayList<>();
+        //crate restfull call using retrofit with json return type
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://maps.googleapis.com/maps/api/place/textsearch/")
                 //.client(client)
@@ -45,8 +50,10 @@ final class GooglePlacePrediction implements FactoryInterface{
         call.enqueue(new Callback<GooglePredictionData>() {
             @Override
             public void onResponse(Call<GooglePredictionData> call, Response<GooglePredictionData> response) {
+                //loops true all the prediction
                 for (int i = 0; i < response.body().getResults().size(); i++) {
-                    Log.e("adress","hello" + response.body().getResults().get(i).getFormattedAddress());
+                    //Log.e("address","hello" + response.body().getResults().get(i).getFormattedAddress());
+                    addresses.add(response.body().getResults().get(i).getFormattedAddress());
                 }
             }
 
@@ -55,7 +62,7 @@ final class GooglePlacePrediction implements FactoryInterface{
 
             }
         });
-        return null;
+        return addresses;
     }
 
 }

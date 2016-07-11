@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.firebase.client.DataSnapshot;
@@ -17,6 +18,7 @@ import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.adapters.CustomListAdapter;
 import org.levavi.levaviapp.pojos.FirebaseItem;
 import org.levavi.levaviapp.R;
+import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,12 @@ public class ItemsListFragment extends Fragment {
         final ArrayList<FirebaseItem> firebaseItems = new ArrayList<>();
         final CustomListAdapter listAdapter = new CustomListAdapter(getActivity(),firebaseItems);
         itemsList.setAdapter(listAdapter);
+        itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                UtilitiesFactory.addFragment(getActivity(),new ItemInfoFragment(),"item_info",false).doTask();
+            }
+        });
         // Get a reference to firebase database
         final Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
         //get user clicked subject from application
@@ -40,7 +48,6 @@ public class ItemsListFragment extends Fragment {
         final String fragTag = appController.mSubject;
         if(fragTag.equals("start")){
             // Attach an listener to read the data at our posts reference
-
             Query queryOrder = ref.orderByChild("timeStamp");
             queryOrder.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
