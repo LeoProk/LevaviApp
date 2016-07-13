@@ -142,12 +142,11 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
                         if (mPhone.getText().toString().isEmpty()) {
                             AppFactory.phonePopUp(mPhone, getActivity()).doTask();
-
                         } else {
-                            if(mSpinner.getSelectedItem().toString().equals("")){
+                            if(mSpinner.getSelectedItem().toString().equals("קטגוריות")){
                                 AppFactory.subjectPopUp(mPhone, getActivity()).doTask();
                             }else {
-                                AppFactory.getTimeGetter(NewItemFragment.this).doTask();
+                                    AppFactory.getTimeGetter(NewItemFragment.this).doTask();
                             }
                         }
                     }

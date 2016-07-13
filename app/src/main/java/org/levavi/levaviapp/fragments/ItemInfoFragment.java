@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,10 @@ import android.widget.TextView;
 import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.pojos.ClickedItemInfo;
+import org.levavi.levaviapp.pojos.FirebaseItem;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * this item display information when clicked on item in list view
@@ -23,7 +28,7 @@ public class ItemInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final AppController appController = (AppController) getActivity().getApplicationContext();
-        final ClickedItemInfo itemInfo = appController.mItemInfo;
+        final FirebaseItem itemInfo = appController.mItemInfo;
         final View rootView = inflater.inflate(R.layout.item_info, container, false);
         final TextView title = (TextView) rootView.findViewById(R.id.title);
         final TextView time = (TextView) rootView.findViewById(R.id.time);
@@ -36,7 +41,9 @@ public class ItemInfoFragment extends Fragment {
         //open the location in waze
         final Button go = (Button) rootView.findViewById(R.id.go);
         title.setText(itemInfo.getTitle());
-        time.setText(itemInfo.getTime());
+        Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+        cal.setTimeInMillis(Long.parseLong(itemInfo.getTimeStamp())*-1000);
+        time.setText("פורסם ב-"+ DateFormat.format("dd/MM hh:mm", cal).toString());
         text.setText(itemInfo.getText());
         subject.setText(itemInfo.getSubject());
         price.setText(itemInfo.getPrice());

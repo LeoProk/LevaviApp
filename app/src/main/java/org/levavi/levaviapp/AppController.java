@@ -20,11 +20,9 @@ public class AppController extends Application
     //subject of items list fragment
     public String mSubject;
     //info of currnet clicked item inside item list
-    public ClickedItemInfo mItemInfo;
+    public FirebaseItem mItemInfo;
     //the timestamp of slected date in new item fragment
     public String mTimestamp;
-    //current clicked item
-    public FirebaseItem mCurrentFirebaseItem;
 
     @Override
     public void onCreate() {

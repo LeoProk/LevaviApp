@@ -33,18 +33,19 @@ public class ItemsListFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.start_fragment, container, false);
         final ListView itemsList = (ListView) rootView.findViewById(R.id.itemsList);
         final ArrayList<FirebaseItem> firebaseItems = new ArrayList<>();
+        final AppController appController = (AppController) getActivity().getApplicationContext();
         final CustomListAdapter listAdapter = new CustomListAdapter(getActivity(),firebaseItems);
         itemsList.setAdapter(listAdapter);
         itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                appController.mItemInfo = firebaseItems.get(i);
                 UtilitiesFactory.addFragment(getActivity(),new ItemInfoFragment(),"item_info",false).doTask();
             }
         });
         // Get a reference to firebase database
         final Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
-        //get user clicked subject from application
-        final AppController appController = (AppController) getActivity().getApplicationContext();
+        //get user clicked subject from application class
         final String fragTag = appController.mSubject;
         if(fragTag.equals("start")){
             // Attach an listener to read the data at our posts reference
