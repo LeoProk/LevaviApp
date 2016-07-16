@@ -40,7 +40,7 @@ public class ItemsListFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 appController.mItemInfo = firebaseItems.get(i);
-                UtilitiesFactory.addFragment(getActivity(),new ItemInfoFragment(),"item_info",false).doTask();
+                UtilitiesFactory.replaceFragment(getActivity(),new ItemInfoFragment(),"item_info",false).doTask();
             }
         });
         // Get a reference to firebase database
