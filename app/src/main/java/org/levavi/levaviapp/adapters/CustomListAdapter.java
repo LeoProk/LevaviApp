@@ -73,11 +73,9 @@ public class CustomListAdapter extends BaseAdapter {
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
         //check if user uploaded image if no uses defualt images
         if(firebaseItem.getImage().equals("null")){
-            Log.e("yay","yayyy2");
         switch (firebaseItem.getSubject()){
             case "מסעדות":
                 image.setImageResource(R.drawable.dinner_table);
-                Log.e("yay","88888");
                 break;
             case "אטרקציות ופנאי":
                 image.setImageResource(R.drawable.beach);

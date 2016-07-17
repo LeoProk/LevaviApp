@@ -147,6 +147,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
                                 AppFactory.subjectPopUp(mPhone, getActivity()).doTask();
                             }else {
                                     AppFactory.getTimeGetter(NewItemFragment.this).doTask();
+                                    UtilitiesFactory.removeFragment(getActivity()).doTask();
                             }
                         }
                     }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.levavi.levaviapp.AppController;
@@ -36,6 +37,39 @@ public class ItemInfoFragment extends Fragment {
         final TextView text = (TextView) rootView.findViewById(R.id.text);
         final TextView length = (TextView) rootView.findViewById(R.id.length);
         final TextView price = (TextView) rootView.findViewById(R.id.price);
+        final ImageView image = (ImageView) rootView.findViewById(R.id.image);
+        if(itemInfo.getImage().equals("null")){
+        switch (itemInfo.getSubject()){
+            case "מסעדות":
+                image.setImageResource(R.drawable.dinner_table);
+                break;
+            case "אטרקציות ופנאי":
+                image.setImageResource(R.drawable.beach);
+                break;
+            case "טיפוח וספא":
+                image.setImageResource(R.drawable.spa);
+                break;
+            case "בריאות וכושר":
+                image.setImageResource(R.drawable.gym);
+                break;
+            case "אלקטרוניקה ומחשבים":
+                image.setImageResource(R.drawable.electornics);
+                break;
+            case "לבית ולגן":
+                image.setImageResource(R.drawable.garden);
+                break;
+            case "תינוקות ילדים וצעצועים":
+                image.setImageResource(R.drawable.toy);
+                break;
+            case "ביגוד והנעלה":
+                image.setImageResource(R.drawable.clothes);
+                break;
+            default:
+                break;
+        }
+    }else {
+
+    }
         //calls the contact number
         final Button call = (Button) rootView.findViewById(R.id.call);
         //open the location in waze

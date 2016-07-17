@@ -2,27 +2,36 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp">
+    >
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="220dp" />
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/image"
+        android:layout_alignRight="@id/image"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"/>
 
     <TextView
         android:id="@+id/length"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="10dp"/>
+        android:layout_below="@id/image"
+        android:layout_marginTop="10dp"
+        android:padding="15dp"/>
     <TextView
         android:id="@+id/subject"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="12dp"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/time"/>
+        android:layout_below="@id/time"
+        android:padding="15dp"/>
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
@@ -30,14 +39,16 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/subject"
         android:textStyle="bold"
-        android:textSize="12dp"/>
+        android:textSize="12dp"
+        android:padding="15dp"/>
 
     <TextView
         android:id="@+id/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_below="@id/title"/>
+        android:layout_below="@id/title"
+        android:padding="15dp"/>
 
     <TextView
         android:id="@+id/price"
@@ -48,24 +59,25 @@
         android:textColor="@color/color_primary"
         android:textStyle="bold"
         android:layout_marginTop="20dp"
-        android:textSize="20dp"/>
+        android:textSize="20dp"
+        android:padding="15dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/price"
         android:layout_alignParentRight="true"
         android:layout_marginRight="90dp"
-        android:layout_marginTop="30dp"
         android:text="@string/call"
-        android:id="@+id/call" />
+        android:id="@+id/call"
+        android:padding="15dp"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/price"
         android:layout_marginRight="5dp"
         android:layout_toLeftOf="@id/call"
-        android:layout_marginTop="30dp"
         android:text="@string/go"
-        android:id="@+id/go" />
+        android:id="@+id/go"
+        android:padding="15dp"/>
 
 </RelativeLayout>
