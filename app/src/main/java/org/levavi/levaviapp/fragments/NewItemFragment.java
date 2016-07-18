@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +16,12 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import org.levavi.levaviapp.AppController;
+import org.levavi.levaviapp.interfaces.RequestPlaceInterface;
 import org.levavi.levaviapp.main.AppFactory;
 import org.levavi.levaviapp.pojos.FirebaseItem;
 import org.levavi.levaviapp.interfaces.OnDateCompleted;
 import org.levavi.levaviapp.R;
+import org.levavi.levaviapp.pojos.GooglePredictionData;
 import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
 import java.text.DateFormat;
@@ -27,9 +30,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -43,8 +52,6 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
     private Spinner mSpinner;
 
-    private String mDuration;
-
     private String mLatitude;
 
     private String mLongitude;
@@ -53,21 +60,31 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
     private ArrayList<String> mItems;
 
+    Subscription mSubscription;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_new_item, container, false);
+        //get the application class
+        final AppController appController = (AppController) getActivity().getApplicationContext();
         //initializes views
         mTitle = (EditText) rootView.findViewById(R.id.title);
         mAddress  = (AutoCompleteTextView) rootView.findViewById(R.id.address);
         mItems = new ArrayList<>();
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_dropdown_item_1line, mItems);
+        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, mItems);
         mAddress.setAdapter(arrayAdapter);
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mPrice = (EditText) rootView.findViewById(R.id.price);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
-        mDuration = "null";
+        //get info from google place prediction using rxandroid and retrofit
+        RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.create();
+        final Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://maps.googleapis.com/maps/api/place/textsearch/")
+                .addCallAdapterFactory(rxAdapter)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         mAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -76,28 +93,41 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                Observable.just(new String[]{charSequence.toString(),"32.112650","34.792527"})
-                .observeOn(Schedulers.newThread())
-                .subscribe(new Observer<String[]>() {
-                    @Override
-                    public void onCompleted() {
-                        //after getting the predictions updates the autcompletetext
-                        mItems = new ArrayList<>(mPredictions);
-                        arrayAdapter.notifyDataSetChanged();
+                if(mSubscription!=null){
+                    if(!mSubscription.isUnsubscribed()) {
+                        mSubscription.unsubscribe();
                     }
+                }
+                RequestPlaceInterface requestPlace = retrofit.create(RequestPlaceInterface.class);
+                final Observable<GooglePredictionData> call = requestPlace.getJSON(charSequence.toString(),"31.0461" + "," + "34.8516", "5000", "iw", "AIzaSyD2SJMgrrCuhXx9LbLXfnyqdWbvN28FkKc");
+                mSubscription = call
+                        .subscribeOn(Schedulers.io()) // optional if you do not wish to override the default behavior
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<GooglePredictionData>() {
+                            @Override
+                            public void onCompleted() {
 
-                    @Override
-                    public void onError(Throwable e) {
+                            }
 
-                    }
+                            @Override
+                            public void onError(Throwable e) {
 
-                    @Override
-                    public void onNext(String[] strings) {
-                       //gets the predictions
-                       mPredictions =(ArrayList<String>)AppFactory.getGooglePlacePrediction(strings[0], strings[1], strings[2]).doTask();
-                    }
-                });
-                //AppFactory.getGooglePlacePrediction(charSequence.toString(),"32.112650","34.792527").doTask();
+                            }
+
+                            @Override
+                            public void onNext(GooglePredictionData googlePredictionData) {
+                                ArrayList<String> temp = new ArrayList<String>();
+                                //loops true all the prediction
+                                for (int i = 0; i < googlePredictionData.getResults().size(); i++) {
+                                    Log.e("address", "hello" + googlePredictionData.getResults().get(i).getFormattedAddress());
+                                   temp.add(googlePredictionData.getResults().get(i).getFormattedAddress());
+                                }
+                                String[] data = temp.toArray(new String[temp.size()]);
+                                final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,data);
+                                mAddress.setAdapter(arrayAdapter);
+                                arrayAdapter.notifyDataSetChanged();
+                            }
+                        });
             }
 
             @Override
@@ -111,7 +141,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.no_duration:
-                        mDuration = "null";
+                        appController.mTimestamp = "null";
                         break;
                     case R.id.yes_duration:
                         AppFactory.getDatePopup(mPhone,getActivity()).doTask();
@@ -176,7 +206,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         //save to firebase after creating hashmap of the new items array list
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
                 mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask()
-                ,mDuration,mPrice.getText().toString(),"null");
+                ,appController.mTimestamp,mPrice.getText().toString(),"null");
         AppFactory.saveFireBase(itemForSave).doTask();
     }
 }

@@ -67,6 +67,7 @@ public class CustomListAdapter extends BaseAdapter {
         final TextView subject = (TextView) convertView.findViewById(R.id.subject);
         final TextView length = (TextView) convertView.findViewById(R.id.length);
         final TextView price = (TextView) convertView.findViewById(R.id.price);
+        final TextView duration = (TextView) convertView.findViewById(R.id.duration);
         final ImageView image = (ImageView)convertView.findViewById(R.id.imageView);
         image.setImageResource(R.drawable.dinner_table);
         // getting item data for the row

@@ -28,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Places;
 
 
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
                     .addApi( Places.GEO_DATA_API )
                     .addApi(Places.PLACE_DETECTION_API)
+                    .addApi(LocationServices.API)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .build();
@@ -107,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                UtilitiesFactory.replaceFragment(MainActivity.this,new ItemsListFragment()
-                        ,"userSearch",true).doTask();
+                UtilitiesFactory.replaceFragment(MainActivity.this, new ItemsListFragment()
+                        , "userSearch", true).doTask();
                 appController.mSubject = query;
                 menuSearch.collapseActionView();
                 return false;
@@ -184,8 +186,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         startActivityForResult(signInIntent, RC_SIGN_IN);
         return null;
     }
+    //
     public void googleLogInPopup(){
         mLogInPopup = (PopupWindow)AppFactory.getLogInPopup(mDrawerLayout,this,MainActivity.this,mGso).doTask();
+    }
+    //get the current location and update it in application class
+    public void getCurrentLocation(){
+        final AppController appController = (AppController) getApplicationContext();
+        appController.mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+
     }
     @Override
     protected void onStart() {

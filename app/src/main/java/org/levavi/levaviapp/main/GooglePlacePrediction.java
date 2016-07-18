@@ -32,11 +32,11 @@ final class GooglePlacePrediction implements FactoryInterface{
 
     @Override
     public Object doTask() {
-        final String apiKey = "AIzaSyD2SJMgrrCuhXx9LbLXfnyqdWbvN28FkKc";
+/*        final String apiKey = "AIzaSyD2SJMgrrCuhXx9LbLXfnyqdWbvN28FkKc";
         //debug log of retrofit
-        /* HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        *//* HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();*/
+        OkHttpClient client = new OkHttpClient.Builder().addInterceptor(interceptor).build();*//*
         // array list of predicted addresses
         final ArrayList<String> addresses = new ArrayList<>();
         //crate restfull call using retrofit with json return type
@@ -46,13 +46,13 @@ final class GooglePlacePrediction implements FactoryInterface{
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         RequestPlaceInterface request = retrofit.create(RequestPlaceInterface.class);
-        Call<GooglePredictionData> call = request.getJSON(mQuery,mLatitude+","+mLongitude,"5000","iw",apiKey);
+        Call<GooglePredictionData> call = request.getJSON(mQuery,mLatitude+","+mLongitude,"10000","iw",apiKey);
         call.enqueue(new Callback<GooglePredictionData>() {
             @Override
             public void onResponse(Call<GooglePredictionData> call, Response<GooglePredictionData> response) {
                 //loops true all the prediction
                 for (int i = 0; i < response.body().getResults().size(); i++) {
-                    //Log.e("address","hello" + response.body().getResults().get(i).getFormattedAddress());
+                    Log.e("address","hello" + response.body().getResults().get(i).getName());
                     addresses.add(response.body().getResults().get(i).getFormattedAddress());
                 }
             }
@@ -63,6 +63,8 @@ final class GooglePlacePrediction implements FactoryInterface{
             }
         });
         return addresses;
+        */
+        return null;
     }
 
 }
