@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -42,6 +43,13 @@ final class PopUpGenerator implements FactoryInterface {
         final PopupWindow popupWindow = new PopupWindow(popupView,
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         final TextView textView = (TextView) popupView.findViewById(R.id.message);
+        final Button submit = (Button) popupView.findViewById(R.id.submit);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popupWindow.dismiss();
+            }
+        });
         textView.setTypeface(null, Typeface.BOLD);
         //change load message bassed on input
         switch (mInputCondition) {

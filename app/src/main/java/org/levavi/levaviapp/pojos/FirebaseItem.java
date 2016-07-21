@@ -3,7 +3,7 @@ package org.levavi.levaviapp.pojos;
 /**
  * fire base helper object for saving and retriving data from the server
  */
-public class FirebaseItem {
+public class FirebaseItem implements Comparable {
 
     //make sure that our field names match the names of the properties
     // in the Firebase database
@@ -17,6 +17,8 @@ public class FirebaseItem {
     private String user;
     private String price;
     private String image;
+    //the distance of the item location and current location
+    private int mDistance;
 
     public FirebaseItem(){
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
@@ -75,5 +77,16 @@ public class FirebaseItem {
         return image;
     }
 
+
+    public int getDistance() {
+        return mDistance;
+    }
+
+
+    @Override
+    public int compareTo(Object compare) {
+        int comparedPark = ((FirebaseItem) compare).getDistance();
+        return mDistance - comparedPark;
+    }
 
 }

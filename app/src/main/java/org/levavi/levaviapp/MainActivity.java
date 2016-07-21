@@ -8,6 +8,7 @@ import org.levavi.levaviapp.utilities.UtilitiesFactory;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -64,17 +65,9 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     .requestEmail()
                     .requestProfile()
                     .build();
-            // Build a GoogleApiClient with access to the Google Sign-In API and the
+            // Build a GoogleApiClient with access to the Google Sign-In API location API and the
             // options specified by gso.
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                    .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
-                    .addApi( Places.GEO_DATA_API )
-                    .addApi(Places.PLACE_DETECTION_API)
-                    .addApi(LocationServices.API)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .build();
+            buildGoogleApi();
         }
         //create the drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -172,14 +165,28 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     public void onConnected(Bundle bundle) {
-
+        //get the application class
+        final AppController appController = (AppController) this.getApplicationContext();
+        appController.mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
     }
 
     @Override
     public void onConnectionSuspended(int i) {
 
     }
-
+    //build the google api with place api and location api
+    public void buildGoogleApi(){
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
+                .addApi( Places.GEO_DATA_API )
+                .addApi(Places.PLACE_DETECTION_API)
+                .addApi(LocationServices.API)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .build();
+    }
     @Override
     public Object doTask() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -189,13 +196,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     //
     public void googleLogInPopup(){
         mLogInPopup = (PopupWindow)AppFactory.getLogInPopup(mDrawerLayout,this,MainActivity.this,mGso).doTask();
-    }
-    //get the current location and update it in application class
-    public void getCurrentLocation(){
-        final AppController appController = (AppController) getApplicationContext();
-        appController.mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-
     }
     @Override
     protected void onStart() {

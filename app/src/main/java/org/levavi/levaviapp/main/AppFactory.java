@@ -53,11 +53,6 @@ public class AppFactory {
     //gets current time and date
     public static FactoryInterface getTimeGetter(OnDateCompleted onDateCompleted){return new TimeGetter(onDateCompleted);}
 
-    //get the current query predication
-    public static FactoryInterface getGooglePlacePrediction(String query,String latitude,String longitude){
-        return new GooglePlacePrediction(query,latitude,longitude);
-    }
-
     //gets data from firebase server
     public static FactoryInterface getLogInPopup(View anchorView, Context context,FactoryInterface factoryInterface,
                                                  GoogleSignInOptions gso){
