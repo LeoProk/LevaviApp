@@ -17,6 +17,7 @@ public class FirebaseItem implements Comparable {
     private String user;
     private String price;
     private String image;
+    private Location location;
     //the distance of the item location and current location
     private int mDistance;
 
@@ -24,7 +25,7 @@ public class FirebaseItem implements Comparable {
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
     }
     public FirebaseItem(String subject,String date, String text ,String address, String phone
-            , String title,String user,String duration,String price,String image){
+            , String title,String user,Location location,String duration,String price,String image){
         this.subject = subject;
         this.timeStamp = date;
         this.address = address;
@@ -32,6 +33,7 @@ public class FirebaseItem implements Comparable {
         this.title = title;
         this.text = text;
         this.user = user;
+        this.location = location;
         this.duration = duration;
         this.price = price;
         this.image = image;
@@ -63,6 +65,11 @@ public class FirebaseItem implements Comparable {
 
     public String getUser() {
         return user;
+    }
+
+
+    public Location getLocation() {
+        return location;
     }
 
     public String getDuration() {

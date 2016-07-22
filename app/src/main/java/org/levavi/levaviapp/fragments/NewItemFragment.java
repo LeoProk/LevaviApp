@@ -1,14 +1,13 @@
 package org.levavi.levaviapp.fragments;
 
 import android.app.Fragment;
-import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -17,13 +16,13 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import org.levavi.levaviapp.AppController;
-import org.levavi.levaviapp.MainActivity;
 import org.levavi.levaviapp.interfaces.RequestPlaceInterface;
 import org.levavi.levaviapp.main.AppFactory;
 import org.levavi.levaviapp.pojos.FirebaseItem;
 import org.levavi.levaviapp.interfaces.OnDateCompleted;
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.pojos.GooglePredictionData;
+import org.levavi.levaviapp.pojos.Location;
 import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
 import java.text.DateFormat;
@@ -36,25 +35,33 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 /**
- * First fragment on app run that show the latest items added
+ * this app create new item in firebase database with the folowing params
+ * @subject picked from subject spinner cant be default
+ * @date 2date taken from website to avoid wrong date on devices
+ * @text input from the user about the item
+ * @address autocompletet text view that uses google places prediction to show street
+ * address to the user that he must chose from
+ * @phone phone of the user
+ * @title title for the item by user
+ * @user
  */
 public class NewItemFragment extends Fragment implements OnDateCompleted {
 
     private EditText mTitle,mPhone,mText,mPrice;
-
+    //auto comeplete address
     private AutoCompleteTextView mAddress;
-
+    // spinner of subjects
     private Spinner mSpinner;
-
-    Subscription mSubscription;
+    //location of the chosen street address
+    private Location mChosenLocation;
+    //subscribtion for google place prediction
+    private Subscription mSubscription;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -65,14 +72,20 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         //initializes views
         mTitle = (EditText) rootView.findViewById(R.id.title);
         mAddress  = (AutoCompleteTextView) rootView.findViewById(R.id.address);
+        //lang lat array of predictions
+        final ArrayList<org.levavi.levaviapp.pojos.Location> predictedLocation = new ArrayList<>();
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1, new String[]{});
         mAddress.setAdapter(arrayAdapter);
+        mAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mChosenLocation = predictedLocation.get(position);
+            }
+        });
         mPhone  = (EditText) rootView.findViewById(R.id.phone);
         mText = (EditText) rootView.findViewById(R.id.text);
         mPrice = (EditText) rootView.findViewById(R.id.price);
         mSpinner = (Spinner) rootView.findViewById(R.id.spinner);
-        //lang lat array of predictions
-        final ArrayList<org.levavi.levaviapp.pojos.Location> predictedLocation = new ArrayList<>();
         //get info from google place prediction using rxandroid and retrofit
         RxJavaCallAdapterFactory rxAdapter = RxJavaCallAdapterFactory.create();
         final Retrofit retrofit = new Retrofit.Builder()
@@ -202,7 +215,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         }
         //save to firebase after creating hashmap of the new items array list
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
-                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask()
+                mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mChosenLocation
                 ,appController.mTimestamp,mPrice.getText().toString(),"null");
         AppFactory.saveFireBase(itemForSave).doTask();
         UtilitiesFactory.removeFragment(getActivity()).doTask();
