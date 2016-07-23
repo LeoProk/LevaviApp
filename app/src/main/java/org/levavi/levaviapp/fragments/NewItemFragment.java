@@ -113,7 +113,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
                 }
                 RequestPlaceInterface requestPlace = retrofit.create(RequestPlaceInterface.class);
                 final Observable<GooglePredictionData> call = requestPlace.getJSON(editable.toString()
-                        ,appController.mCurrentLocation.getLatitude() + "," + appController.mCurrentLocation.getLongitude(),
+                        ,31.977682 + "," + 34.764381,
                         "5000", "iw", "AIzaSyD2SJMgrrCuhXx9LbLXfnyqdWbvN28FkKc");
                 mSubscription = call
                         .subscribeOn(Schedulers.io()) // optional if you do not wish to override the default behavior
@@ -152,7 +152,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.no_duration:
-                        appController.mTimestamp = "null";
+                        appController.timestamp = "null";
                         break;
                     case R.id.yes_duration:
                         AppFactory.getDatePopup(mPhone,getActivity()).doTask();
@@ -204,10 +204,10 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         String selectedTime = "null";
         final AppController appController = (AppController) getActivity().getApplicationContext();
         String[] fullTime =date.split(" ");
-        if(appController.mTimestamp!=null) {
+        if(appController.timestamp !=null) {
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             try {
-                Date dateParser = formatter.parse(appController.mTimestamp);
+                Date dateParser = formatter.parse(appController.timestamp);
                 selectedTime = String.valueOf(dateParser.getTime() * -1);
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -216,7 +216,7 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
         //save to firebase after creating hashmap of the new items array list
         FirebaseItem itemForSave = new FirebaseItem(mSpinner.getSelectedItem().toString(),fullTime[0],mText.getText().toString(),mAddress.getText().toString(),
                 mPhone.getText().toString(),mTitle.getText().toString(),(String)UtilitiesFactory.getFile(getActivity(),"user").doTask(),mChosenLocation
-                ,appController.mTimestamp,mPrice.getText().toString(),"null");
+                ,appController.timestamp,mPrice.getText().toString(),"null");
         AppFactory.saveFireBase(itemForSave).doTask();
         UtilitiesFactory.removeFragment(getActivity()).doTask();
     }

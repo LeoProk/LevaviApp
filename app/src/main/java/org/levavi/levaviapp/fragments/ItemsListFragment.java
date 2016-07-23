@@ -39,14 +39,14 @@ public class ItemsListFragment extends Fragment {
         itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                appController.mItemInfo = firebaseItems.get(i);
+                appController.itemInfo = firebaseItems.get(i);
                 UtilitiesFactory.replaceFragment(getActivity(),new ItemInfoFragment(),"item_info",false).doTask();
             }
         });
         // Get a reference to firebase database
         final Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
         //get user clicked subject from application class
-        final String fragTag = appController.mSubject;
+        final String fragTag = appController.subject;
         if(fragTag.equals("start")){
             // Attach an listener to read the data at our posts reference
             Query queryOrder = ref.orderByChild("timeStamp");
@@ -80,7 +80,7 @@ public class ItemsListFragment extends Fragment {
                     }
                 });
             }else {
-                Query queryValue = ref.orderByChild("subject").equalTo(appController.mSubject);
+                Query queryValue = ref.orderByChild("subject").equalTo(appController.subject);
                 queryValue.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {

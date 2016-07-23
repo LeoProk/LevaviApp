@@ -50,7 +50,7 @@ final class ReplaceFragment implements FactoryInterface {
     @Override
     public Object doTask() {
         final AppController appController = (AppController) mContext.getApplicationContext();
-        appController.mFragmentTag = mTag;
+        appController.fragmentTag = mTag;
         if (mAddToBackStack) {
             Fragment fragment = mFragment;
             FragmentManager fragmentManager = ((Activity) mContext)

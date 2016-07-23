@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.R;
-import org.levavi.levaviapp.pojos.ClickedItemInfo;
 import org.levavi.levaviapp.pojos.FirebaseItem;
 
 import java.util.Calendar;
@@ -29,7 +28,7 @@ public class ItemInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final AppController appController = (AppController) getActivity().getApplicationContext();
-        final FirebaseItem itemInfo = appController.mItemInfo;
+        final FirebaseItem itemInfo = appController.itemInfo;
         final View rootView = inflater.inflate(R.layout.item_info, container, false);
         final TextView title = (TextView) rootView.findViewById(R.id.title);
         final TextView time = (TextView) rootView.findViewById(R.id.time);

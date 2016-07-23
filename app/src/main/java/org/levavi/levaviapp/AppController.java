@@ -16,21 +16,21 @@ public class AppController extends Application
 {
 
     //fragment tag control
-    public String mFragmentTag;
+    public String fragmentTag;
     //subject of items list fragment
-    public String mSubject;
+    public String subject;
     //info of currnet clicked item inside item list
-    public FirebaseItem mItemInfo;
+    public FirebaseItem itemInfo;
     //the timestamp of selected date in new item fragment
-    public String mTimestamp;
+    public String timestamp;
     //the current users location
-    public Location mCurrentLocation;
+    public static Location sCurrentLocation;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Firebase.setAndroidContext(this);
-        mSubject = "start";
-        mTimestamp = "null";
+        subject = "start";
+        timestamp = "null";
     }
 }

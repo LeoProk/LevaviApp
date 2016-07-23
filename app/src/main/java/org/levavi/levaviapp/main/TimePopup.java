@@ -7,7 +7,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TimePicker;
@@ -48,13 +47,13 @@ final class TimePopup implements FactoryInterface {
             public void onClick(View v) {
                 popupWindow.dismiss();
                 //gets the selected date
-                String selectedDate = appController.mTimestamp;
+                String selectedDate = appController.timestamp;
                 //checks the current version of api then gets the full date
                 if (Build.VERSION.SDK_INT >= 23 ) {
-                    appController.mTimestamp = timePicker.getHour()+":"+timePicker.getMinute() + " " +selectedDate;
+                    appController.timestamp = timePicker.getHour()+":"+timePicker.getMinute() + " " +selectedDate;
                 }
                 else {
-                    appController.mTimestamp = timePicker.getCurrentHour()+":"+timePicker.getCurrentMinute() + " " +selectedDate;
+                    appController.timestamp = timePicker.getCurrentHour()+":"+timePicker.getCurrentMinute() + " " +selectedDate;
                 }
 
             }
@@ -63,7 +62,7 @@ final class TimePopup implements FactoryInterface {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appController.mTimestamp = null;
+                appController.timestamp = null;
                 popupWindow.dismiss();
             }
         });

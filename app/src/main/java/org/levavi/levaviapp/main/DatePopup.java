@@ -9,10 +9,6 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TimePicker;
-
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 
 import org.levavi.levaviapp.AppController;
 import org.levavi.levaviapp.R;
@@ -50,7 +46,7 @@ final class DatePopup implements FactoryInterface {
             public void onClick(View v) {
                 popupWindow.dismiss();
                 AppFactory.getTimePopup(mAnchorView,mContext).doTask();
-                appController.mTimestamp = datePicker.getDayOfMonth()+"."+datePicker.getMonth()+1
+                appController.timestamp = datePicker.getDayOfMonth()+"."+datePicker.getMonth()+1
                         + "." + datePicker.getYear();
             }
         });
@@ -58,7 +54,7 @@ final class DatePopup implements FactoryInterface {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                appController.mTimestamp = null;
+                appController.timestamp = null;
                 popupWindow.dismiss();
             }
         });

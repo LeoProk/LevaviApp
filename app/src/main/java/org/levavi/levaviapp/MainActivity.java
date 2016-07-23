@@ -8,7 +8,6 @@ import org.levavi.levaviapp.utilities.UtilitiesFactory;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,6 +28,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Places;
 
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             public boolean onQueryTextSubmit(String query) {
                 UtilitiesFactory.replaceFragment(MainActivity.this, new ItemsListFragment()
                         , "userSearch", true).doTask();
-                appController.mSubject = query;
+                appController.subject = query;
                 menuSearch.collapseActionView();
                 return false;
             }
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onBackPressed() {
         final AppController appController = (AppController) getApplicationContext();
-        if(appController.mFragmentTag!=null){
+        if(appController.fragmentTag !=null){
             UtilitiesFactory.removeFragment(this).doTask();
         }
     }
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onConnected(Bundle bundle) {
         //get the application class
         final AppController appController = (AppController) this.getApplicationContext();
-        appController.mCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
+        appController.sCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
     }
 
@@ -193,9 +193,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         startActivityForResult(signInIntent, RC_SIGN_IN);
         return null;
     }
-    //
+    //pop up with the google log in button
     public void googleLogInPopup(){
         mLogInPopup = (PopupWindow)AppFactory.getLogInPopup(mDrawerLayout,this,MainActivity.this,mGso).doTask();
+    }
+    // request the location
+    protected void createLocationRequest() {
+        LocationRequest locationRequest = new LocationRequest();
+        locationRequest.setInterval(10000);
+        locationRequest.setFastestInterval(5000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
     }
     @Override
     protected void onStart() {

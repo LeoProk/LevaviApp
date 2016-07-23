@@ -1,5 +1,7 @@
 package org.levavi.levaviapp.pojos;
 
+import org.levavi.levaviapp.AppController;
+
 /**
  * fire base helper object for saving and retriving data from the server
  */
@@ -37,6 +39,7 @@ public class FirebaseItem implements Comparable {
         this.duration = duration;
         this.price = price;
         this.image = image;
+        mDistance = getDistance();
     }
 
     public String getSubject() {
@@ -86,7 +89,11 @@ public class FirebaseItem implements Comparable {
 
 
     public int getDistance() {
-        return mDistance;
+        android.location.Location parkLocation = new android.location.Location("Park Location");
+        parkLocation.setLatitude(location.getLat());
+        parkLocation.setLongitude(location.getLng());
+        int distance = Math.round(AppController.sCurrentLocation.distanceTo(parkLocation));
+        return distance;
     }
 
 

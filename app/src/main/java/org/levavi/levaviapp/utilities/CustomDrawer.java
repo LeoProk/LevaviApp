@@ -126,35 +126,35 @@ final class CustomDrawer implements FactoryInterface {
                 }
                 break;
             case 1:
-                appController.mSubject = "מסעדות";
+                appController.subject = "מסעדות";
                 fragment = new ItemsListFragment();
                 break;
             case 2:
-                appController.mSubject = "אטרקציות ופנאי";
+                appController.subject = "אטרקציות ופנאי";
                 fragment = new ItemsListFragment();
                 break;
             case 3:
-                appController.mSubject = "טיפוח וספא";
+                appController.subject = "טיפוח וספא";
                 fragment = new ItemsListFragment();
                 break;
             case 4:
-                appController.mSubject = "בריאות וכושר";
+                appController.subject = "בריאות וכושר";
                 fragment = new ItemsListFragment();
                 break;
             case 5:
-                appController.mSubject = "אלקטרוניקה ומחשבים";
+                appController.subject = "אלקטרוניקה ומחשבים";
                 fragment = new ItemsListFragment();
                 break;
             case 6:
-                appController.mSubject = "לבית ולגן";
+                appController.subject = "לבית ולגן";
                 fragment = new ItemsListFragment();
                 break;
             case 7:
-                appController.mSubject = "תינוקות ילדים וצעצועים";
+                appController.subject = "תינוקות ילדים וצעצועים";
                 fragment = new ItemsListFragment();
                 break;
             case 8:
-                appController.mSubject = "ביגוד והנעלה";
+                appController.subject = "ביגוד והנעלה";
                 fragment = new ItemsListFragment();
                 break;
             default:
