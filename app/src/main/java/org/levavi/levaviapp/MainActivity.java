@@ -8,6 +8,7 @@ import org.levavi.levaviapp.utilities.UtilitiesFactory;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -28,12 +29,14 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Places;
 
 
-public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks,FactoryInterface {
+public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener,GoogleApiClient.ConnectionCallbacks
+        ,FactoryInterface,LocationListener {
 
     private ActionBarDrawerToggle mDrawerToggle;
 
@@ -44,6 +47,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private DrawerLayout mDrawerLayout;
 
     private PopupWindow mLogInPopup;
+
+    private LocationRequest mLocationRequest;
 
     private static final int RC_SIGN_IN = 1000;
 
@@ -165,10 +170,21 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     public void onConnected(Bundle bundle) {
+        //http://www.androidwarriors.com/2015/10/fused-location-provider-in-android.html
         //get the application class
         final AppController appController = (AppController) this.getApplicationContext();
-        appController.sCurrentLocation = LocationServices.FusedLocationApi.getLastLocation(
+        mLocationRequest = LocationRequest.create();
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocationRequest.setInterval(10000); // Update location every second
+
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+
+
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
+        if (mLastLocation != null) {
+            Log.e("location is:",String.valueOf(mLastLocation.getLatitude())+","+String.valueOf(mLastLocation.getLongitude()));
+        }
     }
 
     @Override
@@ -217,5 +233,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             mGoogleApiClient.disconnect();
         }
         super.onStop();
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+
     }
 }

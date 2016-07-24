@@ -24,4 +24,5 @@
     <string name="duration">תוקף ההצעה</string>
     <string name="none">ללא</string>
     <string name="till">תקף עד</string>
+    <string name="item_end">תוקף עסקה זו הסתיים</string>
 </resources>

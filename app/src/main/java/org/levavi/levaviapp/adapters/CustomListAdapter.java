@@ -61,7 +61,6 @@ public class CustomListAdapter extends BaseAdapter {
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if (convertView == null)
             convertView = mInflater.inflate(R.layout.item_list_row, null);
-
         final TextView title = (TextView) convertView.findViewById(R.id.title);
         final TextView time = (TextView) convertView.findViewById(R.id.time);
         final TextView subject = (TextView) convertView.findViewById(R.id.subject);
@@ -72,6 +71,23 @@ public class CustomListAdapter extends BaseAdapter {
         image.setImageResource(R.drawable.dinner_table);
         // getting item data for the row
         final FirebaseItem firebaseItem = mFirebaseItems.get(position);
+        //checks if item have end date
+        if(firebaseItem.getDuration().equals("null")){
+            duration.setVisibility(View.INVISIBLE);
+        }else{
+            //gets the current time
+            Long tsLong = System.currentTimeMillis()/1000;
+            if(Long.valueOf(firebaseItem.getDuration())>tsLong){
+                //get the time left until the item listing ends
+                Long timeLeft = Long.valueOf(firebaseItem.getDuration()) - tsLong;
+                //converts the timestamp to date
+                Calendar cal = Calendar.getInstance(Locale.ENGLISH);
+                cal.setTimeInMillis(timeLeft*1000);
+                duration.setText("תקף עד-"+DateFormat.format("hh:mm", cal).toString());
+            }else {
+               duration.setText(mActivity.getResources().getString(R.string.item_end));
+            }
+        }
         //check if user uploaded image if no uses defualt images
         if(firebaseItem.getImage().equals("null")){
         switch (firebaseItem.getSubject()){
