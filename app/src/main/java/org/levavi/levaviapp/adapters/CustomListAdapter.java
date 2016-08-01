@@ -3,22 +3,23 @@ package org.levavi.levaviapp.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.pojos.FirebaseItem;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -77,16 +78,24 @@ public class CustomListAdapter extends BaseAdapter {
         }else{
             //gets the current time
             Long tsLong = System.currentTimeMillis()/1000;
-            if(Long.valueOf(firebaseItem.getDuration())>tsLong){
+            //parses the end date of item
+            SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm dd.MM.yyyy");
+            Date parsedDate = null;
+            try {
+                parsedDate = dateFormat.parse(firebaseItem.getDuration());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if((parsedDate.getTime()/1000) > tsLong){
                 //get the time left until the item listing ends
-                Long timeLeft = Long.valueOf(firebaseItem.getDuration()) - tsLong;
-                //converts the timestamp to date
-                Calendar cal = Calendar.getInstance(Locale.ENGLISH);
-                cal.setTimeInMillis(timeLeft*1000);
-                duration.setText("תקף עד-"+DateFormat.format("hh:mm", cal).toString());
+                Long timeInHours = ((parsedDate.getTime()/1000) - tsLong)/1000;
+                String hoursString = Double.toString(timeInHours.doubleValue() / 3600);
+                String[] fullTime = hoursString.split("\\.");
+                duration.setText("מסתיים בעוד"+"\n"+ fullTime[0] + " "+ " שעות ו " + fullTime[1].substring(0, 1) +" " +  "דקות");
             }else {
                duration.setText(mActivity.getResources().getString(R.string.item_end));
             }
+
         }
         //check if user uploaded image if no uses defualt images
         if(firebaseItem.getImage().equals("null")){
@@ -122,12 +131,28 @@ public class CustomListAdapter extends BaseAdapter {
 
         }
         title.setText(firebaseItem.getTitle());
-        length.setText("5");
-        price.setText(firebaseItem.getPrice()+" "+"₪");
+        length.setText(distanceInKM(firebaseItem.calculateDistance()));
+        if(firebaseItem.getPrice().isEmpty()){
+            price.setText("חינם");
+        }else {
+
+            price.setText(firebaseItem.getPrice()+" "+"₪");
+        }
         //converts the timestamp to date
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(Long.parseLong(firebaseItem.getTimeStamp())*-1000);
         time.setText("פורסם ב-"+DateFormat.format("dd/MM hh:mm", cal).toString());
         return convertView;
+    }
+    //return string distance in meter or kelometres
+    private String distanceInKM(int parkDistance) {
+        String range;
+        if (parkDistance < 1000) {
+            range = "מטרים";
+        } else {
+            range = "קילומטרים";
+            parkDistance = parkDistance / 1000;
+        }
+        return String.valueOf(parkDistance) + " " + range;
     }
 }

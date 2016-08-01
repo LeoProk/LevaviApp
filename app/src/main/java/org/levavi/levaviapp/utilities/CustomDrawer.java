@@ -119,6 +119,8 @@ final class CustomDrawer implements FactoryInterface {
                 //check if the use loged into google if no create log in popup
                 if (((String) UtilitiesFactory.getFile(mContext, "user").doTask()).isEmpty()) {
                     MainActivity mainActivity = (MainActivity)mContext;
+                    //connects google api
+                    mainActivity.googleApiConnect();
                     mainActivity.googleLogInPopup();
                 } else{
                 fragment = new NewItemFragment();
@@ -128,34 +130,42 @@ final class CustomDrawer implements FactoryInterface {
             case 1:
                 appController.subject = "מסעדות";
                 fragment = new ItemsListFragment();
+                tag = "item1";
                 break;
             case 2:
                 appController.subject = "אטרקציות ופנאי";
                 fragment = new ItemsListFragment();
+                tag = "item2";
                 break;
             case 3:
                 appController.subject = "טיפוח וספא";
                 fragment = new ItemsListFragment();
+                tag = "item3";
                 break;
             case 4:
                 appController.subject = "בריאות וכושר";
                 fragment = new ItemsListFragment();
+                tag = "item4";
                 break;
             case 5:
                 appController.subject = "אלקטרוניקה ומחשבים";
                 fragment = new ItemsListFragment();
+                tag = "item5";
                 break;
             case 6:
                 appController.subject = "לבית ולגן";
                 fragment = new ItemsListFragment();
+                tag = "6";
                 break;
             case 7:
                 appController.subject = "תינוקות ילדים וצעצועים";
                 fragment = new ItemsListFragment();
+                tag = "item7";
                 break;
             case 8:
                 appController.subject = "ביגוד והנעלה";
                 fragment = new ItemsListFragment();
+                tag = "item8";
                 break;
             default:
                 break;

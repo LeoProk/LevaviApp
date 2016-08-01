@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff">
     <ImageView
         android:id="@+id/image"
         android:layout_width="match_parent"
-        android:layout_height="220dp" />
+        android:layout_height="240dp" />
     <TextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
@@ -39,7 +47,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@id/subject"
         android:textStyle="bold"
-        android:textSize="12dp"
+        android:textSize="20dp"
         android:padding="15dp"/>
 
     <TextView
@@ -79,5 +87,6 @@
         android:text="@string/go"
         android:id="@+id/go"
         android:padding="15dp"/>
-
-</RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</LinearLayout>

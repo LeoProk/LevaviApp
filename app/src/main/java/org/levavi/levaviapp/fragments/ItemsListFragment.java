@@ -2,6 +2,7 @@ package org.levavi.levaviapp.fragments;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import org.levavi.levaviapp.R;
 import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * class that displayer items bassed on subject input
@@ -35,18 +37,17 @@ public class ItemsListFragment extends Fragment {
         final ArrayList<FirebaseItem> firebaseItems = new ArrayList<>();
         final AppController appController = (AppController) getActivity().getApplicationContext();
         final CustomListAdapter listAdapter = new CustomListAdapter(getActivity(),firebaseItems);
-        itemsList.setAdapter(listAdapter);
         itemsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 appController.itemInfo = firebaseItems.get(i);
-                UtilitiesFactory.replaceFragment(getActivity(),new ItemInfoFragment(),"item_info",false).doTask();
+                UtilitiesFactory.addFragment(getActivity(),new ItemInfoFragment(),"item_info",true).doTask();
             }
         });
         // Get a reference to firebase database
         final Firebase ref = new Firebase("https://luminous-fire-5859.firebaseio.com/input");
         //get user clicked subject from application class
-        final String fragTag = appController.subject;
+        final String fragTag = appController.fragmentTag;
         if(fragTag.equals("start")){
             // Attach an listener to read the data at our posts reference
             Query queryOrder = ref.orderByChild("timeStamp");
@@ -56,7 +57,8 @@ public class ItemsListFragment extends Fragment {
                     for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                         firebaseItems.add(postSnapshot.getValue(FirebaseItem.class));
                     }
-                    listAdapter.notifyDataSetChanged();
+                    Collections.sort(firebaseItems);
+                    itemsList.setAdapter(listAdapter);
                 }
 
                 @Override
@@ -64,15 +66,19 @@ public class ItemsListFragment extends Fragment {
                 }
             });
         }else {
-            if(fragTag.equals("search")){
-                Query queryValue = ref.orderByChild("text").startAt();
+            if(fragTag.equals("userSearch")){
+                Query queryValue = ref.orderByChild("timeStamp");
                 queryValue.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
                         for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                            firebaseItems.add(postSnapshot.getValue(FirebaseItem.class));
+                            FirebaseItem firebaseItem = postSnapshot.getValue(FirebaseItem.class);
+                            if(firebaseItem.getText().contains(appController.subject)||firebaseItem.getTitle().contains(appController.subject)) {
+                                firebaseItems.add(postSnapshot.getValue(FirebaseItem.class));
+                            }
                         }
-                        listAdapter.notifyDataSetChanged();
+                        Collections.sort(firebaseItems);
+                        itemsList.setAdapter(listAdapter);
                     }
 
                     @Override
@@ -87,7 +93,8 @@ public class ItemsListFragment extends Fragment {
                         for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                             firebaseItems.add(postSnapshot.getValue(FirebaseItem.class));
                         }
-                        listAdapter.notifyDataSetChanged();
+                        Collections.sort(firebaseItems);
+                        itemsList.setAdapter(listAdapter);
                     }
 
                     @Override

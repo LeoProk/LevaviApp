@@ -79,7 +79,12 @@ public class ItemInfoFragment extends Fragment {
         time.setText("פורסם ב-"+ DateFormat.format("dd/MM hh:mm", cal).toString());
         text.setText(itemInfo.getText());
         subject.setText(itemInfo.getSubject());
-        price.setText(itemInfo.getPrice());
+        if(itemInfo.getPrice().isEmpty()){
+            price.setText("חינם");
+        }else {
+
+            price.setText(itemInfo.getPrice()+" "+"₪");
+        }
 
 
         call.setOnClickListener(new View.OnClickListener() {

@@ -1,12 +1,14 @@
 package org.levavi.levaviapp.fragments;
 
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -155,6 +157,12 @@ public class NewItemFragment extends Fragment implements OnDateCompleted {
                         appController.timestamp = "null";
                         break;
                     case R.id.yes_duration:
+                        //hide the soft keyboard
+                        View view = getActivity().getCurrentFocus();
+                        if (view != null) {
+                            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                        }
                         AppFactory.getDatePopup(mPhone,getActivity()).doTask();
                         break;
                     default:

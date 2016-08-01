@@ -20,8 +20,8 @@ public class FirebaseItem implements Comparable {
     private String price;
     private String image;
     private Location location;
-    //the distance of the item location and current location
-    private int mDistance;
+/*    //the distance of the item location and current location
+    private int mDistance;*/
 
     public FirebaseItem(){
         // empty default constructor, necessary for Firebase to be able to deserialize blog posts
@@ -39,7 +39,6 @@ public class FirebaseItem implements Comparable {
         this.duration = duration;
         this.price = price;
         this.image = image;
-        mDistance = getDistance();
     }
 
     public String getSubject() {
@@ -88,7 +87,7 @@ public class FirebaseItem implements Comparable {
     }
 
 
-    public int getDistance() {
+    public int calculateDistance() {
         android.location.Location parkLocation = new android.location.Location("Park Location");
         parkLocation.setLatitude(location.getLat());
         parkLocation.setLongitude(location.getLng());
@@ -99,8 +98,9 @@ public class FirebaseItem implements Comparable {
 
     @Override
     public int compareTo(Object compare) {
-        int comparedPark = ((FirebaseItem) compare).getDistance();
-        return mDistance - comparedPark;
+        int comparedPark = ((FirebaseItem) compare).calculateDistance();
+        int distance = calculateDistance();
+        return distance - comparedPark;
     }
 
 }

@@ -1,10 +1,13 @@
 package org.levavi.levaviapp;
 
+import org.levavi.levaviapp.fragments.ItemInfoFragment;
+import org.levavi.levaviapp.fragments.NewItemFragment;
 import org.levavi.levaviapp.main.AppFactory;
 import org.levavi.levaviapp.fragments.ItemsListFragment;
 import org.levavi.levaviapp.interfaces.FactoryInterface;
 import org.levavi.levaviapp.utilities.UtilitiesFactory;
 
+import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -29,6 +32,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
@@ -72,14 +76,13 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     .build();
             // Build a GoogleApiClient with access to the Google Sign-In API location API and the
             // options specified by gso.
-            buildGoogleApi();
         }
+        buildGoogleApi();
         //create the drawer
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ListView drawerList = (ListView) findViewById(R.id.slider_list);
         mDrawerToggle = (ActionBarDrawerToggle) UtilitiesFactory.getDrawer(this, mDrawerLayout, drawerList, toolbar).doTask();
         AppFactory.getFireBase().doTask();
-        UtilitiesFactory.addFragment(this,new ItemsListFragment(),"start",true).doTask();
     }
 
     @Override
@@ -144,11 +147,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     @Override
     public void onBackPressed() {
-        final AppController appController = (AppController) getApplicationContext();
-        if(appController.fragmentTag !=null){
+        //check what the current fragment is and replace the fragment based on it
+        NewItemFragment newFragment = (NewItemFragment)getFragmentManager().findFragmentByTag("new");
+        if (newFragment != null && newFragment.isVisible()) {
             UtilitiesFactory.removeFragment(this).doTask();
+        }else {
+            ItemInfoFragment infoFragment = (ItemInfoFragment)getFragmentManager().findFragmentByTag("item_info");
+            if(infoFragment!= null && infoFragment.isVisible()) {
+                UtilitiesFactory.removeFragment(this).doTask();
+            }else {
+                super.onBackPressed();
+            }
         }
     }
+
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
 
@@ -167,41 +179,49 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             Log.e("TRY","error");
         }
     }
-
     @Override
     public void onConnected(Bundle bundle) {
-        //http://www.androidwarriors.com/2015/10/fused-location-provider-in-android.html
-        //get the application class
-        final AppController appController = (AppController) this.getApplicationContext();
+        getCurrentLocation();
+        Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (lastLocation != null) {
+            AppController.sCurrentLocation = new Location(lastLocation);
+        }
+        UtilitiesFactory.addFragment(this,new ItemsListFragment(),"start",true).doTask();
+    }
+    //check the current location
+    private void getCurrentLocation(){
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(10000); // Update location every second
-
         LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
-
-
-        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            Log.e("location is:",String.valueOf(mLastLocation.getLatitude())+","+String.valueOf(mLastLocation.getLongitude()));
-        }
+        mGoogleApiClient.disconnect();
     }
-
     @Override
     public void onConnectionSuspended(int i) {
 
     }
     //build the google api with place api and location api
     public void buildGoogleApi(){
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
-                .addApi( Places.GEO_DATA_API )
-                .addApi(Places.PLACE_DETECTION_API)
-                .addApi(LocationServices.API)
-                .addConnectionCallbacks(this)
-                .addOnConnectionFailedListener(this)
-                .build();
+        if(mGso==null){
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(Places.GEO_DATA_API)
+                    .addApi(Places.PLACE_DETECTION_API)
+                    .addApi(LocationServices.API)
+                    .build();
+        }else {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(Auth.GOOGLE_SIGN_IN_API, mGso)
+                    .addApi(Places.GEO_DATA_API)
+                    .addApi(Places.PLACE_DETECTION_API)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
     }
     @Override
     public Object doTask() {
@@ -213,13 +233,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void googleLogInPopup(){
         mLogInPopup = (PopupWindow)AppFactory.getLogInPopup(mDrawerLayout,this,MainActivity.this,mGso).doTask();
     }
-    // request the location
-    protected void createLocationRequest() {
-        LocationRequest locationRequest = new LocationRequest();
-        locationRequest.setInterval(10000);
-        locationRequest.setFastestInterval(5000);
-        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+    //used be the drawer when use click on create new item option in the list. connects to google api again
+    public void googleApiConnect(){
+        mGoogleApiClient.connect();
     }
+
+    //saves the new location from listener to static location inside applicatin class
+    @Override
+    public void onLocationChanged(Location location) {
+        AppController.sCurrentLocation = new Location(location);
+
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -233,10 +259,5 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             mGoogleApiClient.disconnect();
         }
         super.onStop();
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-
     }
 }
