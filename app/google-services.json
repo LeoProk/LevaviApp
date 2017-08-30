@@ -1,7 +1,9 @@
 {
   "project_info": {
     "project_number": "947543842597",
-    "project_id": "levavi-1185"
+    "firebase_url": "https://levavi-1185.firebaseio.com",
+    "project_id": "levavi-1185",
+    "storage_bucket": "levavi-1185.appspot.com"
   },
   "client": [
     {
@@ -19,19 +21,32 @@
             "package_name": "org.levavi.levaviapp",
             "certificate_hash": "0CE6C3B3A6EC4352AC7717C820316EB4FA356D93"
           }
+        },
+        {
+          "client_id": "947543842597-13hjshm5r1o1qnm91as529ima868gmar.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
-      "api_key": [{ "current_key": "" }],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBN4F56JZDMsvFkwZSYEox7jN1iDZTHq3I"
+        }
+      ],
       "services": {
         "analytics_service": {
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947543842597-13hjshm5r1o1qnm91as529ima868gmar.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
-          "status": 1
+          "status": 2
         }
       }
     }
